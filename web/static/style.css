@@ -1,0 +1,7 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f7f9; color: #222; }
+main { max-width: 640px; margin: 15vh auto; padding: 0 1rem; }
+form { display: flex; gap: .5rem; }
+input { flex: 1; padding: .7rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+button { padding: .7rem 1.2rem; border: 0; border-radius: 6px; background: #2b6cb0; color: #fff; font-size: 1rem; cursor: pointer; }
+#error { color: #c53030; min-height: 1.2em; }
+

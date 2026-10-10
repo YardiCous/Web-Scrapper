@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Product Rating Lookup</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+        <main>
+                <h1>Product Rating Lookup</h1>
+                <p>Paste a product URL from any supported site.</p>
+
+                <form id="lookup-form" action="/search" method="get">
+                        <input type="url" id="url" name="url" placeholder="http://site-a/products/LAMP-100.html"
+                                required>
+                        <button type="submit">Look up</button>
+                </form>
+                <p id="error" role="alert"></p>
+        </main>
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>
