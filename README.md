@@ -71,5 +71,10 @@ If `psql` is not recognized, add `C:\Program Files\PostgreSQL\16\bin` to your PA
 If the Flask app runs in WSL but Postgres runs on Windows, `localhost` inside WSL may not reach the Windows server. By default Windows Postgres only listens on localhost, so you would need to change `listen_addresses` and `pg_hba.conf` and use the Windows host IP in `DATABASE_URL`. This is fiddly. **Simplest rule: run the app and the database in the same place** (both in WSL, or both on Windows).
 
 ---
+## Dummy Websites
+
+* https://paegnium.github.io/dummysite/
+* https://paegnium.github.io/dummysite2/
+* https://paegnium.github.io/dummysite3/
 
 
