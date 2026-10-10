@@ -14,7 +14,7 @@ Requires Docker Desktop with the WSL2 backend and WSL integration enabled for yo
 ```bash
 cd ~/project
 docker compose up -d db
-docker compose ps          # wait for "healthy"
+docker compose ps         
 docker compose exec db psql -U USER -d listings -c "\dt"
 ```
 
