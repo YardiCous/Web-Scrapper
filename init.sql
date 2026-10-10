@@ -1,4 +1,3 @@
--- db/init.sql
 CREATE TABLE listings (
     id               SERIAL PRIMARY KEY,
     sku              TEXT NOT NULL,            
