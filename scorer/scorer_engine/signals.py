@@ -10,7 +10,6 @@ as evidence of a genuine listing.
 import math
 import re
 from datetime import timedelta
-from statistics import median
 from typing import Optional, Sequence
 
 from datasketch import MinHash, MinHashLSH
@@ -29,27 +28,22 @@ def _clip(x, lo=0.0, hi=1.0):
 # --------------------------------------------------------------------------- #
 # Price and seller
 # --------------------------------------------------------------------------- #
-def price_dev(price: float, others: Sequence[float]) -> Optional[float]:
+def price_dev(
+    price: float, cluster_median: Optional[float], cluster_size: int
+) -> Optional[float]:
     """
-    Robust z-score of how far *below* the cluster median this price is,
-    using the median absolute deviation of the other listings' prices.
-    z = 0.6745 * (median - price) / MAD; risk = clip(z / 3.5).
-    MAD is floored at PRICE_MAD_FLOOR * median: with a handful of prices, two
-    near-identical ones make MAD tiny and a 2% discount look extreme.
-    With MAD = 0 (floor disabled, identical prices) z falls back to
-    (median - price) / median * 10. Dearer-than-median listings score 0.
+    How far *below* the cluster median this price is, as a share of the median:
+    risk = clip(discount / PRICE_FULL_RISK_DISCOUNT), so with the default 0.35
+    a listing 35% or more below the median scores 1.0.
+    Dearer-than-median listings score 0.
+
+    The normaliser sends the cluster median (this listing included), not the
+    individual prices, so a robust z-score (MAD) can't be computed here.
     """
-    if len(others) < config.MIN_CLUSTER_PRICES:
+    if cluster_size < config.MIN_CLUSTER_SIZE or not cluster_median or cluster_median <= 0:
         return None
-    med = median(others)
-    if med <= 0:
-        return None
-    mad = max(median(abs(p - med) for p in others), config.PRICE_MAD_FLOOR * med)
-    if mad > 0:
-        z = 0.6745 * (med - price) / mad
-    else:
-        z = (med - price) / med * 10
-    return _clip(z / config.PRICE_Z_CAP)
+    discount = (cluster_median - price) / cluster_median
+    return _clip(discount / config.PRICE_FULL_RISK_DISCOUNT)
 
 
 def seller_age(age_days: Optional[int]) -> Optional[float]:
@@ -143,39 +137,32 @@ def mismatch(
 # --------------------------------------------------------------------------- #
 # All signals for one listing
 # --------------------------------------------------------------------------- #
-def compute(
-    listing: Listing,
-    cluster_prices: Sequence[float],
-    sentiment: Sentiment = default_sentiment,
-):
+def compute(listing: Listing, sentiment: Sentiment = default_sentiment):
     """
-    Return (signals, facts). `cluster_prices` are the *other* listings' prices
-    in the same cluster. `facts` holds the raw numbers the reason templates quote.
+    Return (signals, facts). Everything needed is in the message itself,
+    including the cluster's median price. `facts` holds the raw numbers the
+    reason templates quote.
     """
     texts = [r.text for r in listing.reviews]
     labels = sentiment.classify(texts) if texts else []
-
-    age_days = None
-    if listing.seller.created_at is not None:
-        age_days = (listing.fetched_at.date() - listing.seller.created_at).days
+    med = listing.cluster_price_median_sgd
 
     signals = {
-        "price_dev": price_dev(listing.price, cluster_prices),
-        "seller_age": seller_age(age_days),
-        "seller_volume": seller_volume(listing.seller.sales),
-        "official": official(listing.seller.is_official),
+        "price_dev": price_dev(listing.price_sgd, med, listing.cluster_size),
+        "seller_age": seller_age(listing.seller_age_days),
+        "seller_volume": seller_volume(listing.seller_sales),
+        "official": official(listing.seller_is_official),
         "title_kw": title_kw(listing.title),
         "dup_reviews": dup_reviews(texts),
-        "burst": burst([r.ts for r in listing.reviews]),
+        "burst": burst([r.date for r in listing.reviews]),
         "neg_share": neg_share(texts, labels),
         "mismatch": mismatch([r.rating for r in listing.reviews], labels),
     }
 
-    facts = {"age_days": age_days, "sales": listing.seller.sales}
-    if cluster_prices:
-        med = median(cluster_prices)
+    facts = {"age_days": listing.seller_age_days, "sales": listing.seller_sales}
+    if med:
         facts["cluster_median"] = med
-        facts["pct_below_median"] = (med - listing.price) / med * 100 if med else None
+        facts["pct_below_median"] = (med - listing.price_sgd) / med * 100
     kw = config.TITLE_KW_RE.search(listing.title or "")
     facts["title_keyword"] = kw.group(0) if kw else None
     return signals, facts
