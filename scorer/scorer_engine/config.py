@@ -30,15 +30,14 @@ REASON_MIN_CONTRIBUTION = _num("SCORER_REASON_MIN", 0.3)
 MAX_REASONS = _num("SCORER_MAX_REASONS", 3, int)
 
 # --- minimum data per signal -------------------------------------------------
-MIN_CLUSTER_PRICES = _num("SCORER_MIN_CLUSTER_PRICES", 3, int)
+MIN_CLUSTER_SIZE = _num("SCORER_MIN_CLUSTER_SIZE", 3, int)  # listings, this one included
 MIN_REVIEWS_DUP = _num("SCORER_MIN_REVIEWS_DUP", 5, int)
 MIN_REVIEWS_BURST = _num("SCORER_MIN_REVIEWS_BURST", 10, int)
 MIN_REVIEWS_NEG = _num("SCORER_MIN_REVIEWS_NEG", 3, int)
 MIN_RATED_MISMATCH = _num("SCORER_MIN_RATED_MISMATCH", 3, int)
 
 # --- signal parameters -------------------------------------------------------
-PRICE_Z_CAP = _num("SCORER_PRICE_Z_CAP", 3.5)
-PRICE_MAD_FLOOR = _num("SCORER_PRICE_MAD_FLOOR", 0.05)  # fraction of the median; 0 disables
+PRICE_FULL_RISK_DISCOUNT = _num("SCORER_PRICE_FULL_RISK_DISCOUNT", 0.35)  # 35% below median = 1.0
 SELLER_AGE_SCALE_DAYS = _num("SCORER_SELLER_AGE_SCALE", 180.0)
 BURST_WINDOW_HOURS = _num("SCORER_BURST_WINDOW_HOURS", 48.0)
 
@@ -53,6 +52,3 @@ TITLE_KW_RE = re.compile(
 NEG_KW_RE = re.compile(
     r"fake|not original|counterfeit|假货|假的|palsu|tiruan", re.IGNORECASE
 )
-
-# --- stub adapter (delete with fixtures/adapter.py once the normaliser exists)
-SGD_TO_USD = _num("SCORER_SGD_TO_USD", 0.77)

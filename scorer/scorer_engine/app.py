@@ -8,12 +8,10 @@ Status codes drive delivery semantics:
   400  invalid message: not retryable, so KafkaSource sends it to the deadLetterSink
   503  database/transient failure: KafkaSource retries, giving at-least-once delivery
 
-Cluster prices: for now an InMemoryPrices loaded read-only at start-up from
-SCORER_PRICE_FIXTURES (a glob), so every replica sees the same prices and the
-service stays stateless. Switch to DbPrices once listings carries cluster_id.
+Each message carries its cluster's price statistics, so scoring needs no
+lookups and the service is stateless apart from the database write.
 """
 
-import glob
 import logging
 import os
 import time
@@ -27,7 +25,6 @@ from pydantic import ValidationError
 from . import signals, store
 from .combiner import combine
 from .models import Listing
-from .prices import InMemoryPrices
 
 log = logging.getLogger("scorer")
 
@@ -36,20 +33,11 @@ UPSERTS = Counter("scorer_upserts_total", "risk_scores writes", ["result"])  # c
 ERRORS = Counter("scorer_errors_total", "Failed messages", ["kind"])
 LATENCY = Histogram("scorer_processing_seconds", "Time to score and save one listing")
 
-state = {"pool": None, "prices": InMemoryPrices()}
-
-
-def _load_prices(pattern):
-    from fixtures import adapter
-    listings = [l for p in sorted(glob.glob(pattern)) for l in adapter.load(p)]
-    log.info("loaded %d fixture listings for cluster prices", len(listings))
-    return InMemoryPrices(listings)
+state = {"pool": None}
 
 
 @asynccontextmanager
 async def lifespan(app):
-    if os.environ.get("SCORER_PRICE_FIXTURES"):
-        state["prices"] = _load_prices(os.environ["SCORER_PRICE_FIXTURES"])
     if os.environ.get("DATABASE_URL"):
         from psycopg_pool import ConnectionPool
         state["pool"] = ConnectionPool(os.environ["DATABASE_URL"], min_size=1, max_size=10, open=True)
@@ -80,8 +68,7 @@ async def receive(request: Request):
         ERRORS.labels("invalid").inc()
         return JSONResponse({"error": "invalid listing", "detail": str(e)}, status_code=400)
 
-    others = state["prices"].others(listing.cluster_id, listing.listing_id)
-    sig, facts = signals.compute(listing, others)
+    sig, facts = signals.compute(listing)
     result = combine(sig, facts)
     SCORED.labels(result.band).inc()
 
@@ -89,7 +76,7 @@ async def receive(request: Request):
     if state["pool"] is not None:
         try:
             with state["pool"].connection() as conn:
-                saved = store.upsert(conn, listing, result, store.input_hash(listing, others))
+                saved = store.upsert(conn, listing, result, store.input_hash(listing))
         except Exception:
             ERRORS.labels("db").inc()
             log.exception("upsert failed for %s", listing.listing_id)

@@ -1,8 +1,8 @@
 """
 Idempotent writes to risk_scores.
 
-input_hash covers the listing itself and the sorted cluster prices, so a
-replayed message is a no-op while a moved cluster median triggers a rescore.
+input_hash covers the listing including its cluster statistics, so a replayed
+message is a no-op while a moved cluster median triggers a rescore.
 """
 
 import hashlib
@@ -33,11 +33,9 @@ _UPSERT = """
 """
 
 
-def input_hash(listing: Listing, cluster_prices) -> str:
-    payload = {
-        "listing": listing.model_dump(mode="json"),
-        "cluster_prices": sorted(cluster_prices),
-    }
+def input_hash(listing: Listing) -> str:
+    # fetched_at is left out: a re-crawl with identical data is not a new input.
+    payload = listing.model_dump(mode="json", exclude={"fetched_at"})
     canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
