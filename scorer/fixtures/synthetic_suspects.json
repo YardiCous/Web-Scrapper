@@ -1,0 +1,554 @@
+[
+  {
+    "cluster_id": "c_78",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 2468.7,
+    "cluster_price_min_sgd": 518.7,
+    "cluster_price_max_sgd": 2599.99,
+    "listing_id": "synthetic:mbp-official",
+    "source_platform": "synthetic",
+    "title": "Apple MacBook Pro 14-inch Space Grey (Official Store)",
+    "price_sgd": 2598.7,
+    "seller_name": "Apple Official Store",
+    "seller_age_days": 3210,
+    "review_count": 11,
+    "reviews": [
+      {
+        "text": "Battery life is excellent, lasts a full working day.",
+        "rating": 5,
+        "date": "2026-03-01T00:00:00Z"
+      },
+      {
+        "text": "Screen is great but the charger cable is a bit short.",
+        "rating": 4,
+        "date": "2026-03-18T00:00:00Z"
+      },
+      {
+        "text": "Arrived well packed, serial number checked on the official site.",
+        "rating": 5,
+        "date": "2026-04-04T00:00:00Z"
+      },
+      {
+        "text": "Good product, delivery took longer than promised.",
+        "rating": 3,
+        "date": "2026-04-21T00:00:00Z"
+      },
+      {
+        "text": "Second one I have bought from this shop, still very happy.",
+        "rating": 5,
+        "date": "2026-05-08T00:00:00Z"
+      },
+      {
+        "text": "Works as described. Setup was quick.",
+        "rating": 4,
+        "date": "2026-05-25T00:00:00Z"
+      },
+      {
+        "text": "Had a dead pixel, the shop replaced it within a week.",
+        "rating": 2,
+        "date": "2026-06-11T00:00:00Z"
+      },
+      {
+        "text": "Fast shipping and genuine warranty card included.",
+        "rating": 5,
+        "date": "2026-06-28T00:00:00Z"
+      },
+      {
+        "text": "Solid build quality, a little heavy.",
+        "rating": 4,
+        "date": "2026-07-15T00:00:00Z"
+      },
+      {
+        "text": "Exactly as pictured, would buy again.",
+        "rating": 5,
+        "date": "2026-08-01T00:00:00Z"
+      },
+      {
+        "text": "Fair price for what you get.",
+        "rating": 4,
+        "date": "2026-08-18T00:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/mbp-official",
+    "seller_sales": 52000,
+    "seller_is_official": true,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_78",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 2468.7,
+    "cluster_price_min_sgd": 518.7,
+    "cluster_price_max_sgd": 2599.99,
+    "listing_id": "synthetic:mbp-reseller",
+    "source_platform": "synthetic",
+    "title": "Apple MacBook Pro 14 M3 Space Grey",
+    "price_sgd": 2468.7,
+    "seller_name": "TechHub",
+    "seller_age_days": 1638,
+    "review_count": 6,
+    "reviews": [
+      {
+        "text": "Arrived well packed, serial number checked on the official site.",
+        "rating": 5,
+        "date": "2026-05-03T00:00:00Z"
+      },
+      {
+        "text": "Good product, delivery took longer than promised.",
+        "rating": 3,
+        "date": "2026-05-24T00:00:00Z"
+      },
+      {
+        "text": "Second one I have bought from this shop, still very happy.",
+        "rating": 5,
+        "date": "2026-06-14T00:00:00Z"
+      },
+      {
+        "text": "Works as described. Setup was quick.",
+        "rating": 4,
+        "date": "2026-07-05T00:00:00Z"
+      },
+      {
+        "text": "Had a dead pixel, the shop replaced it within a week.",
+        "rating": 2,
+        "date": "2026-07-26T00:00:00Z"
+      },
+      {
+        "text": "Fast shipping and genuine warranty card included.",
+        "rating": 5,
+        "date": "2026-08-16T00:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/mbp-reseller",
+    "seller_sales": 3400,
+    "seller_is_official": false,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_78",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 2468.7,
+    "cluster_price_min_sgd": 518.7,
+    "cluster_price_max_sgd": 2599.99,
+    "listing_id": "synthetic:mbp-suspect",
+    "source_platform": "synthetic",
+    "title": "MacBook Pro 14 Space Grey 1:1 Replica Premium",
+    "price_sgd": 518.7,
+    "seller_name": "BestDeal2026",
+    "seller_age_days": 21,
+    "review_count": 480,
+    "reviews": [
+      {
+        "text": "Amazing laptop, exactly like the original, super fast delivery!!",
+        "rating": 5,
+        "date": "2026-10-20T08:00:00Z"
+      },
+      {
+        "text": "Amazing laptop, exactly like the original, super fast delivery!!",
+        "rating": 5,
+        "date": "2026-10-20T11:00:00Z"
+      },
+      {
+        "text": "Amazing laptop, exactly like the original, super fast delivery!",
+        "rating": 5,
+        "date": "2026-10-20T14:00:00Z"
+      },
+      {
+        "text": "Amazing laptop, exactly like the original, super fast delivery!!",
+        "rating": 5,
+        "date": "2026-10-20T17:00:00Z"
+      },
+      {
+        "text": "amazing laptop, exactly like the original, super fast delivery!!",
+        "rating": 5,
+        "date": "2026-10-20T20:00:00Z"
+      },
+      {
+        "text": "Amazing laptop exactly like the original, super fast delivery",
+        "rating": 5,
+        "date": "2026-10-20T23:00:00Z"
+      },
+      {
+        "text": "Looks nice but it is fake, the logo is not original",
+        "rating": 5,
+        "date": "2026-10-21T02:00:00Z"
+      },
+      {
+        "text": "Keyboard feels cheap, I think it is counterfeit",
+        "rating": 4,
+        "date": "2026-10-21T05:00:00Z"
+      },
+      {
+        "text": "Not original. Serial number does not exist.",
+        "rating": 1,
+        "date": "2026-10-21T08:00:00Z"
+      },
+      {
+        "text": "Good",
+        "rating": 5,
+        "date": "2026-10-21T11:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/mbp-suspect",
+    "seller_sales": 12,
+    "seller_is_official": false,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_88",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 180.7,
+    "cluster_price_min_sgd": 50.7,
+    "cluster_price_max_sgd": 206.7,
+    "listing_id": "synthetic:aj1-official",
+    "source_platform": "synthetic",
+    "title": "Nike Air Jordan 1 Retro High Red/Black",
+    "price_sgd": 206.7,
+    "seller_name": "Nike Official",
+    "seller_age_days": 3493,
+    "review_count": 5,
+    "reviews": [
+      {
+        "text": "Fits true to size, very comfortable from day one.",
+        "rating": 5,
+        "date": "2026-06-01T00:00:00Z"
+      },
+      {
+        "text": "Colour is slightly darker than the photos.",
+        "rating": 4,
+        "date": "2026-06-20T00:00:00Z"
+      },
+      {
+        "text": "Box and tags all present, checked the SKU on Nike's site.",
+        "rating": 5,
+        "date": "2026-07-09T00:00:00Z"
+      },
+      {
+        "text": "Took two weeks to arrive.",
+        "rating": 3,
+        "date": "2026-07-28T00:00:00Z"
+      },
+      {
+        "text": "My son loves them.",
+        "rating": 5,
+        "date": "2026-08-16T00:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/aj1-official",
+    "seller_sales": 80000,
+    "seller_is_official": true,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_88",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 180.7,
+    "cluster_price_min_sgd": 50.7,
+    "cluster_price_max_sgd": 206.7,
+    "listing_id": "synthetic:aj1-reseller",
+    "source_platform": "synthetic",
+    "title": "Air Jordan 1 High Chicago Red Black",
+    "price_sgd": 180.7,
+    "seller_name": "Kicks Corner",
+    "seller_age_days": 1897,
+    "review_count": 4,
+    "reviews": [
+      {
+        "text": "Legit pair, came with receipt.",
+        "rating": 5,
+        "date": "2026-07-10T00:00:00Z"
+      },
+      {
+        "text": "Good condition.",
+        "rating": 4,
+        "date": "2026-07-22T00:00:00Z"
+      },
+      {
+        "text": "Slight crease on the toe box but fine.",
+        "rating": 4,
+        "date": "2026-08-03T00:00:00Z"
+      },
+      {
+        "text": "Fast delivery.",
+        "rating": 5,
+        "date": "2026-08-15T00:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/aj1-reseller",
+    "seller_sales": 900,
+    "seller_is_official": false,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_88",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 180.7,
+    "cluster_price_min_sgd": 50.7,
+    "cluster_price_max_sgd": 206.7,
+    "listing_id": "synthetic:aj1-suspect",
+    "source_platform": "synthetic",
+    "title": "Air Jordan 1 Red Black AAA Quality OEM Factory",
+    "price_sgd": 50.7,
+    "seller_name": "ShoeKing88",
+    "seller_age_days": 14,
+    "review_count": 6,
+    "reviews": [
+      {
+        "text": "Best shoes ever, same as store, five stars seller recommended!",
+        "rating": 5,
+        "date": "2026-10-22T09:00:00Z"
+      },
+      {
+        "text": "Best shoes ever, same as store, five stars seller recommended!",
+        "rating": 5,
+        "date": "2026-10-22T11:00:00Z"
+      },
+      {
+        "text": "Best shoes ever, same as store, five stars seller recommended!!",
+        "rating": 5,
+        "date": "2026-10-22T13:00:00Z"
+      },
+      {
+        "text": "Best shoes ever, same as store, five stars seller recommended!",
+        "rating": 5,
+        "date": "2026-10-22T15:00:00Z"
+      },
+      {
+        "text": "best shoes ever, same as store, five stars seller recommended!",
+        "rating": 5,
+        "date": "2026-10-22T17:00:00Z"
+      },
+      {
+        "text": "Sole came off after a week, these are fake",
+        "rating": 5,
+        "date": "2026-10-22T19:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/aj1-suspect",
+    "seller_sales": 3,
+    "seller_is_official": false,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_101",
+    "cluster_size": 4,
+    "cluster_platforms": [
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 706.35,
+    "cluster_price_min_sgd": 167.7,
+    "cluster_price_max_sgd": 714.99,
+    "listing_id": "synthetic:apm-official",
+    "source_platform": "synthetic",
+    "title": "Apple AirPods Max Silver",
+    "price_sgd": 713.7,
+    "seller_name": "Apple Official Store",
+    "seller_age_days": 3210,
+    "review_count": 6,
+    "reviews": [
+      {
+        "text": "Battery life is excellent, lasts a full working day.",
+        "rating": 5,
+        "date": "2026-04-02T00:00:00Z"
+      },
+      {
+        "text": "Screen is great but the charger cable is a bit short.",
+        "rating": 4,
+        "date": "2026-04-27T00:00:00Z"
+      },
+      {
+        "text": "Arrived well packed, serial number checked on the official site.",
+        "rating": 5,
+        "date": "2026-05-22T00:00:00Z"
+      },
+      {
+        "text": "Good product, delivery took longer than promised.",
+        "rating": 3,
+        "date": "2026-06-16T00:00:00Z"
+      },
+      {
+        "text": "Second one I have bought from this shop, still very happy.",
+        "rating": 5,
+        "date": "2026-07-11T00:00:00Z"
+      },
+      {
+        "text": "Works as described. Setup was quick.",
+        "rating": 4,
+        "date": "2026-08-05T00:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/apm-official",
+    "seller_sales": 52000,
+    "seller_is_official": true,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_101",
+    "cluster_size": 4,
+    "cluster_platforms": [
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 706.35,
+    "cluster_price_min_sgd": 167.7,
+    "cluster_price_max_sgd": 714.99,
+    "listing_id": "synthetic:apm-reseller",
+    "source_platform": "synthetic",
+    "title": "AirPods Max Silver Wireless Headphones",
+    "price_sgd": 699.0,
+    "seller_name": "Gadget SG",
+    "seller_age_days": 2155,
+    "review_count": 6,
+    "reviews": [
+      {
+        "text": "Second one I have bought from this shop, still very happy.",
+        "rating": 5,
+        "date": "2026-02-14T00:00:00Z"
+      },
+      {
+        "text": "Works as described. Setup was quick.",
+        "rating": 4,
+        "date": "2026-03-16T00:00:00Z"
+      },
+      {
+        "text": "Had a dead pixel, the shop replaced it within a week.",
+        "rating": 2,
+        "date": "2026-04-15T00:00:00Z"
+      },
+      {
+        "text": "Fast shipping and genuine warranty card included.",
+        "rating": 5,
+        "date": "2026-05-15T00:00:00Z"
+      },
+      {
+        "text": "Solid build quality, a little heavy.",
+        "rating": 4,
+        "date": "2026-06-14T00:00:00Z"
+      },
+      {
+        "text": "Exactly as pictured, would buy again.",
+        "rating": 5,
+        "date": "2026-07-14T00:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/apm-reseller",
+    "seller_sales": 7600,
+    "seller_is_official": false,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  },
+  {
+    "cluster_id": "c_101",
+    "cluster_size": 4,
+    "cluster_platforms": [
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 706.35,
+    "cluster_price_min_sgd": 167.7,
+    "cluster_price_max_sgd": 714.99,
+    "listing_id": "synthetic:apm-suspect",
+    "source_platform": "synthetic",
+    "title": "AirPods Max Silver super copy noise cancelling",
+    "price_sgd": 167.7,
+    "seller_name": "AudioOutletX",
+    "seller_age_days": 35,
+    "review_count": 12,
+    "reviews": [
+      {
+        "text": "Sound is fake, not original but ok for price",
+        "rating": 5,
+        "date": "2026-10-23T01:00:00Z"
+      },
+      {
+        "text": "Great",
+        "rating": 5,
+        "date": "2026-10-23T04:00:00Z"
+      },
+      {
+        "text": "Great value",
+        "rating": 5,
+        "date": "2026-10-23T07:00:00Z"
+      },
+      {
+        "text": "Not original, the case is different",
+        "rating": 4,
+        "date": "2026-10-23T10:00:00Z"
+      },
+      {
+        "text": "Love it",
+        "rating": 5,
+        "date": "2026-10-23T13:00:00Z"
+      },
+      {
+        "text": "Perfect",
+        "rating": 5,
+        "date": "2026-10-23T16:00:00Z"
+      },
+      {
+        "text": "Counterfeit, ANC does not work",
+        "rating": 1,
+        "date": "2026-10-23T19:00:00Z"
+      },
+      {
+        "text": "Good",
+        "rating": 5,
+        "date": "2026-10-23T22:00:00Z"
+      },
+      {
+        "text": "Five stars",
+        "rating": 5,
+        "date": "2026-10-24T01:00:00Z"
+      },
+      {
+        "text": "Fast",
+        "rating": 5,
+        "date": "2026-10-24T04:00:00Z"
+      },
+      {
+        "text": "Fake product, refund please",
+        "rating": 2,
+        "date": "2026-10-24T07:00:00Z"
+      },
+      {
+        "text": "Nice",
+        "rating": 5,
+        "date": "2026-10-24T10:00:00Z"
+      }
+    ],
+    "product_url": "https://example.invalid/synthetic/apm-suspect",
+    "seller_sales": 40,
+    "seller_is_official": false,
+    "fetched_at": "2026-10-25T05:00:00Z"
+  }
+]

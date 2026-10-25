@@ -1,0 +1,691 @@
+[
+  {
+    "cluster_id": "store_a:A-1001",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 445.5,
+    "cluster_price_min_sgd": 399.0,
+    "cluster_price_max_sgd": 449.0,
+    "listing_id": "store_a:A-1001",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1001",
+    "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
+    "brand": "sony",
+    "price_sgd": 449.0,
+    "seller_id": "sel_a_01",
+    "seller_name": "AudioHub SG",
+    "seller_age_days": 2064,
+    "rating": 4.7,
+    "review_count": 230,
+    "reviews": [
+      {
+        "text": "Great noise cancellation, worth the price.",
+        "rating": 5,
+        "date": "2026-09-01"
+      },
+      {
+        "text": "Battery life is excellent, very comfortable.",
+        "rating": 4,
+        "date": "2026-08-20"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1001"
+  },
+  {
+    "cluster_id": "store_a:A-1001",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 445.5,
+    "cluster_price_min_sgd": 399.0,
+    "cluster_price_max_sgd": 449.0,
+    "listing_id": "store_b:B-2001",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2001",
+    "title": "Sony WH1000XM5 Over Ear Headphones",
+    "brand": "sony",
+    "price_sgd": 445.5,
+    "seller_id": "sel_b_01",
+    "seller_name": "SoundGear",
+    "seller_age_days": 1958,
+    "rating": 4.6,
+    "review_count": 85,
+    "reviews": [
+      {
+        "text": "Very comfortable for long listening sessions.",
+        "rating": 5,
+        "date": "2026-08-30"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2001"
+  },
+  {
+    "cluster_id": "store_a:A-1001",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 445.5,
+    "cluster_price_min_sgd": 399.0,
+    "cluster_price_max_sgd": 449.0,
+    "listing_id": "store_c:C-3001",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3001",
+    "title": "Sony WH-1000XM5 Headphone - Black",
+    "brand": "sony",
+    "price_sgd": 399.0,
+    "seller_id": "sel_c_01",
+    "seller_name": "SoundBox88",
+    "seller_age_days": 85,
+    "rating": 4.0,
+    "review_count": 12,
+    "reviews": [
+      {
+        "text": "Good price good quality fast delivery",
+        "rating": 5,
+        "date": "2026-09-30"
+      },
+      {
+        "text": "Good price, good quality, fast delivery!",
+        "rating": 5,
+        "date": "2026-10-01"
+      },
+      {
+        "text": "Good price good quality, fast delivery.",
+        "rating": 5,
+        "date": "2026-10-01"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3001"
+  },
+  {
+    "cluster_id": "store_a:A-1002",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 329.0,
+    "cluster_price_min_sgd": 319.0,
+    "cluster_price_max_sgd": 330.75,
+    "listing_id": "store_a:A-1002",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1002",
+    "title": "Apple AirPods Pro 2nd Generation",
+    "brand": "apple",
+    "price_sgd": 329.0,
+    "seller_id": "sel_a_02",
+    "seller_name": "TechZone",
+    "seller_age_days": 2659,
+    "rating": 4.8,
+    "review_count": 540,
+    "reviews": [
+      {
+        "text": "Fits well and the noise cancellation is great.",
+        "rating": 5,
+        "date": "2026-09-10"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1002"
+  },
+  {
+    "cluster_id": "store_a:A-1002",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 329.0,
+    "cluster_price_min_sgd": 319.0,
+    "cluster_price_max_sgd": 330.75,
+    "listing_id": "store_b:B-2002",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2002",
+    "title": "Apple AirPods Pro (2nd Gen)",
+    "brand": "apple",
+    "price_sgd": 330.75,
+    "seller_id": "sel_b_02",
+    "seller_name": "GadgetBay",
+    "seller_age_days": 3575,
+    "rating": 4.9,
+    "review_count": 620,
+    "reviews": [
+      {
+        "text": "Best earbuds I have owned, seamless pairing.",
+        "rating": 5,
+        "date": "2026-09-15"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2002"
+  },
+  {
+    "cluster_id": "store_a:A-1002",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 329.0,
+    "cluster_price_min_sgd": 319.0,
+    "cluster_price_max_sgd": 330.75,
+    "listing_id": "store_c:C-3002",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3002",
+    "title": "Apple AirPods Pro Gen 2 White",
+    "brand": "apple",
+    "price_sgd": 319.0,
+    "seller_id": "sel_c_02",
+    "seller_name": "iGadget Store",
+    "seller_age_days": 2445,
+    "rating": 4.7,
+    "review_count": 410,
+    "reviews": [
+      {
+        "text": "Works perfectly with all my Apple devices.",
+        "rating": 5,
+        "date": "2026-09-12"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3002"
+  },
+  {
+    "cluster_id": "store_a:A-1003",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 249.0,
+    "cluster_price_min_sgd": 243.0,
+    "cluster_price_max_sgd": 259.0,
+    "listing_id": "store_a:A-1003",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1003",
+    "title": "Samsung Galaxy Buds2 Pro",
+    "brand": "samsung",
+    "price_sgd": 249.0,
+    "seller_id": "sel_a_03",
+    "seller_name": "MobileWorld",
+    "seller_age_days": 2165,
+    "rating": 4.5,
+    "review_count": 180,
+    "reviews": [
+      {
+        "text": "Good sound quality for the price.",
+        "rating": 4,
+        "date": "2026-07-18"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1003"
+  },
+  {
+    "cluster_id": "store_a:A-1003",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 249.0,
+    "cluster_price_min_sgd": 243.0,
+    "cluster_price_max_sgd": 259.0,
+    "listing_id": "store_b:B-2003",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2003",
+    "title": "Samsung Buds2 Pro Wireless Earbuds",
+    "brand": "samsung",
+    "price_sgd": 243.0,
+    "seller_id": "sel_b_03",
+    "seller_name": "ElectroMart",
+    "seller_age_days": 54,
+    "rating": 4.2,
+    "review_count": 40,
+    "reviews": [
+      {
+        "text": "Amazing product super fast shipping highly recommend",
+        "rating": 5,
+        "date": "2026-09-28"
+      },
+      {
+        "text": "Amazing product super fast shipping highly recommend!",
+        "rating": 5,
+        "date": "2026-09-28"
+      },
+      {
+        "text": "Amazing product, super fast shipping, highly recommend.",
+        "rating": 5,
+        "date": "2026-09-29"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2003"
+  },
+  {
+    "cluster_id": "store_a:A-1003",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 249.0,
+    "cluster_price_min_sgd": 243.0,
+    "cluster_price_max_sgd": 259.0,
+    "listing_id": "store_c:C-3003",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3003",
+    "title": "Samsung Galaxy Buds 2 Pro - Graphite",
+    "brand": "samsung",
+    "price_sgd": 259.0,
+    "seller_id": "sel_c_03",
+    "seller_name": "MobileWorld",
+    "seller_age_days": 2165,
+    "rating": 4.5,
+    "review_count": 90,
+    "reviews": [
+      {
+        "text": "Solid earbuds, good for calls.",
+        "rating": 4,
+        "date": "2026-07-01"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3003"
+  },
+  {
+    "cluster_id": "store_a:A-1004",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 899.0,
+    "cluster_price_min_sgd": 879.0,
+    "cluster_price_max_sgd": 904.5,
+    "listing_id": "store_a:A-1004",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1004",
+    "title": "Dyson V15 Detect Cordless Vacuum",
+    "brand": "dyson",
+    "price_sgd": 899.0,
+    "seller_id": "sel_a_04",
+    "seller_name": "HomeEssentials",
+    "seller_age_days": 3179,
+    "rating": 4.6,
+    "review_count": 95,
+    "reviews": [
+      {
+        "text": "Powerful suction, the laser feature is handy.",
+        "rating": 5,
+        "date": "2026-06-02"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1004"
+  },
+  {
+    "cluster_id": "store_a:A-1004",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 899.0,
+    "cluster_price_min_sgd": 879.0,
+    "cluster_price_max_sgd": 904.5,
+    "listing_id": "store_b:B-2004",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2004",
+    "title": "Dyson V15 Detect Vacuum Cleaner",
+    "brand": "dyson",
+    "price_sgd": 904.5,
+    "seller_id": "sel_b_04",
+    "seller_name": "CleanTech",
+    "seller_age_days": 2743,
+    "rating": 4.5,
+    "review_count": 60,
+    "reviews": [
+      {
+        "text": "Does a great job on carpets.",
+        "rating": 4,
+        "date": "2026-06-19"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2004"
+  },
+  {
+    "cluster_id": "store_a:A-1004",
+    "cluster_size": 3,
+    "cluster_platforms": [
+      "store_a",
+      "store_b",
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 899.0,
+    "cluster_price_min_sgd": 879.0,
+    "cluster_price_max_sgd": 904.5,
+    "listing_id": "store_c:C-3004",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3004",
+    "title": "Dyson V15 Detect Absolute Vacuum",
+    "brand": "dyson",
+    "price_sgd": 879.0,
+    "seller_id": "sel_c_04",
+    "seller_name": "HomeEssentials",
+    "seller_age_days": 3179,
+    "rating": 4.6,
+    "review_count": 70,
+    "reviews": [
+      {
+        "text": "Worth it for pet hair pickup.",
+        "rating": 5,
+        "date": "2026-06-28"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3004"
+  },
+  {
+    "cluster_id": "store_a:A-1005",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "store_a",
+      "store_b"
+    ],
+    "cluster_price_median_sgd": 138.35,
+    "cluster_price_min_sgd": 137.7,
+    "cluster_price_max_sgd": 139.0,
+    "listing_id": "store_a:A-1005",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1005",
+    "title": "Logitech MX Master 3S Wireless Mouse",
+    "brand": "logitech",
+    "price_sgd": 139.0,
+    "seller_id": "sel_a_05",
+    "seller_name": "PeripheralPlus",
+    "seller_age_days": 1638,
+    "rating": 4.7,
+    "review_count": 310,
+    "reviews": [
+      {
+        "text": "Silent clicks and great ergonomics.",
+        "rating": 5,
+        "date": "2026-08-01"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1005"
+  },
+  {
+    "cluster_id": "store_a:A-1005",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "store_a",
+      "store_b"
+    ],
+    "cluster_price_median_sgd": 138.35,
+    "cluster_price_min_sgd": 137.7,
+    "cluster_price_max_sgd": 139.0,
+    "listing_id": "store_b:B-2005",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2005",
+    "title": "Logitech MX Master 3S Mouse",
+    "brand": "logitech",
+    "price_sgd": 137.7,
+    "seller_id": "sel_b_05",
+    "seller_name": "PeripheralPlus",
+    "seller_age_days": 1638,
+    "rating": 4.7,
+    "review_count": 95,
+    "reviews": [
+      {
+        "text": "Smooth scroll wheel, works great on glass.",
+        "rating": 5,
+        "date": "2026-07-22"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2005"
+  },
+  {
+    "cluster_id": "store_a:A-1006",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_a"
+    ],
+    "cluster_price_median_sgd": 139.0,
+    "cluster_price_min_sgd": 139.0,
+    "cluster_price_max_sgd": 139.0,
+    "listing_id": "store_a:A-1006",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1006",
+    "title": "JBL Flip 6 Portable Bluetooth Speaker",
+    "brand": "jbl",
+    "price_sgd": 139.0,
+    "seller_id": "sel_a_01",
+    "seller_name": "AudioHub SG",
+    "seller_age_days": 2064,
+    "rating": 4.4,
+    "review_count": 150,
+    "reviews": [
+      {
+        "text": "Loud for its size, good bass.",
+        "rating": 4,
+        "date": "2026-05-14"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1006"
+  },
+  {
+    "cluster_id": "store_a:A-1007",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_a"
+    ],
+    "cluster_price_median_sgd": 469.0,
+    "cluster_price_min_sgd": 469.0,
+    "cluster_price_max_sgd": 469.0,
+    "listing_id": "store_a:A-1007",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1007",
+    "title": "Nintendo Switch OLED Console",
+    "brand": "nintendo",
+    "price_sgd": 469.0,
+    "seller_id": "sel_a_06",
+    "seller_name": "GameStopSG",
+    "seller_age_days": 3341,
+    "rating": 4.8,
+    "review_count": 710,
+    "reviews": [
+      {
+        "text": "Screen is a big upgrade over the original.",
+        "rating": 5,
+        "date": "2026-09-22"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1007"
+  },
+  {
+    "cluster_id": "store_a:A-1008",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_a"
+    ],
+    "cluster_price_median_sgd": 219.0,
+    "cluster_price_min_sgd": 219.0,
+    "cluster_price_max_sgd": 219.0,
+    "listing_id": "store_a:A-1008",
+    "source_platform": "store_a",
+    "source_listing_id": "A-1008",
+    "title": "Fitbit Charge 6 Fitness Tracker",
+    "brand": "fitbit",
+    "price_sgd": 219.0,
+    "seller_id": "sel_a_07",
+    "seller_name": "WearableWorld",
+    "seller_age_days": 2485,
+    "rating": 4.3,
+    "review_count": 88,
+    "reviews": [
+      {
+        "text": "Accurate heart rate tracking.",
+        "rating": 4,
+        "date": "2026-04-11"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1008"
+  },
+  {
+    "cluster_id": "store_b:B-2006",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_b"
+    ],
+    "cluster_price_median_sgd": 486.0,
+    "cluster_price_min_sgd": 486.0,
+    "cluster_price_max_sgd": 486.0,
+    "listing_id": "store_b:B-2006",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2006",
+    "title": "Bose QuietComfort Ultra Headphones",
+    "brand": "bose",
+    "price_sgd": 486.0,
+    "seller_id": "sel_b_06",
+    "seller_name": "AudioDepot",
+    "seller_age_days": 2412,
+    "rating": 4.6,
+    "review_count": 142,
+    "reviews": [
+      {
+        "text": "Excellent ANC, slightly pricey though.",
+        "rating": 4,
+        "date": "2026-05-25"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2006"
+  },
+  {
+    "cluster_id": "store_b:B-2007",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_b"
+    ],
+    "cluster_price_median_sgd": 472.5,
+    "cluster_price_min_sgd": 472.5,
+    "cluster_price_max_sgd": 472.5,
+    "listing_id": "store_b:B-2007",
+    "source_platform": "store_b",
+    "source_listing_id": "B-2007",
+    "title": "GoPro Hero 12 Action Camera",
+    "brand": "gopro",
+    "price_sgd": 472.5,
+    "seller_id": "sel_b_07",
+    "seller_name": "ActionCamHQ",
+    "seller_age_days": 2549,
+    "rating": 4.5,
+    "review_count": 203,
+    "reviews": [
+      {
+        "text": "Stabilisation is incredible for action shots.",
+        "rating": 5,
+        "date": "2026-08-05"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2007"
+  },
+  {
+    "cluster_id": "store_c:C-3005",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 599.0,
+    "cluster_price_min_sgd": 599.0,
+    "cluster_price_max_sgd": 599.0,
+    "listing_id": "store_c:C-3005",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3005",
+    "title": "Xiaomi Robot Vacuum X20",
+    "brand": "xiaomi",
+    "price_sgd": 599.0,
+    "seller_id": "sel_c_05",
+    "seller_name": "SmartHomeSG",
+    "seller_age_days": 1842,
+    "rating": 4.3,
+    "review_count": 54,
+    "reviews": [
+      {
+        "text": "Mapping is accurate, app could be better.",
+        "rating": 4,
+        "date": "2026-05-02"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3005"
+  },
+  {
+    "cluster_id": "store_c:C-3006",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 729.0,
+    "cluster_price_min_sgd": 729.0,
+    "cluster_price_max_sgd": 729.0,
+    "listing_id": "store_c:C-3006",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3006",
+    "title": "PlayStation 5 Slim Console",
+    "brand": "playstation",
+    "price_sgd": 729.0,
+    "seller_id": "sel_c_06",
+    "seller_name": "GameStopSG",
+    "seller_age_days": 3341,
+    "rating": 4.8,
+    "review_count": 390,
+    "reviews": [
+      {
+        "text": "Loads games noticeably faster than the original PS5.",
+        "rating": 5,
+        "date": "2026-09-19"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3006"
+  },
+  {
+    "cluster_id": "store_c:C-3007",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "store_c"
+    ],
+    "cluster_price_median_sgd": 219.0,
+    "cluster_price_min_sgd": 219.0,
+    "cluster_price_max_sgd": 219.0,
+    "listing_id": "store_c:C-3007",
+    "source_platform": "store_c",
+    "source_listing_id": "C-3007",
+    "title": "Kindle Paperwhite 11th Gen",
+    "brand": "kindle",
+    "price_sgd": 219.0,
+    "seller_id": "sel_c_07",
+    "seller_name": "BookNookSG",
+    "seller_age_days": 2630,
+    "rating": 4.6,
+    "review_count": 165,
+    "reviews": [
+      {
+        "text": "Great for reading at night, warm light works well.",
+        "rating": 5,
+        "date": "2026-07-09"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3007"
+  }
+]

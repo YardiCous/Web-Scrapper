@@ -1,0 +1,1167 @@
+[
+  {
+    "cluster_id": "c_78",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 2468.7,
+    "cluster_price_min_sgd": 518.7,
+    "cluster_price_max_sgd": 2599.99,
+    "listing_id": "cartlane:78",
+    "source_platform": "cartlane",
+    "title": "Apple MacBook Pro 14 Inch Space Grey",
+    "price_sgd": 844.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.7,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=78",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_47",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "cartlane",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 51.99,
+    "cluster_price_min_sgd": 38.99,
+    "cluster_price_max_sgd": 64.99,
+    "listing_id": "cartlane:47",
+    "source_platform": "cartlane",
+    "title": "Table Lamp",
+    "price_sgd": 38.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Would not recommend!",
+        "rating": 3,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=47",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_90",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "cartlane",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 94.24,
+    "cluster_price_min_sgd": 71.49,
+    "cluster_price_max_sgd": 116.99,
+    "listing_id": "cartlane:90",
+    "source_platform": "cartlane",
+    "title": "Puma Future Rider Trainers",
+    "price_sgd": 71.49,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 3.7,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very disappointed!",
+        "rating": 1,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=90",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_51",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 51.99,
+    "cluster_price_min_sgd": 51.99,
+    "cluster_price_max_sgd": 51.99,
+    "listing_id": "cartlane:51",
+    "source_platform": "cartlane",
+    "title": "Boxed Blender",
+    "price_sgd": 51.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 5.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=51",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_14",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 194.99,
+    "cluster_price_min_sgd": 194.99,
+    "cluster_price_max_sgd": 194.99,
+    "listing_id": "cartlane:14",
+    "source_platform": "cartlane",
+    "title": "Knoll Saarinen Executive Conference Chair",
+    "price_sgd": 194.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 3.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Waste of money!",
+        "rating": 2,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very dissatisfied!",
+        "rating": 2,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=14",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_93",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 64.99,
+    "cluster_price_min_sgd": 64.99,
+    "cluster_price_max_sgd": 64.99,
+    "listing_id": "cartlane:93",
+    "source_platform": "cartlane",
+    "title": "Brown Leather Belt Watch",
+    "price_sgd": 64.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 3.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very unhappy with my purchase!",
+        "rating": 1,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Fast shipping!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=93",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_52",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 32.49,
+    "cluster_price_min_sgd": 32.49,
+    "cluster_price_max_sgd": 32.49,
+    "listing_id": "cartlane:52",
+    "source_platform": "cartlane",
+    "title": "Carbon Steel Wok",
+    "price_sgd": 32.49,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=52",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_46",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 16.89,
+    "cluster_price_min_sgd": 16.89,
+    "cluster_price_max_sgd": 16.89,
+    "listing_id": "cartlane:46",
+    "source_platform": "cartlane",
+    "title": "Plant Pot",
+    "price_sgd": 16.89,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Fast shipping!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Poor quality!",
+        "rating": 3,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=46",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_81",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 649.99,
+    "cluster_price_min_sgd": 649.99,
+    "cluster_price_max_sgd": 649.99,
+    "listing_id": "cartlane:81",
+    "source_platform": "cartlane",
+    "title": "Lenovo Yoga 920",
+    "price_sgd": 649.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=81",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_65",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 22.09,
+    "cluster_price_min_sgd": 22.09,
+    "cluster_price_max_sgd": 22.09,
+    "listing_id": "cartlane:65",
+    "source_platform": "cartlane",
+    "title": "Lunch Box",
+    "price_sgd": 22.09,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Poor quality!",
+        "rating": 2,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=65",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_13",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "cartlane"
+    ],
+    "cluster_price_median_sgd": 103.99,
+    "cluster_price_min_sgd": 103.99,
+    "cluster_price_max_sgd": 103.99,
+    "listing_id": "cartlane:13",
+    "source_platform": "cartlane",
+    "title": "Bedside Table African Cherry",
+    "price_sgd": 103.99,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 4.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Highly recommended!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=13",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_88",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 180.7,
+    "cluster_price_min_sgd": 50.7,
+    "cluster_price_max_sgd": 206.7,
+    "listing_id": "cartlane:88",
+    "source_platform": "cartlane",
+    "title": "Nike Air Jordan 1 Red And Black",
+    "price_sgd": 84.49,
+    "seller_name": "Cartlane",
+    "seller_age_days": 17,
+    "rating": 3.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "date": "2025-04-30T00:00:00Z"
+      },
+      {
+        "text": "Waste of money!",
+        "rating": 1,
+        "date": "2025-04-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=88",
+    "fetched_at": "2026-10-25T04:20:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_1",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 89.9,
+    "cluster_price_min_sgd": 89.9,
+    "cluster_price_max_sgd": 89.9,
+    "listing_id": "lazora:1",
+    "source_platform": "lazora",
+    "title": "Fjällräven Foldsack No. 1 Backpack",
+    "brand": "Fjällräven",
+    "price_sgd": 89.9,
+    "seller_name": "Lazora Everyday",
+    "seller_age_days": 2050,
+    "rating": 4.8,
+    "review_count": 128,
+    "reviews": [
+      {
+        "text": "Comfortable straps and just the right size for my laptop and everyday essentials.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-1",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_2",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 79.9,
+    "cluster_price_min_sgd": 79.9,
+    "cluster_price_max_sgd": 79.9,
+    "listing_id": "lazora:2",
+    "source_platform": "lazora",
+    "title": "SanDisk SSD PLUS 1TB",
+    "brand": "SanDisk",
+    "price_sgd": 79.9,
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2267,
+    "rating": 4.7,
+    "review_count": 86,
+    "reviews": [
+      {
+        "text": "A practical storage upgrade. My everyday apps feel much quicker to open.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-2",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_3",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 349.0,
+    "cluster_price_min_sgd": 349.0,
+    "cluster_price_max_sgd": 349.0,
+    "listing_id": "lazora:3",
+    "source_platform": "lazora",
+    "title": "John Hardy Legends Naga Bracelet",
+    "brand": "John Hardy",
+    "price_sgd": 349.0,
+    "seller_name": "Lazora Everyday",
+    "seller_age_days": 2050,
+    "rating": 4.9,
+    "review_count": 42,
+    "reviews": [
+      {
+        "text": "The intricate detail is lovely. A statement piece that works with a simple outfit.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-3",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_4",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 69.9,
+    "cluster_price_min_sgd": 69.9,
+    "cluster_price_max_sgd": 69.9,
+    "listing_id": "lazora:4",
+    "source_platform": "lazora",
+    "title": "WD Elements 2TB Portable Hard Drive",
+    "brand": "Western Digital",
+    "price_sgd": 69.9,
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2267,
+    "rating": 4.6,
+    "review_count": 215,
+    "reviews": [
+      {
+        "text": "Compact enough for my work bag, with plenty of room for photos and documents.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-4",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_5",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 139.9,
+    "cluster_price_min_sgd": 139.9,
+    "cluster_price_max_sgd": 139.9,
+    "listing_id": "lazora:5",
+    "source_platform": "lazora",
+    "title": "Acer SB220Q 21.5-inch Full HD Monitor",
+    "brand": "Acer",
+    "price_sgd": 139.9,
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2267,
+    "rating": 4.5,
+    "review_count": 94,
+    "reviews": [
+      {
+        "text": "A good size for a compact desk. The slim frame makes the setup look tidy.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-5",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_6",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 899.0,
+    "cluster_price_min_sgd": 899.0,
+    "cluster_price_max_sgd": 899.0,
+    "listing_id": "lazora:6",
+    "source_platform": "lazora",
+    "title": "Samsung CHG90 49-inch Gaming Monitor",
+    "brand": "Samsung",
+    "price_sgd": 899.0,
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2267,
+    "rating": 4.8,
+    "review_count": 67,
+    "reviews": [
+      {
+        "text": "The wide display is especially useful when working with several windows at once.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-6",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_7",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 69.9,
+    "cluster_price_min_sgd": 69.9,
+    "cluster_price_max_sgd": 69.9,
+    "listing_id": "lazora:7",
+    "source_platform": "lazora",
+    "title": "BIYLACLESEN Women’s 3-in-1 Snow Jacket",
+    "brand": "BIYLACLESEN",
+    "price_sgd": 69.9,
+    "seller_name": "Lazora Style",
+    "seller_age_days": 1739,
+    "rating": 4.6,
+    "review_count": 73,
+    "reviews": [
+      {
+        "text": "I like being able to change the layers. The pockets are handy for days outdoors.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-7",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_lazora_8",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "lazora"
+    ],
+    "cluster_price_median_sgd": 49.9,
+    "cluster_price_min_sgd": 49.9,
+    "cluster_price_max_sgd": 49.9,
+    "listing_id": "lazora:8",
+    "source_platform": "lazora",
+    "title": "Lock and Love Faux Leather Moto Jacket",
+    "brand": "Lock and Love",
+    "price_sgd": 49.9,
+    "seller_name": "Lazora Style",
+    "seller_age_days": 1739,
+    "rating": 4.4,
+    "review_count": 119,
+    "reviews": [
+      {
+        "text": "Easy to style with jeans. The removable hood gives it a little more versatility.",
+        "rating": 5,
+        "date": "2026-09-20T00:00:00Z"
+      },
+      {
+        "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
+        "rating": 4,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-8",
+    "fetched_at": "2026-10-25T04:50:00Z"
+  },
+  {
+    "cluster_id": "c_101",
+    "cluster_size": 4,
+    "cluster_platforms": [
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 706.35,
+    "cluster_price_min_sgd": 167.7,
+    "cluster_price_max_sgd": 714.99,
+    "listing_id": "taomarket:101",
+    "source_platform": "taomarket",
+    "title": "Apple AirPods Max Silver",
+    "price_sgd": 714.99,
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2415,
+    "rating": 3.47,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/101.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_88",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 180.7,
+    "cluster_price_min_sgd": 50.7,
+    "cluster_price_max_sgd": 206.7,
+    "listing_id": "taomarket:88",
+    "source_platform": "taomarket",
+    "title": "Nike Air Jordan 1 Red And Black",
+    "price_sgd": 194.99,
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2703,
+    "rating": 4.77,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Waste of money!",
+        "rating": 1,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/88.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_174",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 779.99,
+    "cluster_price_min_sgd": 779.99,
+    "cluster_price_max_sgd": 779.99,
+    "listing_id": "taomarket:174",
+    "source_platform": "taomarket",
+    "title": "Prada Galleria Saffiano Leather Bag",
+    "price_sgd": 779.99,
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2703,
+    "rating": 2.71,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would not buy again!",
+        "rating": 2,
+        "date": "2025-04-30T09:41:02.054000Z"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.054000Z"
+      },
+      {
+        "text": "Highly recommended!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.054000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/174.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_78",
+    "cluster_size": 5,
+    "cluster_platforms": [
+      "cartlane",
+      "synthetic",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 2468.7,
+    "cluster_price_min_sgd": 518.7,
+    "cluster_price_max_sgd": 2599.99,
+    "listing_id": "taomarket:78",
+    "source_platform": "taomarket",
+    "title": "Apple MacBook Pro 14-inch",
+    "price_sgd": 2599.99,
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2415,
+    "rating": 3.65,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/78.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_7",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 168.99,
+    "cluster_price_min_sgd": 168.99,
+    "cluster_price_max_sgd": 168.99,
+    "listing_id": "taomarket:7",
+    "source_platform": "taomarket",
+    "title": "Chanel Coco Noir Eau de Parfum",
+    "price_sgd": 168.99,
+    "seller_name": "Tao Beauty Edit",
+    "seller_age_days": 2226,
+    "rating": 4.26,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/7.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_47",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "cartlane",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 51.99,
+    "cluster_price_min_sgd": 38.99,
+    "cluster_price_max_sgd": 64.99,
+    "listing_id": "taomarket:47",
+    "source_platform": "taomarket",
+    "title": "Table Lamp",
+    "price_sgd": 64.99,
+    "seller_name": "Tao Home Finds",
+    "seller_age_days": 2083,
+    "rating": 3.55,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Would not recommend!",
+        "rating": 3,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/47.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_100",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 168.99,
+    "cluster_price_min_sgd": 168.99,
+    "cluster_price_max_sgd": 168.99,
+    "listing_id": "taomarket:100",
+    "source_platform": "taomarket",
+    "title": "Apple AirPods",
+    "price_sgd": 168.99,
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2415,
+    "rating": 4.15,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would not buy again!",
+        "rating": 3,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Great product!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/100.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_123",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 1429.99,
+    "cluster_price_min_sgd": 1429.99,
+    "cluster_price_max_sgd": 1429.99,
+    "listing_id": "taomarket:123",
+    "source_platform": "taomarket",
+    "title": "iPhone 13 Pro",
+    "price_sgd": 1429.99,
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2415,
+    "rating": 4.12,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.054000Z"
+      },
+      {
+        "text": "Not worth the price!",
+        "rating": 3,
+        "date": "2025-04-30T09:41:02.054000Z"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.054000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/123.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_90",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "cartlane",
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 94.24,
+    "cluster_price_min_sgd": 71.49,
+    "cluster_price_max_sgd": 116.99,
+    "listing_id": "taomarket:90",
+    "source_platform": "taomarket",
+    "title": "Puma Future Rider Trainers",
+    "price_sgd": 116.99,
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2703,
+    "rating": 4.9,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very disappointed!",
+        "rating": 1,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/90.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_10",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 103.99,
+    "cluster_price_min_sgd": 103.99,
+    "cluster_price_max_sgd": 103.99,
+    "listing_id": "taomarket:10",
+    "source_platform": "taomarket",
+    "title": "Gucci Bloom Eau de Parfum",
+    "price_sgd": 103.99,
+    "seller_name": "Tao Beauty Edit",
+    "seller_age_days": 2226,
+    "rating": 2.74,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very dissatisfied!",
+        "rating": 1,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/10.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_103",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 129.99,
+    "cluster_price_min_sgd": 129.99,
+    "cluster_price_max_sgd": 129.99,
+    "listing_id": "taomarket:103",
+    "source_platform": "taomarket",
+    "title": "Apple HomePod Mini Cosmic Grey",
+    "price_sgd": 129.99,
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2415,
+    "rating": 4.62,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Great product!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Would not buy again!",
+        "rating": 3,
+        "date": "2025-04-30T09:41:02.053000Z"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.053000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/103.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  },
+  {
+    "cluster_id": "c_173",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "taomarket"
+    ],
+    "cluster_price_median_sgd": 168.99,
+    "cluster_price_min_sgd": 168.99,
+    "cluster_price_max_sgd": 168.99,
+    "listing_id": "taomarket:173",
+    "source_platform": "taomarket",
+    "title": "HESHE Leather Shoulder Bag",
+    "price_sgd": 168.99,
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2703,
+    "rating": 4.92,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "date": "2025-04-30T09:41:02.054000Z"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.054000Z"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 4,
+        "date": "2025-04-30T09:41:02.054000Z"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/173.html",
+    "fetched_at": "2026-10-25T04:45:00Z"
+  }
+]
