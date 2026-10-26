@@ -8,6 +8,7 @@ last committed offset.
 import json
 import os
 import time
+from pathlib import Path
 
 from confluent_kafka import Consumer, Producer
 
@@ -19,6 +20,9 @@ GROUP = os.environ.get("KAFKA_GROUP_ID", "cdc.smoke-consumer")
 BATCH = int(os.environ.get("BATCH_SIZE", "100"))
 # Simulated per-message work, so one replica can fall behind and KEDA has something to scale.
 WORK_MS = float(os.environ.get("WORK_MS_PER_MESSAGE", "0"))
+# Fault injection for eval/exp_consumer_kill.py: if this file exists, die after the DB write but
+# before the offset commit, without leaving the group (a crash, not a shutdown).
+CRASH_FILE = Path("/tmp/crash-before-commit")
 
 UPSERT = """
 INSERT INTO listings AS l (listing_id, source_platform, source_listing_id, title, price, currency,
@@ -107,6 +111,9 @@ def run():
                         break
         if dlq:
             producer.flush(30)
+        if CRASH_FILE.exists():
+            log("crash_injected", messages=len(msgs))
+            os._exit(1)
         consumer.commit(asynchronous=False)
         log("batch", messages=len(msgs), inserted=inserted, updated=updated,
             stale=len(rows) - inserted - updated, dlq=dlq)

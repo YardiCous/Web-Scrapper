@@ -5,4 +5,5 @@ resources:
   - smoke.yaml
   - smoke-consumer.yaml
   - ttl-refresh.yaml
+  - loadgen.yaml
   - services.yaml

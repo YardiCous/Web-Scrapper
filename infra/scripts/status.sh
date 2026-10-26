@@ -19,7 +19,7 @@ log "KEDA and Knative"
 kubectl -n pipeline get scaledobject 2>/dev/null || true
 kubectl -n scoring get ksvc,kafkasource,kafkasink 2>/dev/null || true
 
-log "Consumer-group lag (summed over partitions; '-' = no committed offset yet)"
+log "Consumer-group lag (summed over partitions; ASSIGNED = partitions owned by a live consumer)"
 if [ -z "$(kafka_pod)" ]; then
   echo "Kafka is not running"
   exit 0
