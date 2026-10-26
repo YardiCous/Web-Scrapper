@@ -20,7 +20,7 @@ docker compose exec db psql -U USER -d listings -c "\dt"
 
 Notes:
 
-- The container reads `POSTGRES_USER`, `POSTGRES_PASSWORD` and `POSTGRES_DB` from `.env` and creates them **only the first time**, when the data volume is empty. `db/init.sql` also runs only then.
+- The container reads `POSTGRES_USER`, `POSTGRES_PASSWORD` and `POSTGRES_DB` from `.env` and creates them **only the first time**, when the data volume is empty. `init.sql` also runs only then.
 - To change credentials or the schema, wipe the volume and start again (**deletes all data**):
 
 ```bash
