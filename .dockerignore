@@ -1,0 +1,8 @@
+**
+!requirements.txt
+!web/
+!web/**
+**/__pycache__/
+**/*.pyc
+**/.env
+**/.venv/

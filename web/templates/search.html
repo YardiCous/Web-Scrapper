@@ -10,8 +10,29 @@
 
 <body>
         <main>
-                <!-- Empty for now-->
+                <h1>Product results</h1>
+                {% include '_search_form.html' %}
+                <p>Found {{ listings|length }} listing{{ '' if listings|length == 1 else 's' }}.</p>
+                {% for listing in listings %}
+                <article class="listing">
+                        <h2>{{ listing.title or 'Untitled product' }}</h2>
+                        <p>{{ listing.source_platform }} · {{ listing.seller_name or 'Unknown seller' }}</p>
+                        <p><strong>{{ listing.currency or '' }} {{ listing.price if listing.price is not none else 'Price unavailable' }}</strong></p>
+                        <p>Rating: {{ listing.rating if listing.rating is not none else 'Unavailable' }} / 5
+                                · {{ listing.review_count }} reviews</p>
+                        <a href="{{ listing.product_url }}" target="_blank" rel="noopener noreferrer">View product</a>
+                        {% if listing.reviews %}
+                        <details>
+                                <summary>Collected reviews</summary>
+                                {% for review in listing.reviews %}
+                                <p><strong>{{ review.rating }} / 5</strong> {{ review.text or 'No review text' }}</p>
+                                {% endfor %}
+                        </details>
+                        {% endif %}
+                </article>
+                {% endfor %}
         </main>
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 
 </html>

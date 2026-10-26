@@ -73,14 +73,14 @@ If the Flask app runs in WSL but Postgres runs on Windows, `localhost` inside WS
 ---
 ## Run project
  
-Create `.env` using .env.example
+Create `.env` using `env.example` in the repository root.
  
 ```bash
-cd ~/project/web
+cd ~/project
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python app.py
+python web/app.py
 ```
 
 ## Dummy Websites
@@ -88,5 +88,46 @@ python app.py
 * https://paegnium.github.io/dummysite/
 * https://paegnium.github.io/dummysite2/
 * https://paegnium.github.io/dummysite3/
+
+## Search-triggered collectors
+
+Start the site, database, and three collector services from the repository root:
+
+```bash
+docker compose up --build -d
+```
+
+Open http://localhost:5000 and paste a dummy product URL, for example:
+
+* Cartlane: `https://paegnium.github.io/dummysite/?product=78`
+* Tao Market: `https://paegnium.github.io/dummysite2/products/78.html`
+* Lazora: `https://paegnium.github.io/dummysite3/#product-7`
+
+The collectors stay running and wait for requests; starting them does not scrape
+anything. Each search sends the URL to the matching collector's `POST /collect`
+endpoint. That collector uses the existing scraper, saves the listing and reviews
+to PostgreSQL, and returns the collected data for the results page. Repeating a
+search refreshes the existing listing and replaces its reviews. A storefront URL
+collects that site's catalogue instead of a single product. Searches currently
+collect from the submitted platform only; cross-platform matching is separate.
+
+To run Flask on your machine instead of in Docker, start only its dependencies:
+
+```bash
+docker compose up --build -d collector-cartlane collector-tao collector-lazora
+python web/app.py
+```
+
+The local Flask app uses collector ports 8101, 8102, and 8103. Containerized Flask
+uses the Compose service names instead. The URLs can be overridden with
+`COLLECTOR_CARTLANE_URL`, `COLLECTOR_TAO_URL`, and `COLLECTOR_LAZORA_URL`.
+Collectors connect to PostgreSQL at `db:5432` using the `POSTGRES_*` credentials
+from `.env`; the host-run app continues to use its local `DATABASE_URL`.
+
+Inspect collector logs with:
+
+```bash
+docker compose logs -f collector-cartlane collector-tao collector-lazora
+```
 
 
