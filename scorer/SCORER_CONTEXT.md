@@ -14,18 +14,18 @@ Cloud-native system that collects listings + reviews from Shopee, TikTok Shop an
 Consumes normalised listings, computes heuristic signals (each 0–1, higher = riskier, or `None` if not computable), combines them with a logistic function into a score + band + top-3 human-readable reasons, upserts into `risk_scores`.
 
 ## Input message (topic `listings.normalised`, key = cluster_id)
-This is the normaliser's actual output (supersedes the originally agreed shape; sample in `fixtures/sample_store_a.json`, more in `fixtures/normalised_output.json`):
+This is the normaliser's actual output (supersedes the originally agreed shape; real sample in `fixtures/normaliser_cartlane_78.json`, older-format samples in `fixtures/sample_store_a.json` and `fixtures/normalised_output.json`):
 ```json
 {
-  "cluster_id": "store_a:A-1001", "cluster_size": 3,
-  "cluster_platforms": ["store_a", "store_b", "store_c"],
-  "cluster_price_median_sgd": 445.5, "cluster_price_min_sgd": 399.0, "cluster_price_max_sgd": 449.0,
-  "listing_id": "store_a:A-1001", "source_platform": "store_a",
-  "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones", "brand": "sony",
-  "price_sgd": 449.0, "seller_name": "AudioHub SG", "seller_age_days": 2064,
-  "rating": 4.7, "review_count": 230,
-  "reviews": [{"text": "Great noise cancellation, worth the price.", "rating": 5, "date": "2026-09-01"}],
-  "product_url": "https://store-a.mock/items/A-1001"
+  "cluster_id": "Cartlane:78", "cluster_size": 2,
+  "cluster_platforms": ["Cartlane", "Tao Market"],
+  "cluster_price_median_sgd": 1788.74, "cluster_price_min_sgd": 877.49, "cluster_price_max_sgd": 2699.99,
+  "listing_id": "Cartlane:78", "source_platform": "Cartlane", "source_listing_id": "78",
+  "title": "Apple MacBook Pro 14 Inch Space Grey", "brand": "apple",
+  "price_sgd": 877.49, "seller_id": "cartlane-001", "seller_name": "Cartlane", "seller_age_days": 18,
+  "rating": 4.7, "review_count": 3,
+  "reviews": [{"text": "Very happy with my purchase!", "rating": 5, "review_date": "2025-04-30"}],
+  "product_url": "https://paegnium.github.io/dummysite/?product=78"
 }
 ```
 Prices are in SGD; currency conversion and cluster statistics are the normaliser's job. Validated by `scorer_engine/models.py` (Listing / Review); unknown fields are ignored. The model also accepts optional `seller_sales`, `seller_is_official` and `fetched_at`, which the normaliser does not send yet; without them `seller_volume` and `official` are `None`.
@@ -117,3 +117,6 @@ Items 2–4 above are done: `scorer/scorer_engine/` package, 69 unit tests, CLI,
 - **Keyword sentiment in v1** (`sentiment.py`, behind a protocol). *Why:* small image, no cold-start model download for the demo; the XLM-R model / sentiment service is the next step.
 - `risk_scores` is a new table; the existing `listings` table is untouched.
 - Known false positive: the agreed title regex matches "mirror**less**" (no word boundary). Left as agreed; noted in tests.
+
+## Decisions (26 Oct 2026)
+- **Normaliser output updated:** reviews carry `review_date` (was `date`); new `seller_id` and `source_listing_id`; cluster ids are now `<platform>:<id>` (e.g. `Cartlane:78`). `Review.date` reads `review_date` and still accepts the legacy `date` key (pydantic `AliasChoices`). *Why:* unknown keys are ignored, so without the alias every review date was silently `None` and `burst` could never fire. All fixtures were switched to `review_date`; fixture cluster ids (`c_78` etc.) were left as they are because ids are opaque to the scorer. `seller_id` / `source_listing_id` are ignored for now.

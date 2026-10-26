@@ -22,17 +22,17 @@
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very satisfied!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=78",
@@ -60,17 +60,17 @@
       {
         "text": "Excellent quality!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Would not recommend!",
         "rating": 3,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Awesome product!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=47",
@@ -98,17 +98,17 @@
       {
         "text": "Highly impressed!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very disappointed!",
         "rating": 1,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very pleased!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=90",
@@ -135,17 +135,17 @@
       {
         "text": "Very pleased!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Would buy again!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=51",
@@ -172,17 +172,17 @@
       {
         "text": "Waste of money!",
         "rating": 2,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very dissatisfied!",
         "rating": 2,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Would buy again!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=14",
@@ -209,17 +209,17 @@
       {
         "text": "Very unhappy with my purchase!",
         "rating": 1,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Fast shipping!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Would buy again!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=93",
@@ -246,17 +246,17 @@
       {
         "text": "Excellent quality!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Highly impressed!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very satisfied!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=52",
@@ -283,17 +283,17 @@
       {
         "text": "Fast shipping!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very satisfied!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Poor quality!",
         "rating": 3,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=46",
@@ -320,17 +320,17 @@
       {
         "text": "Would buy again!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Great value for money!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Great value for money!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=81",
@@ -357,17 +357,17 @@
       {
         "text": "Very pleased!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Poor quality!",
         "rating": 2,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=65",
@@ -394,17 +394,17 @@
       {
         "text": "Excellent quality!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Excellent quality!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Highly recommended!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=13",
@@ -433,17 +433,17 @@
       {
         "text": "Highly impressed!",
         "rating": 5,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 4,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       },
       {
         "text": "Waste of money!",
         "rating": 1,
-        "date": "2025-04-30T00:00:00Z"
+        "review_date": "2025-04-30T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite/?product=88",
@@ -471,12 +471,12 @@
       {
         "text": "Comfortable straps and just the right size for my laptop and everyday essentials.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-1",
@@ -504,12 +504,12 @@
       {
         "text": "A practical storage upgrade. My everyday apps feel much quicker to open.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-2",
@@ -537,12 +537,12 @@
       {
         "text": "The intricate detail is lovely. A statement piece that works with a simple outfit.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-3",
@@ -570,12 +570,12 @@
       {
         "text": "Compact enough for my work bag, with plenty of room for photos and documents.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-4",
@@ -603,12 +603,12 @@
       {
         "text": "A good size for a compact desk. The slim frame makes the setup look tidy.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-5",
@@ -636,12 +636,12 @@
       {
         "text": "The wide display is especially useful when working with several windows at once.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-6",
@@ -669,12 +669,12 @@
       {
         "text": "I like being able to change the layers. The pockets are handy for days outdoors.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-7",
@@ -702,12 +702,12 @@
       {
         "text": "Easy to style with jeans. The removable hood gives it a little more versatility.",
         "rating": 5,
-        "date": "2026-09-20T00:00:00Z"
+        "review_date": "2026-09-20T00:00:00Z"
       },
       {
         "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
         "rating": 4,
-        "date": "2026-09-12T00:00:00Z"
+        "review_date": "2026-09-12T00:00:00Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite3/#product-8",
@@ -735,17 +735,17 @@
       {
         "text": "Excellent quality!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Would buy again!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/101.html",
@@ -774,17 +774,17 @@
       {
         "text": "Highly impressed!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Waste of money!",
         "rating": 1,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/88.html",
@@ -811,17 +811,17 @@
       {
         "text": "Would not buy again!",
         "rating": 2,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       },
       {
         "text": "Great value for money!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       },
       {
         "text": "Highly recommended!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/174.html",
@@ -850,17 +850,17 @@
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very satisfied!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/78.html",
@@ -887,17 +887,17 @@
       {
         "text": "Highly impressed!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Awesome product!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/7.html",
@@ -925,17 +925,17 @@
       {
         "text": "Excellent quality!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Would not recommend!",
         "rating": 3,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Awesome product!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/47.html",
@@ -962,17 +962,17 @@
       {
         "text": "Would not buy again!",
         "rating": 3,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Great product!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Excellent quality!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/100.html",
@@ -999,17 +999,17 @@
       {
         "text": "Would buy again!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       },
       {
         "text": "Not worth the price!",
         "rating": 3,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       },
       {
         "text": "Very satisfied!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/123.html",
@@ -1037,17 +1037,17 @@
       {
         "text": "Highly impressed!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very disappointed!",
         "rating": 1,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very pleased!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/90.html",
@@ -1074,17 +1074,17 @@
       {
         "text": "Very dissatisfied!",
         "rating": 1,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Highly impressed!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/10.html",
@@ -1111,17 +1111,17 @@
       {
         "text": "Great product!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Would not buy again!",
         "rating": 3,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       },
       {
         "text": "Very pleased!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.053000Z"
+        "review_date": "2025-04-30T09:41:02.053000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/103.html",
@@ -1148,17 +1148,17 @@
       {
         "text": "Excellent quality!",
         "rating": 5,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       },
       {
         "text": "Awesome product!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       },
       {
         "text": "Awesome product!",
         "rating": 4,
-        "date": "2025-04-30T09:41:02.054000Z"
+        "review_date": "2025-04-30T09:41:02.054000Z"
       }
     ],
     "product_url": "https://paegnium.github.io/dummysite2/products/173.html",
