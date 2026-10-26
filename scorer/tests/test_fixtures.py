@@ -5,6 +5,7 @@ import pytest
 
 from scorer_engine import config
 from scorer_engine.cli import load, score_all
+from scorer_engine.models import Review
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 FILES = sorted(FIXTURES.glob("*.json"))
@@ -43,3 +44,10 @@ def test_every_signal_fires_somewhere(scores):
 
 def test_normaliser_sample_is_low(scores):
     assert scores["store_a:A-1001"].band == "low"
+
+
+def test_review_date_key_parsed():
+    # The normaliser sends "review_date"; the legacy "date" key still works.
+    listing = load(FIXTURES / "normaliser_cartlane_78.json")[0]
+    assert all(r.date is not None and r.date.tzinfo for r in listing.reviews)
+    assert Review(review_date="2025-04-30").date == Review(date="2025-04-30").date

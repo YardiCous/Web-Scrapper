@@ -21,57 +21,57 @@
       {
         "text": "Battery life is excellent, lasts a full working day.",
         "rating": 5,
-        "date": "2026-03-01T00:00:00Z"
+        "review_date": "2026-03-01T00:00:00Z"
       },
       {
         "text": "Screen is great but the charger cable is a bit short.",
         "rating": 4,
-        "date": "2026-03-18T00:00:00Z"
+        "review_date": "2026-03-18T00:00:00Z"
       },
       {
         "text": "Arrived well packed, serial number checked on the official site.",
         "rating": 5,
-        "date": "2026-04-04T00:00:00Z"
+        "review_date": "2026-04-04T00:00:00Z"
       },
       {
         "text": "Good product, delivery took longer than promised.",
         "rating": 3,
-        "date": "2026-04-21T00:00:00Z"
+        "review_date": "2026-04-21T00:00:00Z"
       },
       {
         "text": "Second one I have bought from this shop, still very happy.",
         "rating": 5,
-        "date": "2026-05-08T00:00:00Z"
+        "review_date": "2026-05-08T00:00:00Z"
       },
       {
         "text": "Works as described. Setup was quick.",
         "rating": 4,
-        "date": "2026-05-25T00:00:00Z"
+        "review_date": "2026-05-25T00:00:00Z"
       },
       {
         "text": "Had a dead pixel, the shop replaced it within a week.",
         "rating": 2,
-        "date": "2026-06-11T00:00:00Z"
+        "review_date": "2026-06-11T00:00:00Z"
       },
       {
         "text": "Fast shipping and genuine warranty card included.",
         "rating": 5,
-        "date": "2026-06-28T00:00:00Z"
+        "review_date": "2026-06-28T00:00:00Z"
       },
       {
         "text": "Solid build quality, a little heavy.",
         "rating": 4,
-        "date": "2026-07-15T00:00:00Z"
+        "review_date": "2026-07-15T00:00:00Z"
       },
       {
         "text": "Exactly as pictured, would buy again.",
         "rating": 5,
-        "date": "2026-08-01T00:00:00Z"
+        "review_date": "2026-08-01T00:00:00Z"
       },
       {
         "text": "Fair price for what you get.",
         "rating": 4,
-        "date": "2026-08-18T00:00:00Z"
+        "review_date": "2026-08-18T00:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/mbp-official",
@@ -101,32 +101,32 @@
       {
         "text": "Arrived well packed, serial number checked on the official site.",
         "rating": 5,
-        "date": "2026-05-03T00:00:00Z"
+        "review_date": "2026-05-03T00:00:00Z"
       },
       {
         "text": "Good product, delivery took longer than promised.",
         "rating": 3,
-        "date": "2026-05-24T00:00:00Z"
+        "review_date": "2026-05-24T00:00:00Z"
       },
       {
         "text": "Second one I have bought from this shop, still very happy.",
         "rating": 5,
-        "date": "2026-06-14T00:00:00Z"
+        "review_date": "2026-06-14T00:00:00Z"
       },
       {
         "text": "Works as described. Setup was quick.",
         "rating": 4,
-        "date": "2026-07-05T00:00:00Z"
+        "review_date": "2026-07-05T00:00:00Z"
       },
       {
         "text": "Had a dead pixel, the shop replaced it within a week.",
         "rating": 2,
-        "date": "2026-07-26T00:00:00Z"
+        "review_date": "2026-07-26T00:00:00Z"
       },
       {
         "text": "Fast shipping and genuine warranty card included.",
         "rating": 5,
-        "date": "2026-08-16T00:00:00Z"
+        "review_date": "2026-08-16T00:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/mbp-reseller",
@@ -156,52 +156,52 @@
       {
         "text": "Amazing laptop, exactly like the original, super fast delivery!!",
         "rating": 5,
-        "date": "2026-10-20T08:00:00Z"
+        "review_date": "2026-10-20T08:00:00Z"
       },
       {
         "text": "Amazing laptop, exactly like the original, super fast delivery!!",
         "rating": 5,
-        "date": "2026-10-20T11:00:00Z"
+        "review_date": "2026-10-20T11:00:00Z"
       },
       {
         "text": "Amazing laptop, exactly like the original, super fast delivery!",
         "rating": 5,
-        "date": "2026-10-20T14:00:00Z"
+        "review_date": "2026-10-20T14:00:00Z"
       },
       {
         "text": "Amazing laptop, exactly like the original, super fast delivery!!",
         "rating": 5,
-        "date": "2026-10-20T17:00:00Z"
+        "review_date": "2026-10-20T17:00:00Z"
       },
       {
         "text": "amazing laptop, exactly like the original, super fast delivery!!",
         "rating": 5,
-        "date": "2026-10-20T20:00:00Z"
+        "review_date": "2026-10-20T20:00:00Z"
       },
       {
         "text": "Amazing laptop exactly like the original, super fast delivery",
         "rating": 5,
-        "date": "2026-10-20T23:00:00Z"
+        "review_date": "2026-10-20T23:00:00Z"
       },
       {
         "text": "Looks nice but it is fake, the logo is not original",
         "rating": 5,
-        "date": "2026-10-21T02:00:00Z"
+        "review_date": "2026-10-21T02:00:00Z"
       },
       {
         "text": "Keyboard feels cheap, I think it is counterfeit",
         "rating": 4,
-        "date": "2026-10-21T05:00:00Z"
+        "review_date": "2026-10-21T05:00:00Z"
       },
       {
         "text": "Not original. Serial number does not exist.",
         "rating": 1,
-        "date": "2026-10-21T08:00:00Z"
+        "review_date": "2026-10-21T08:00:00Z"
       },
       {
         "text": "Good",
         "rating": 5,
-        "date": "2026-10-21T11:00:00Z"
+        "review_date": "2026-10-21T11:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/mbp-suspect",
@@ -231,27 +231,27 @@
       {
         "text": "Fits true to size, very comfortable from day one.",
         "rating": 5,
-        "date": "2026-06-01T00:00:00Z"
+        "review_date": "2026-06-01T00:00:00Z"
       },
       {
         "text": "Colour is slightly darker than the photos.",
         "rating": 4,
-        "date": "2026-06-20T00:00:00Z"
+        "review_date": "2026-06-20T00:00:00Z"
       },
       {
         "text": "Box and tags all present, checked the SKU on Nike's site.",
         "rating": 5,
-        "date": "2026-07-09T00:00:00Z"
+        "review_date": "2026-07-09T00:00:00Z"
       },
       {
         "text": "Took two weeks to arrive.",
         "rating": 3,
-        "date": "2026-07-28T00:00:00Z"
+        "review_date": "2026-07-28T00:00:00Z"
       },
       {
         "text": "My son loves them.",
         "rating": 5,
-        "date": "2026-08-16T00:00:00Z"
+        "review_date": "2026-08-16T00:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/aj1-official",
@@ -281,22 +281,22 @@
       {
         "text": "Legit pair, came with receipt.",
         "rating": 5,
-        "date": "2026-07-10T00:00:00Z"
+        "review_date": "2026-07-10T00:00:00Z"
       },
       {
         "text": "Good condition.",
         "rating": 4,
-        "date": "2026-07-22T00:00:00Z"
+        "review_date": "2026-07-22T00:00:00Z"
       },
       {
         "text": "Slight crease on the toe box but fine.",
         "rating": 4,
-        "date": "2026-08-03T00:00:00Z"
+        "review_date": "2026-08-03T00:00:00Z"
       },
       {
         "text": "Fast delivery.",
         "rating": 5,
-        "date": "2026-08-15T00:00:00Z"
+        "review_date": "2026-08-15T00:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/aj1-reseller",
@@ -326,32 +326,32 @@
       {
         "text": "Best shoes ever, same as store, five stars seller recommended!",
         "rating": 5,
-        "date": "2026-10-22T09:00:00Z"
+        "review_date": "2026-10-22T09:00:00Z"
       },
       {
         "text": "Best shoes ever, same as store, five stars seller recommended!",
         "rating": 5,
-        "date": "2026-10-22T11:00:00Z"
+        "review_date": "2026-10-22T11:00:00Z"
       },
       {
         "text": "Best shoes ever, same as store, five stars seller recommended!!",
         "rating": 5,
-        "date": "2026-10-22T13:00:00Z"
+        "review_date": "2026-10-22T13:00:00Z"
       },
       {
         "text": "Best shoes ever, same as store, five stars seller recommended!",
         "rating": 5,
-        "date": "2026-10-22T15:00:00Z"
+        "review_date": "2026-10-22T15:00:00Z"
       },
       {
         "text": "best shoes ever, same as store, five stars seller recommended!",
         "rating": 5,
-        "date": "2026-10-22T17:00:00Z"
+        "review_date": "2026-10-22T17:00:00Z"
       },
       {
         "text": "Sole came off after a week, these are fake",
         "rating": 5,
-        "date": "2026-10-22T19:00:00Z"
+        "review_date": "2026-10-22T19:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/aj1-suspect",
@@ -380,32 +380,32 @@
       {
         "text": "Battery life is excellent, lasts a full working day.",
         "rating": 5,
-        "date": "2026-04-02T00:00:00Z"
+        "review_date": "2026-04-02T00:00:00Z"
       },
       {
         "text": "Screen is great but the charger cable is a bit short.",
         "rating": 4,
-        "date": "2026-04-27T00:00:00Z"
+        "review_date": "2026-04-27T00:00:00Z"
       },
       {
         "text": "Arrived well packed, serial number checked on the official site.",
         "rating": 5,
-        "date": "2026-05-22T00:00:00Z"
+        "review_date": "2026-05-22T00:00:00Z"
       },
       {
         "text": "Good product, delivery took longer than promised.",
         "rating": 3,
-        "date": "2026-06-16T00:00:00Z"
+        "review_date": "2026-06-16T00:00:00Z"
       },
       {
         "text": "Second one I have bought from this shop, still very happy.",
         "rating": 5,
-        "date": "2026-07-11T00:00:00Z"
+        "review_date": "2026-07-11T00:00:00Z"
       },
       {
         "text": "Works as described. Setup was quick.",
         "rating": 4,
-        "date": "2026-08-05T00:00:00Z"
+        "review_date": "2026-08-05T00:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/apm-official",
@@ -434,32 +434,32 @@
       {
         "text": "Second one I have bought from this shop, still very happy.",
         "rating": 5,
-        "date": "2026-02-14T00:00:00Z"
+        "review_date": "2026-02-14T00:00:00Z"
       },
       {
         "text": "Works as described. Setup was quick.",
         "rating": 4,
-        "date": "2026-03-16T00:00:00Z"
+        "review_date": "2026-03-16T00:00:00Z"
       },
       {
         "text": "Had a dead pixel, the shop replaced it within a week.",
         "rating": 2,
-        "date": "2026-04-15T00:00:00Z"
+        "review_date": "2026-04-15T00:00:00Z"
       },
       {
         "text": "Fast shipping and genuine warranty card included.",
         "rating": 5,
-        "date": "2026-05-15T00:00:00Z"
+        "review_date": "2026-05-15T00:00:00Z"
       },
       {
         "text": "Solid build quality, a little heavy.",
         "rating": 4,
-        "date": "2026-06-14T00:00:00Z"
+        "review_date": "2026-06-14T00:00:00Z"
       },
       {
         "text": "Exactly as pictured, would buy again.",
         "rating": 5,
-        "date": "2026-07-14T00:00:00Z"
+        "review_date": "2026-07-14T00:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/apm-reseller",
@@ -488,62 +488,62 @@
       {
         "text": "Sound is fake, not original but ok for price",
         "rating": 5,
-        "date": "2026-10-23T01:00:00Z"
+        "review_date": "2026-10-23T01:00:00Z"
       },
       {
         "text": "Great",
         "rating": 5,
-        "date": "2026-10-23T04:00:00Z"
+        "review_date": "2026-10-23T04:00:00Z"
       },
       {
         "text": "Great value",
         "rating": 5,
-        "date": "2026-10-23T07:00:00Z"
+        "review_date": "2026-10-23T07:00:00Z"
       },
       {
         "text": "Not original, the case is different",
         "rating": 4,
-        "date": "2026-10-23T10:00:00Z"
+        "review_date": "2026-10-23T10:00:00Z"
       },
       {
         "text": "Love it",
         "rating": 5,
-        "date": "2026-10-23T13:00:00Z"
+        "review_date": "2026-10-23T13:00:00Z"
       },
       {
         "text": "Perfect",
         "rating": 5,
-        "date": "2026-10-23T16:00:00Z"
+        "review_date": "2026-10-23T16:00:00Z"
       },
       {
         "text": "Counterfeit, ANC does not work",
         "rating": 1,
-        "date": "2026-10-23T19:00:00Z"
+        "review_date": "2026-10-23T19:00:00Z"
       },
       {
         "text": "Good",
         "rating": 5,
-        "date": "2026-10-23T22:00:00Z"
+        "review_date": "2026-10-23T22:00:00Z"
       },
       {
         "text": "Five stars",
         "rating": 5,
-        "date": "2026-10-24T01:00:00Z"
+        "review_date": "2026-10-24T01:00:00Z"
       },
       {
         "text": "Fast",
         "rating": 5,
-        "date": "2026-10-24T04:00:00Z"
+        "review_date": "2026-10-24T04:00:00Z"
       },
       {
         "text": "Fake product, refund please",
         "rating": 2,
-        "date": "2026-10-24T07:00:00Z"
+        "review_date": "2026-10-24T07:00:00Z"
       },
       {
         "text": "Nice",
         "rating": 5,
-        "date": "2026-10-24T10:00:00Z"
+        "review_date": "2026-10-24T10:00:00Z"
       }
     ],
     "product_url": "https://example.invalid/synthetic/apm-suspect",

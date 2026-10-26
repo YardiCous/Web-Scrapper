@@ -11,7 +11,7 @@ SAMPLE = {
     "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones", "brand": "sony",
     "price_sgd": 449.0, "seller_name": "AudioHub SG", "seller_age_days": 2064,
     "rating": 4.7, "review_count": 230,
-    "reviews": [{"text": "Great noise cancellation, worth the price.", "rating": 5, "date": "2026-09-01"}],
+    "reviews": [{"text": "Great noise cancellation, worth the price.", "rating": 5, "review_date": "2026-09-01"}],
     "product_url": "https://store-a.mock/items/A-1001",
 }
 

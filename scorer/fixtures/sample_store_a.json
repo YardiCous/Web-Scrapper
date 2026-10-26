@@ -16,7 +16,7 @@
   "rating": 4.7,
   "review_count": 230,
   "reviews": [
-    {"text": "Great noise cancellation, worth the price.", "rating": 5, "date": "2026-09-01"}
+    {"text": "Great noise cancellation, worth the price.", "rating": 5, "review_date": "2026-09-01"}
   ],
   "product_url": "https://store-a.mock/items/A-1001"
 }

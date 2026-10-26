@@ -9,13 +9,15 @@ Unknown extra fields are ignored, so the normaliser can add fields freely.
 from datetime import datetime, timezone
 from typing import Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import AliasChoices, BaseModel, Field, field_validator
 
 
 class Review(BaseModel):
     text: Optional[str] = None
     rating: Optional[int] = Field(default=None, ge=1, le=5)
-    date: Optional[datetime] = None  # "2026-09-01" or a full ISO timestamp
+    date: Optional[datetime] = Field(
+        default=None, validation_alias=AliasChoices("review_date", "date")
+    )
 
     @field_validator("date")
     @classmethod
