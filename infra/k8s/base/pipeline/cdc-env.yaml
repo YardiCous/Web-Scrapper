@@ -1,0 +1,8 @@
+# Shared client settings. Workloads load it with envFrom (see templates/).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cdc-env
+  namespace: pipeline
+data:
+  KAFKA_BOOTSTRAP_SERVERS: cdc-kafka-bootstrap.kafka.svc:9092

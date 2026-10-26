@@ -1,0 +1,75 @@
+# Keys and payloads: docs/contracts.md. auto.create.topics.enable is off, so topics exist only here.
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: scrape-requests
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: cdc
+spec:
+  topicName: scrape.requests
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: listings-raw
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: cdc
+spec:
+  topicName: listings.raw
+  partitions: 6
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 604800000
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: listings-cleaned
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: cdc
+spec:
+  topicName: listings.cleaned
+  partitions: 6
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 604800000
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: listings-normalized
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: cdc
+spec:
+  topicName: listings.normalized
+  partitions: 6
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 604800000
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: listings-dlq
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: cdc
+spec:
+  topicName: listings.dlq
+  partitions: 1
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 1209600000

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespaces.yaml
+  - kafka
+  - pipeline
+
+# One entry per image. Manifests use the short name on the left.
+# GHCR_OWNER is replaced with the Makefile's GHCR_OWNER at deploy time.
+images:
+  - name: cdc-tools
+    newName: ghcr.io/GHCR_OWNER/cdc-tools
+    newTag: "0.1.0"

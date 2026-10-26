@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cdc/listings.cleaned.schema.json",
+  "title": "listings.cleaned (PROPOSED)",
+  "description": "PROPOSED, confirm with Gordon. One normalised listing before matching: listings.normalized without the cluster_* fields. Kafka key: brand (blocking key), so one matcher replica sees every listing of a brand.",
+  "type": "object",
+  "required": [
+    "listing_id", "source_platform", "source_listing_id", "title", "brand", "price_sgd", "seller_id",
+    "product_url", "scraped_at"
+  ],
+  "properties": {
+    "listing_id": { "type": "string", "pattern": "^store_[a-z]:.+$" },
+    "source_platform": { "type": "string", "pattern": "^store_[a-z]$" },
+    "source_listing_id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "brand": { "type": "string", "minLength": 1 },
+    "price_sgd": { "type": "number", "minimum": 0 },
+    "seller_id": { "type": "string", "minLength": 1 },
+    "seller_name": { "type": "string" },
+    "seller_age_days": { "type": "integer", "minimum": 0 },
+    "rating": { "type": ["number", "null"], "minimum": 0, "maximum": 5 },
+    "review_count": { "type": "integer", "minimum": 0 },
+    "reviews": { "type": "array", "items": { "type": "object" } },
+    "product_url": { "type": "string", "pattern": "^https?://" },
+    "scraped_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$" }
+  }
+}

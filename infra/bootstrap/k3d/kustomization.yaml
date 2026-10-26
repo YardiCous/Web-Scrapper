@@ -1,0 +1,34 @@
+# k3d-only additions to the portable base, used by k8s/overlays/local-*.
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  # Kafka reachable from the laptop at localhost:32100. Ports 32100-32103 are mapped by create-cluster.sh.
+  # Entries for brokers 1 and 2 are unused in the lite profile.
+  - target:
+      group: kafka.strimzi.io
+      kind: Kafka
+      name: cdc
+    patch: |-
+      - op: add
+        path: /spec/kafka/listeners/-
+        value:
+          name: external
+          port: 9094
+          type: nodeport
+          tls: false
+          configuration:
+            bootstrap:
+              nodePort: 32100
+            brokers:
+              - broker: 0
+                nodePort: 32101
+                advertisedHost: localhost
+                advertisedPort: 32101
+              - broker: 1
+                nodePort: 32102
+                advertisedHost: localhost
+                advertisedPort: 32102
+              - broker: 2
+                nodePort: 32103
+                advertisedHost: localhost
+                advertisedPort: 32103

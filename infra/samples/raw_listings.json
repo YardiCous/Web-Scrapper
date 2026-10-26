@@ -1,0 +1,489 @@
+[
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1001",
+    "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
+    "price": 449.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_01",
+    "seller_name": "AudioHub SG",
+    "selling_since": "2021-03-02",
+    "rating": 4.7,
+    "review_count": 230,
+    "review": [
+      {
+        "text": "Great noise cancellation, worth the price.",
+        "rating": 5,
+        "date": "2026-09-01T00:00:00Z"
+      },
+      {
+        "text": "Battery life is excellent, very comfortable.",
+        "rating": 4,
+        "date": "2026-08-20T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1001",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2001",
+    "title": "Sony WH1000XM5 Over Ear Headphones",
+    "price": 445.5,
+    "currency": "SGD",
+    "seller_id": "sel_b_01",
+    "seller_name": "SoundGear",
+    "selling_since": "2021-06-16",
+    "rating": 4.6,
+    "review_count": 85,
+    "review": [
+      {
+        "text": "Very comfortable for long listening sessions.",
+        "rating": 5,
+        "date": "2026-08-30T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2001",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3001",
+    "title": "Sony WH-1000XM5 Headphone - Black",
+    "price": 399.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_01",
+    "seller_name": "SoundBox88",
+    "selling_since": "2026-08-02",
+    "rating": 4.0,
+    "review_count": 12,
+    "review": [
+      {
+        "text": "Good price good quality fast delivery",
+        "rating": 5,
+        "date": "2026-09-30T00:00:00Z"
+      },
+      {
+        "text": "Good price, good quality, fast delivery!",
+        "rating": 5,
+        "date": "2026-10-01T00:00:00Z"
+      },
+      {
+        "text": "Good price good quality, fast delivery.",
+        "rating": 5,
+        "date": "2026-10-01T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3001",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1002",
+    "title": "Apple AirPods Pro 2nd Generation",
+    "price": 329.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_02",
+    "seller_name": "TechZone",
+    "selling_since": "2019-07-16",
+    "rating": 4.8,
+    "review_count": 540,
+    "review": [
+      {
+        "text": "Fits well and the noise cancellation is great.",
+        "rating": 5,
+        "date": "2026-09-10T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1002",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2002",
+    "title": "Apple AirPods Pro (2nd Gen)",
+    "price": 330.75,
+    "currency": "SGD",
+    "seller_id": "sel_b_02",
+    "seller_name": "GadgetBay",
+    "selling_since": "2017-01-11",
+    "rating": 4.9,
+    "review_count": 620,
+    "review": [
+      {
+        "text": "Best earbuds I have owned, seamless pairing.",
+        "rating": 5,
+        "date": "2026-09-15T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2002",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3002",
+    "title": "Apple AirPods Pro Gen 2 White",
+    "price": 319.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_02",
+    "seller_name": "iGadget Store",
+    "selling_since": "2020-02-15",
+    "rating": 4.7,
+    "review_count": 410,
+    "review": [
+      {
+        "text": "Works perfectly with all my Apple devices.",
+        "rating": 5,
+        "date": "2026-09-12T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3002",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1003",
+    "title": "Samsung Galaxy Buds2 Pro",
+    "price": 249.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_03",
+    "seller_name": "MobileWorld",
+    "selling_since": "2020-11-21",
+    "rating": 4.5,
+    "review_count": 180,
+    "review": [
+      {
+        "text": "Good sound quality for the price.",
+        "rating": 4,
+        "date": "2026-07-18T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1003",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2003",
+    "title": "Samsung Buds2 Pro Wireless Earbuds",
+    "price": 243.0,
+    "currency": "SGD",
+    "seller_id": "sel_b_03",
+    "seller_name": "ElectroMart",
+    "selling_since": "2026-09-02",
+    "rating": 4.2,
+    "review_count": 40,
+    "review": [
+      {
+        "text": "Amazing product super fast shipping highly recommend",
+        "rating": 5,
+        "date": "2026-09-28T00:00:00Z"
+      },
+      {
+        "text": "Amazing product super fast shipping highly recommend!",
+        "rating": 5,
+        "date": "2026-09-28T00:00:00Z"
+      },
+      {
+        "text": "Amazing product, super fast shipping, highly recommend.",
+        "rating": 5,
+        "date": "2026-09-29T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2003",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3003",
+    "title": "Samsung Galaxy Buds 2 Pro - Graphite",
+    "price": 259.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_03",
+    "seller_name": "MobileWorld",
+    "selling_since": "2020-11-21",
+    "rating": 4.5,
+    "review_count": 90,
+    "review": [
+      {
+        "text": "Solid earbuds, good for calls.",
+        "rating": 4,
+        "date": "2026-07-01T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3003",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1004",
+    "title": "Dyson V15 Detect Cordless Vacuum",
+    "price": 899.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_04",
+    "seller_name": "HomeEssentials",
+    "selling_since": "2018-02-11",
+    "rating": 4.6,
+    "review_count": 95,
+    "review": [
+      {
+        "text": "Powerful suction, the laser feature is handy.",
+        "rating": 5,
+        "date": "2026-06-02T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1004",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2004",
+    "title": "Dyson V15 Detect Vacuum Cleaner",
+    "price": 904.5,
+    "currency": "SGD",
+    "seller_id": "sel_b_04",
+    "seller_name": "CleanTech",
+    "selling_since": "2019-04-23",
+    "rating": 4.5,
+    "review_count": 60,
+    "review": [
+      {
+        "text": "Does a great job on carpets.",
+        "rating": 4,
+        "date": "2026-06-19T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2004",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3004",
+    "title": "Dyson V15 Detect Absolute Vacuum",
+    "price": 879.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_04",
+    "seller_name": "HomeEssentials",
+    "selling_since": "2018-02-11",
+    "rating": 4.6,
+    "review_count": 70,
+    "review": [
+      {
+        "text": "Worth it for pet hair pickup.",
+        "rating": 5,
+        "date": "2026-06-28T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3004",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1005",
+    "title": "Logitech MX Master 3S Wireless Mouse",
+    "price": 139.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_05",
+    "seller_name": "PeripheralPlus",
+    "selling_since": "2022-05-02",
+    "rating": 4.7,
+    "review_count": 310,
+    "review": [
+      {
+        "text": "Silent clicks and great ergonomics.",
+        "rating": 5,
+        "date": "2026-08-01T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1005",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2005",
+    "title": "Logitech MX Master 3S Mouse",
+    "price": 137.7,
+    "currency": "SGD",
+    "seller_id": "sel_b_05",
+    "seller_name": "PeripheralPlus",
+    "selling_since": "2022-05-02",
+    "rating": 4.7,
+    "review_count": 95,
+    "review": [
+      {
+        "text": "Smooth scroll wheel, works great on glass.",
+        "rating": 5,
+        "date": "2026-07-22T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2005",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1006",
+    "title": "JBL Flip 6 Portable Bluetooth Speaker",
+    "price": 139.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_01",
+    "seller_name": "AudioHub SG",
+    "selling_since": "2021-03-02",
+    "rating": 4.4,
+    "review_count": 150,
+    "review": [
+      {
+        "text": "Loud for its size, good bass.",
+        "rating": 4,
+        "date": "2026-05-14T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1006",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1007",
+    "title": "Nintendo Switch OLED Console",
+    "price": 469.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_06",
+    "seller_name": "GameStopSG",
+    "selling_since": "2017-09-02",
+    "rating": 4.8,
+    "review_count": 710,
+    "review": [
+      {
+        "text": "Screen is a big upgrade over the original.",
+        "rating": 5,
+        "date": "2026-09-22T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1007",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_a",
+    "source_listing_id": "A-1008",
+    "title": "Fitbit Charge 6 Fitness Tracker",
+    "price": 219.0,
+    "currency": "SGD",
+    "seller_id": "sel_a_07",
+    "seller_name": "WearableWorld",
+    "selling_since": "2020-01-06",
+    "rating": 4.3,
+    "review_count": 88,
+    "review": [
+      {
+        "text": "Accurate heart rate tracking.",
+        "rating": 4,
+        "date": "2026-04-11T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-a.mock/items/A-1008",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2006",
+    "title": "Bose QuietComfort Ultra Headphones",
+    "price": 486.0,
+    "currency": "SGD",
+    "seller_id": "sel_b_06",
+    "seller_name": "AudioDepot",
+    "selling_since": "2020-03-19",
+    "rating": 4.6,
+    "review_count": 142,
+    "review": [
+      {
+        "text": "Excellent ANC, slightly pricey though.",
+        "rating": 4,
+        "date": "2026-05-25T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2006",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_b",
+    "source_listing_id": "B-2007",
+    "title": "GoPro Hero 12 Action Camera",
+    "price": 472.5,
+    "currency": "SGD",
+    "seller_id": "sel_b_07",
+    "seller_name": "ActionCamHQ",
+    "selling_since": "2019-11-03",
+    "rating": 4.5,
+    "review_count": 203,
+    "review": [
+      {
+        "text": "Stabilisation is incredible for action shots.",
+        "rating": 5,
+        "date": "2026-08-05T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-b.mock/p/B-2007",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3005",
+    "title": "Xiaomi Robot Vacuum X20",
+    "price": 599.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_05",
+    "seller_name": "SmartHomeSG",
+    "selling_since": "2021-10-10",
+    "rating": 4.3,
+    "review_count": 54,
+    "review": [
+      {
+        "text": "Mapping is accurate, app could be better.",
+        "rating": 4,
+        "date": "2026-05-02T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3005",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3006",
+    "title": "PlayStation 5 Slim Console",
+    "price": 729.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_06",
+    "seller_name": "GameStopSG",
+    "selling_since": "2017-09-02",
+    "rating": 4.8,
+    "review_count": 390,
+    "review": [
+      {
+        "text": "Loads games noticeably faster than the original PS5.",
+        "rating": 5,
+        "date": "2026-09-19T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3006",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  },
+  {
+    "source_platform": "store_c",
+    "source_listing_id": "C-3007",
+    "title": "Kindle Paperwhite 11th Gen",
+    "price": 219.0,
+    "currency": "SGD",
+    "seller_id": "sel_c_07",
+    "seller_name": "BookNookSG",
+    "selling_since": "2019-08-14",
+    "rating": 4.6,
+    "review_count": 165,
+    "review": [
+      {
+        "text": "Great for reading at night, warm light works well.",
+        "rating": 5,
+        "date": "2026-07-09T00:00:00Z"
+      }
+    ],
+    "product_url": "https://store-c.mock/listing/C-3007",
+    "scraped_at": "2026-10-26T10:00:00Z"
+  }
+]

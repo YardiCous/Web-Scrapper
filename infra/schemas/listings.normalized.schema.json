@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cdc/listings.normalized.schema.json",
+  "title": "listings.normalized",
+  "description": "One listing after normalisation and matching, with its cluster's aggregates (derived from Gordon's sample). Kafka key: cluster_id. scraped_at is requested, not yet emitted.",
+  "type": "object",
+  "required": [
+    "cluster_id", "cluster_size", "cluster_platforms", "cluster_price_median_sgd", "cluster_price_min_sgd",
+    "cluster_price_max_sgd", "listing_id", "source_platform", "source_listing_id", "title", "brand", "price_sgd",
+    "seller_id", "seller_name", "seller_age_days", "rating", "review_count", "reviews", "product_url"
+  ],
+  "properties": {
+    "cluster_id": { "type": "string", "minLength": 1 },
+    "cluster_size": { "type": "integer", "minimum": 1 },
+    "cluster_platforms": { "type": "array", "items": { "$ref": "#/$defs/platform" }, "minItems": 1, "uniqueItems": true },
+    "cluster_price_median_sgd": { "type": "number", "minimum": 0 },
+    "cluster_price_min_sgd": { "type": "number", "minimum": 0 },
+    "cluster_price_max_sgd": { "type": "number", "minimum": 0 },
+    "listing_id": { "type": "string", "pattern": "^store_[a-z]:.+$" },
+    "source_platform": { "$ref": "#/$defs/platform" },
+    "source_listing_id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "brand": { "type": "string", "minLength": 1 },
+    "price_sgd": { "type": "number", "minimum": 0 },
+    "seller_id": { "type": "string", "minLength": 1 },
+    "seller_name": { "type": "string" },
+    "seller_age_days": { "type": "integer", "minimum": 0 },
+    "rating": { "type": ["number", "null"], "minimum": 0, "maximum": 5 },
+    "review_count": { "type": "integer", "minimum": 0 },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text", "rating", "date"],
+        "properties": {
+          "text": { "type": "string" },
+          "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+        }
+      }
+    },
+    "product_url": { "type": "string", "pattern": "^https?://" },
+    "scraped_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$" }
+  },
+  "$defs": {
+    "platform": { "type": "string", "pattern": "^store_[a-z]$" }
+  }
+}

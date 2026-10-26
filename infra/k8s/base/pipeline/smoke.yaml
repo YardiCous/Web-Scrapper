@@ -1,0 +1,38 @@
+# Template only: suspended and scheduled for 31 Feb. `make smoke` runs it with
+# `kubectl create job --from=cronjob/smoke`, so the image comes from kustomize like everything else.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: smoke
+  namespace: pipeline
+spec:
+  schedule: "0 0 31 2 *"
+  suspend: true
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 300
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: smoke
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: smoke
+              image: cdc-tools
+              args: ["smoke"]
+              envFrom:
+                - configMapRef:
+                    name: cdc-env
+              env:
+                - name: SERVICE_NAME
+                  value: smoke
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                limits:
+                  cpu: 500m
+                  memory: 256Mi

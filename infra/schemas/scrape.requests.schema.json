@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cdc/scrape.requests.schema.json",
+  "title": "scrape.requests (PROPOSED)",
+  "description": "PROPOSED, confirm with JJ and Yu Da. Ask a collector to (re)scrape one product URL. Kafka key: source_platform.",
+  "type": "object",
+  "required": ["request_id", "source_platform", "product_url", "reason", "requested_at"],
+  "properties": {
+    "request_id": { "type": "string", "minLength": 1 },
+    "source_platform": { "type": "string", "pattern": "^store_[a-z]$" },
+    "product_url": { "type": "string", "pattern": "^https?://" },
+    "source_listing_id": { "type": ["string", "null"] },
+    "reason": { "enum": ["ttl_refresh", "user_request"] },
+    "requested_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$" }
+  }
+}
