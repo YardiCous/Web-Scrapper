@@ -10,7 +10,7 @@ HTTP_PORT ?= 8080
 
 export PROFILE OVERLAY CLUSTER GHCR_OWNER HTTP_PORT
 
-.PHONY: help up down status smoke deploy images push
+.PHONY: help up down status smoke deploy images push ttl-refresh
 
 help:
 	@echo "make up       create or update the local cluster and deploy everything (PROFILE=$(PROFILE))"
@@ -20,6 +20,7 @@ help:
 	@echo "make deploy   re-apply manifests only (after editing k8s/)"
 	@echo "make images   build our images and import them into k3d"
 	@echo "make push     build multi-arch images and push them to ghcr.io/$(GHCR_OWNER)"
+	@echo "make ttl-refresh   run the TTL refresh CronJob once, now"
 
 up:
 	@bash scripts/up.sh
@@ -42,3 +43,6 @@ images:
 
 push:
 	@bash scripts/images.sh push
+
+ttl-refresh:
+	@kubectl -n pipeline create job ttl-refresh-$$(date +%s) --from=cronjob/ttl-refresh

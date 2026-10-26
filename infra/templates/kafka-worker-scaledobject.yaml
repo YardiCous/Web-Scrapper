@@ -1,0 +1,25 @@
+# Template: scale a kafka-worker Deployment on consumer-group lag (KEDA).
+# Working example: k8s/base/pipeline/smoke-consumer.yaml.
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: my-service
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: my-service             # the Deployment
+  minReplicaCount: 1             # 0 = scale to zero when idle; then pollingInterval and cooldownPeriod apply
+  maxReplicaCount: 6             # more replicas than partitions would sit idle
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30   # scale in 30 s after lag drops (Kubernetes default 300)
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.my-service
+        topic: listings.raw
+        lagThreshold: "100"      # target lag per replica
+        offsetResetPolicy: earliest

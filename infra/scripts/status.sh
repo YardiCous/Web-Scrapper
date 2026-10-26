@@ -15,6 +15,10 @@ log "Topics"
 kubectl -n kafka get kafkatopics \
   -o custom-columns='TOPIC:.spec.topicName,PARTITIONS:.spec.partitions,REPLICAS:.spec.replicas,MIN_ISR:.spec.config.min\.insync\.replicas,READY:.status.conditions[?(@.type=="Ready")].status'
 
+log "KEDA and Knative"
+kubectl -n pipeline get scaledobject 2>/dev/null || true
+kubectl -n scoring get ksvc,kafkasource,kafkasink 2>/dev/null || true
+
 log "Consumer-group lag (summed over partitions; '-' = no committed offset yet)"
 if [ -z "$(kafka_pod)" ]; then
   echo "Kafka is not running"

@@ -1,0 +1,59 @@
+# Uses the cluster's default IngressClass (Traefik on k3d). Hosts under .localhost resolve to this
+# machine; a cloud overlay replaces them.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web
+  namespace: web
+spec:
+  rules:
+    - host: store-a.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: store-a
+                port:
+                  name: http
+    - host: store-b.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: store-b
+                port:
+                  name: http
+    - host: store-c.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: store-c
+                port:
+                  name: http
+    - host: api.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  name: http
+    - host: app.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  name: http

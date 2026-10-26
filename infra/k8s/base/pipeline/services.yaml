@@ -1,0 +1,233 @@
+# Slots for teammates' pipeline services. Parked at replicas: 0 so a placeholder never commits offsets
+# in the real consumer group. To go live: set the image in k8s/base/kustomization.yaml, then raise
+# replicas here or add a ScaledObject (templates/kafka-worker-scaledobject.yaml).
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-store-a
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: collector-store-a
+    cdc/owner: jj
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collector-store-a
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collector-store-a
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: collector-store-a
+          image: collector-store-a
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: collector-store-a
+            - name: KAFKA_GROUP_ID
+              value: cdc.collector.store_a
+            - name: KAFKA_INPUT_TOPIC
+              value: scrape.requests
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-store-b
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: collector-store-b
+    cdc/owner: jj
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collector-store-b
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collector-store-b
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: collector-store-b
+          image: collector-store-b
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: collector-store-b
+            - name: KAFKA_GROUP_ID
+              value: cdc.collector.store_b
+            - name: KAFKA_INPUT_TOPIC
+              value: scrape.requests
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-store-c
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: collector-store-c
+    cdc/owner: jj
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collector-store-c
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collector-store-c
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: collector-store-c
+          image: collector-store-c
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: collector-store-c
+            - name: KAFKA_GROUP_ID
+              value: cdc.collector.store_c
+            - name: KAFKA_INPUT_TOPIC
+              value: scrape.requests
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: normaliser
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: normaliser
+    cdc/owner: gordon
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: normaliser
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: normaliser
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: normaliser
+          image: normaliser
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: normaliser
+            - name: KAFKA_GROUP_ID
+              value: cdc.normaliser
+            - name: KAFKA_INPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.cleaned
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matcher
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: matcher
+    cdc/owner: gordon
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matcher
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matcher
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: matcher
+          image: matcher
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: matcher
+            - name: KAFKA_GROUP_ID
+              value: cdc.matcher
+            - name: KAFKA_INPUT_TOPIC
+              value: listings.cleaned
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.normalized
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

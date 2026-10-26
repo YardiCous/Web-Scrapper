@@ -9,27 +9,37 @@ refs() {
   render | grep -Eo "ghcr.io/$GHCR_OWNER/[a-z0-9-]+:[A-Za-z0-9._-]+" | sort -u
 }
 
-# Sets DOCKERFILE, CTX and BUILD_ARGS for images built here; fails for anything else (e.g. a teammate's image).
+# Sets DOCKERFILE, CTX and BUILD_ARGS for an image built here, given "name:tag"; fails for anything
+# else (e.g. a teammate's image, which is pulled from the registry instead).
+# Store images are tagged with the full commit SHA of the site repo they serve.
 build_spec() {
-  BUILD_ARGS=""
-  case "$1" in
-    cdc-tools) DOCKERFILE="$INFRA_DIR/images/tools/Dockerfile"; CTX="$INFRA_DIR" ;;
+  local name=${1%%:*} tag=${1#*:}
+  DOCKERFILE="$INFRA_DIR/images/tools/Dockerfile"; CTX="$INFRA_DIR"; BUILD_ARGS=""
+  case "$name" in
+    cdc-tools) BUILD_ARGS="--target tools" ;;
+    cdc-placeholder) BUILD_ARGS="--target placeholder" ;;
+    store-a|store-b|store-c)
+      case "$name" in
+        store-a) repo=https://github.com/Paegnium/dummysite ;;
+        store-b) repo=https://github.com/Paegnium/dummysite2 ;;
+        store-c) repo=https://github.com/Paegnium/dummysite3 ;;
+      esac
+      DOCKERFILE="$INFRA_DIR/images/site/Dockerfile"; CTX="$INFRA_DIR/images/site"
+      BUILD_ARGS="--build-arg SITE_REPO=$repo --build-arg SITE_REF=$tag" ;;
     *) return 1 ;;
   esac
 }
 
 ours=""
 for ref in $(refs); do
-  name=${ref#ghcr.io/$GHCR_OWNER/}
-  name=${name%%:*}
-  if build_spec "$name"; then ours="$ours $ref"; fi
+  if build_spec "${ref#ghcr.io/$GHCR_OWNER/}"; then ours="$ours $ref"; fi
 done
 [ -n "$ours" ] || die "no buildable images referenced by overlay $OVERLAY"
 
 case "$cmd" in
   build)
     for ref in $ours; do
-      name=${ref#ghcr.io/$GHCR_OWNER/}; build_spec "${name%%:*}"
+      build_spec "${ref#ghcr.io/$GHCR_OWNER/}"
       log "docker build $ref"
       # shellcheck disable=SC2086
       docker build -t "$ref" -f "$DOCKERFILE" $BUILD_ARGS "$CTX"
@@ -48,7 +58,7 @@ case "$cmd" in
       *) die "buildx cannot build both linux/amd64 and linux/arm64; run: docker run --privileged --rm tonistiigi/binfmt --install amd64,arm64" ;;
     esac
     for ref in $ours; do
-      name=${ref#ghcr.io/$GHCR_OWNER/}; build_spec "${name%%:*}"
+      build_spec "${ref#ghcr.io/$GHCR_OWNER/}"
       log "docker buildx build --push $ref (linux/amd64,linux/arm64)"
       # shellcheck disable=SC2086
       docker buildx build --builder cdc --platform linux/amd64,linux/arm64 \

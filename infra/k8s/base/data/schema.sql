@@ -1,0 +1,45 @@
+-- Runs as an initdb script on first start and again on every `make up` (existing volumes), so every
+-- statement must be idempotent.
+-- No foreign keys: rows arrive from independent consumers in any order.
+
+CREATE TABLE IF NOT EXISTS listings (
+  listing_id        text PRIMARY KEY,          -- "<source_platform>:<source_listing_id>"
+  source_platform   text        NOT NULL,
+  source_listing_id text        NOT NULL,
+  title             text,
+  price             numeric(12, 2),
+  currency          text,
+  seller_id         text,
+  product_url       text        NOT NULL,
+  cluster_id        text,
+  payload           jsonb       NOT NULL,      -- latest full message
+  first_seen_at     timestamptz NOT NULL DEFAULT now(),
+  last_seen_at      timestamptz NOT NULL,      -- scraped_at of the newest version seen
+  updated_at        timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS listings_last_seen_at_idx ON listings (last_seen_at);
+
+CREATE TABLE IF NOT EXISTS clusters (
+  cluster_id         text PRIMARY KEY,
+  brand              text,
+  member_listing_ids text[]      NOT NULL DEFAULT '{}',
+  platforms          text[]      NOT NULL DEFAULT '{}',
+  size               integer     NOT NULL DEFAULT 0,
+  price_median_sgd   numeric(12, 2),
+  price_min_sgd      numeric(12, 2),
+  price_max_sgd      numeric(12, 2),
+  version            bigint      NOT NULL DEFAULT 1,  -- optimistic concurrency: see docs/contracts.md
+  updated_at         timestamptz NOT NULL DEFAULT now()
+);
+
+-- One row per listing: the latest score. Columns to be confirmed with Declan.
+CREATE TABLE IF NOT EXISTS risk_scores (
+  listing_id  text PRIMARY KEY,
+  cluster_id  text,
+  risk_score  numeric(4, 3) NOT NULL CHECK (risk_score BETWEEN 0 AND 1),
+  band        text          NOT NULL,
+  signals     jsonb         NOT NULL DEFAULT '{}',
+  explanation text,
+  scored_at   timestamptz   NOT NULL
+);
+CREATE INDEX IF NOT EXISTS risk_scores_cluster_id_idx ON risk_scores (cluster_id);

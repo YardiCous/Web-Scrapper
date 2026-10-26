@@ -1,11 +1,14 @@
 """Smoke test: validate the sample records against the topic schemas, publish them, read them back,
-and check every message landed on the partition a Java client would pick for its key."""
+check every message landed on the partition a Java client would pick for its key, then check the
+pipeline picked them up: smoke-consumer wrote the raw listings to Postgres and the KafkaSource
+delivered the normalized ones to the scorer."""
 import json
 import time
 import uuid
 from collections import Counter
 from datetime import datetime, timezone
 
+import psycopg
 from confluent_kafka import Consumer, KafkaException, Producer, TopicPartition
 from jsonschema import Draft202012Validator
 
@@ -13,6 +16,8 @@ from .common import DATA_DIR, consumer_config, log, murmur2_partition, producer_
 
 GROUP = "cdc.smoke"
 READ_TIMEOUT_S = 60
+# Long enough for the scorer to scale up from zero.
+PIPELINE_TIMEOUT_S = 180
 
 
 def load(relpath):
@@ -114,6 +119,33 @@ def check_partitions(delivered, partitions):
     return wrong
 
 
+def group_caught_up(group, delivered, topic, deadline):
+    """True once `group` has committed past every message we produced to `topic`."""
+    needed = {}
+    for t, partition, offset in delivered:
+        if t == topic:
+            needed[partition] = max(offset + 1, needed.get(partition, 0))
+    consumer = Consumer(consumer_config(group))
+    try:
+        while time.monotonic() < deadline:
+            committed = consumer.committed([TopicPartition(topic, p) for p in needed], timeout=10)
+            if all(tp.offset >= needed[tp.partition] for tp in committed):
+                return True
+            time.sleep(2)
+        return False
+    finally:
+        consumer.close()
+
+
+def rows_in_db(listing_ids, deadline):
+    with psycopg.connect() as db:
+        while True:
+            n = db.execute("SELECT count(*) FROM listings WHERE listing_id = ANY(%s)", (listing_ids,)).fetchone()[0]
+            if n == len(listing_ids) or time.monotonic() >= deadline:
+                return n
+            time.sleep(2)
+
+
 def run():
     run_id = uuid.uuid4().hex[:8]
     msgs = build_messages()
@@ -128,9 +160,18 @@ def run():
     missing, mismatched = read_back(delivered)
     wrong_partition = check_partitions(delivered, partitions)
 
+    deadline = time.monotonic() + PIPELINE_TIMEOUT_S
+    raw_ids = [k for t, k, _ in msgs if t == "listings.raw"]
+    db_rows = rows_in_db(raw_ids, deadline)
+    consumer_done = group_caught_up("cdc.smoke-consumer", delivered, "listings.raw", deadline)
+    scorer_done = group_caught_up("cdc.scorer", delivered, "listings.normalized", deadline)
+
     ok = not failed and unflushed == 0 and len(delivered) == len(msgs) \
-        and missing == 0 and mismatched == 0 and wrong_partition == 0
+        and missing == 0 and mismatched == 0 and wrong_partition == 0 \
+        and db_rows == len(raw_ids) and consumer_done and scorer_done
     log("smoke_result", ok=ok, run_id=run_id, validated=len(msgs), produced=len(delivered),
         delivery_errors=failed[:5], unflushed=unflushed, not_read_back=missing,
-        content_mismatches=mismatched, wrong_partition=wrong_partition)
+        content_mismatches=mismatched, wrong_partition=wrong_partition,
+        listings_rows=f"{db_rows}/{len(raw_ids)}", smoke_consumer_caught_up=consumer_done,
+        scorer_feed_caught_up=scorer_done)
     return 0 if ok else 1

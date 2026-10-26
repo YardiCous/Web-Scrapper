@@ -3,3 +3,6 @@ kind: Kustomization
 resources:
   - cdc-env.yaml
   - smoke.yaml
+  - smoke-consumer.yaml
+  - ttl-refresh.yaml
+  - services.yaml

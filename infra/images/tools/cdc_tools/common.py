@@ -1,6 +1,7 @@
 """Shared settings and helpers. Env var names follow docs/contracts.md."""
 import json
 import os
+import signal
 import time
 from pathlib import Path
 
@@ -8,6 +9,38 @@ SERVICE = os.environ.get("SERVICE_NAME", "cdc-tools")
 BOOTSTRAP = os.environ.get("KAFKA_BOOTSTRAP_SERVERS", "cdc-kafka-bootstrap.kafka.svc:9092")
 # /app in the image; infra/ when run from a checkout.
 DATA_DIR = Path(os.environ.get("CDC_DATA_DIR") or Path(__file__).resolve().parents[3])
+HEALTH_FILE = Path(os.environ.get("HEALTH_FILE", "/tmp/healthy"))
+
+
+class Shutdown:
+    """Flips `requested` on SIGTERM/SIGINT so a poll loop can finish its batch, commit and exit."""
+
+    def __init__(self):
+        self.requested = False
+        signal.signal(signal.SIGTERM, self._handle)
+        signal.signal(signal.SIGINT, self._handle)
+
+    def _handle(self, signum, _frame):
+        log("shutdown_requested", signal=signum)
+        self.requested = True
+
+
+def heartbeat():
+    """Touched every poll-loop iteration; the liveness probe restarts the pod if it goes stale."""
+    HEALTH_FILE.touch()
+
+
+def connect_db(attempts=20, delay_s=3):
+    """psycopg connection from the PG* env vars, waiting for Postgres to come up (e.g. on first deploy)."""
+    import psycopg
+    for attempt in range(1, attempts):
+        try:
+            return psycopg.connect()
+        except psycopg.OperationalError as e:
+            log("db_unavailable", attempt=attempt, error=str(e).strip())
+            heartbeat()
+            time.sleep(delay_s)
+    return psycopg.connect()
 
 
 def log(event, **fields):

@@ -1,0 +1,86 @@
+# Scorer slot (Declan). Placeholder image until the real scorer exists: set `scorer` in
+# k8s/base/kustomization.yaml. Scales to zero when listings.normalized is idle.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: scorer
+  namespace: scoring
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "0"
+        autoscaling.knative.dev/max-scale: "5"
+        autoscaling.knative.dev/target: "10"
+    spec:
+      timeoutSeconds: 60
+      containers:
+        - image: scorer
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: scorer
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: "1"
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /healthz
+---
+# Every listings.normalized message becomes a CloudEvent POSTed to the scorer. The source commits an
+# offset only after a 2xx (or after the event has gone to the dead-letter sink).
+apiVersion: sources.knative.dev/v1
+kind: KafkaSource
+metadata:
+  name: scorer-feed
+  namespace: scoring
+  annotations:
+    kafka.eventing.knative.dev/delivery.order: ordered   # one in-flight event per partition = per cluster_id
+spec:
+  consumerGroup: cdc.scorer
+  bootstrapServers:
+    - cdc-kafka-bootstrap.kafka.svc:9092
+  topics:
+    - listings.normalized
+  initialOffset: earliest
+  delivery:
+    retry: 5
+    backoffPolicy: exponential
+    backoffDelay: PT0.5S
+    deadLetterSink:
+      ref:
+        apiVersion: eventing.knative.dev/v1alpha1
+        kind: KafkaSink
+        name: listings-dlq
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: scorer
+---
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KafkaSink
+metadata:
+  name: listings-dlq
+  namespace: scoring
+spec:
+  topic: listings.dlq
+  bootstrapServers:
+    - cdc-kafka-bootstrap.kafka.svc:9092
+  contentMode: binary

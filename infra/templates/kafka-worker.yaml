@@ -1,0 +1,65 @@
+# Template: a Kafka consumer/producer service in the pipeline namespace.
+# Copy to k8s/base/pipeline/<service>.yaml, replace "my-service", add the file to that folder's
+# kustomization.yaml and an `images:` entry named my-service to k8s/base/kustomization.yaml.
+# Conventions: docs/onboarding.md.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-service
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: my-service
+spec:
+  replicas: 1                # remove if a KEDA ScaledObject manages this Deployment
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: my-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: my-service
+    spec:
+      # SIGTERM -> stop polling, finish the batch, commit, close the consumer (leaves the group
+      # immediately instead of waiting out session.timeout.ms). Must finish within this window.
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: my-service
+          image: my-service       # resolved by the images: list in k8s/base/kustomization.yaml
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+            - configMapRef:
+                name: cdc-env     # KAFKA_BOOTSTRAP_SERVERS, PGHOST, PGPORT, PGDATABASE
+            - secretRef:
+                name: postgres-credentials   # PGUSER, PGPASSWORD; drop if no database access
+          env:
+            - name: SERVICE_NAME
+              value: my-service
+            - name: KAFKA_GROUP_ID
+              value: cdc.my-service
+            - name: KAFKA_INPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.cleaned
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+            - name: LOG_LEVEL
+              value: INFO
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          # The poll loop touches /tmp/healthy each iteration; a stuck loop gets restarted.
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3

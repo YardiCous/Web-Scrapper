@@ -3,11 +3,51 @@ kind: Kustomization
 resources:
   - namespaces.yaml
   - kafka
+  - data
   - pipeline
+  - scoring
+  - web
 
-# One entry per image. Manifests use the short name on the left.
-# GHCR_OWNER is replaced with the Makefile's GHCR_OWNER at deploy time.
+# Every image our manifests use, by the short name on the left. GHCR_OWNER is replaced with the
+# Makefile's GHCR_OWNER at deploy time.
 images:
+  # Built by scripts/images.sh. Store tags are the dummy-site commit served.
   - name: cdc-tools
     newName: ghcr.io/GHCR_OWNER/cdc-tools
+    newTag: "0.1.0"
+  - name: store-a
+    newName: ghcr.io/GHCR_OWNER/store-a
+    newTag: 2b8093c186c86c205feea65655569c472cfe33b7
+  - name: store-b
+    newName: ghcr.io/GHCR_OWNER/store-b
+    newTag: 0526795c327979887e730aee6ba0d265aa922039
+  - name: store-c
+    newName: ghcr.io/GHCR_OWNER/store-c
+    newTag: 24ee76c44f610ad486efcde2c49c406722e8d29f
+
+  # Teammates' services, on the placeholder until their image exists. To swap one in, change only
+  # its own entry, e.g. newName: ghcr.io/GHCR_OWNER/scorer and newTag: "1.0.0".
+  - name: scorer              # Declan
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: gateway             # Yu Da
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: frontend
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: collector-store-a   # JJ
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: collector-store-b   # JJ
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: collector-store-c   # JJ
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: normaliser          # Gordon
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newTag: "0.1.0"
+  - name: matcher             # Gordon
+    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
     newTag: "0.1.0"

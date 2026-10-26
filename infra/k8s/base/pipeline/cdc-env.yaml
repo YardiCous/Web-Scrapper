@@ -1,4 +1,5 @@
-# Shared client settings. Workloads load it with envFrom (see templates/).
+# Shared client settings (same keys in pipeline, scoring and web). Workloads load it with envFrom,
+# plus the postgres-credentials Secret for PGUSER/PGPASSWORD. See templates/.
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -6,3 +7,6 @@ metadata:
   namespace: pipeline
 data:
   KAFKA_BOOTSTRAP_SERVERS: cdc-kafka-bootstrap.kafka.svc:9092
+  PGHOST: postgres.data.svc
+  PGPORT: "5432"
+  PGDATABASE: cdc

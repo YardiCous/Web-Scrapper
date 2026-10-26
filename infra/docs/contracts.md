@@ -76,10 +76,46 @@ One message per listing, carrying its cluster's aggregates. The schema is derive
 ### `listings.dlq`
 The failed message's original key and value, unchanged, with the `dlq-*` headers above.
 
+## Database (Postgres, namespace `data`)
+
+From a pod: `postgres.data.svc:5432`, database `cdc`. Pods that load the `cdc-env` ConfigMap and the `postgres-credentials` Secret (see `templates/`) get the standard libpq variables (`PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`), so `psycopg.connect()` with no arguments works. The password is generated per machine by `make up` and is never committed. For a shell: `kubectl -n data exec -it postgres-0 -- psql -U cdc -d cdc`.
+
+The tables are in [`k8s/base/data/schema.sql`](../k8s/base/data/schema.sql). Every statement must stay idempotent, because it reruns on each `make up`.
+
+| Table | Key | Written by | Notes |
+|---|---|---|---|
+| `listings` | `listing_id` | first consumer of `listings.raw` (smoke-consumer today) | `last_seen_at` = newest `scraped_at`; the TTL refresh reads it |
+| `clusters` | `cluster_id` | matcher (Gordon) | `version` for optimistic concurrency |
+| `risk_scores` | `listing_id` (latest score) | scorer (Declan) | columns to be confirmed with Declan |
+| cache table | | gateway (Yu Da) | not created here; add it to `schema.sql` |
+
+**Idempotent upsert.** A redelivered message rewrites the same values, and an older version that arrives late is skipped:
+```sql
+INSERT INTO listings AS l (listing_id, source_platform, source_listing_id, product_url, payload, last_seen_at)
+VALUES ($1, $2, $3, $4, $5, $6)
+ON CONFLICT (listing_id) DO UPDATE
+SET product_url = EXCLUDED.product_url, payload = EXCLUDED.payload,
+    last_seen_at = EXCLUDED.last_seen_at, updated_at = now()
+WHERE l.last_seen_at <= EXCLUDED.last_seen_at;
+```
+`risk_scores` works the same way, with `WHERE risk_scores.scored_at <= EXCLUDED.scored_at`.
+
+**Optimistic concurrency on `clusters`.** Two matcher replicas may update the same cluster; the `version` check makes the second writer notice and retry instead of overwriting:
+```sql
+INSERT INTO clusters (cluster_id, brand) VALUES ($1, $2) ON CONFLICT (cluster_id) DO NOTHING;   -- create if new
+SELECT version, member_listing_ids FROM clusters WHERE cluster_id = $1;                          -- read: version = n
+UPDATE clusters                                                                                  -- write if still n
+SET member_listing_ids = $2, platforms = $3, size = $4, price_median_sgd = $5,
+    version = version + 1, updated_at = now()
+WHERE cluster_id = $1 AND version = $6;          -- $6 = n
+-- 0 rows updated: another writer won. Re-read and retry (bounded, e.g. 5 attempts).
+```
+
 ## Still to confirm
 
 | Who | What |
 |---|---|
 | Gordon | `brand` as the `listings.cleaned` key; the `listings.cleaned` shape; adding `scraped_at` to `listings.normalized` |
 | JJ | platform id mapping and `source_listing_id` rule above; `murmur2_random` partitioner; `scrape.requests` shape |
-| Yu Da | `scrape.requests` shape; a 4th store's key shares partition 2 with `store_c` (fine with rule 7) |
+| Yu Da | `scrape.requests` shape; a 4th store's key shares partition 2 with `store_c` (fine with rule 7); the cache table |
+| Declan | `risk_scores` columns, `band` values, one row per listing (latest) vs history |
