@@ -32,14 +32,18 @@ CREATE TABLE IF NOT EXISTS clusters (
   updated_at         timestamptz NOT NULL DEFAULT now()
 );
 
--- One row per listing: the latest score. Columns to be confirmed with Declan.
+-- Owned by the scorer: identical to scorer/sql/risk_scores.sql, so running either file is a no-op once the other has run. One row per listing (latest score);
+-- input_hash makes a replayed message a no-op.
 CREATE TABLE IF NOT EXISTS risk_scores (
-  listing_id  text PRIMARY KEY,
-  cluster_id  text,
-  risk_score  numeric(4, 3) NOT NULL CHECK (risk_score BETWEEN 0 AND 1),
-  band        text          NOT NULL,
-  signals     jsonb         NOT NULL DEFAULT '{}',
-  explanation text,
-  scored_at   timestamptz   NOT NULL
+  listing_id     text PRIMARY KEY,
+  cluster_id     text        NOT NULL,
+  score          real        NOT NULL,
+  band           text        NOT NULL,
+  coverage       real        NOT NULL,
+  contributions  jsonb       NOT NULL,
+  reasons        jsonb       NOT NULL,
+  model_version  text        NOT NULL,
+  input_hash     text        NOT NULL,
+  computed_at    timestamptz NOT NULL DEFAULT now()
 );
-CREATE INDEX IF NOT EXISTS risk_scores_cluster_id_idx ON risk_scores (cluster_id);
+CREATE INDEX IF NOT EXISTS idx_risk_scores_cluster ON risk_scores (cluster_id);

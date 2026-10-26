@@ -11,6 +11,11 @@ if [ ! -f "$env_file" ]; then
   printf 'PGUSER=cdc\nPGPASSWORD=%s\n' "$(openssl rand -hex 24)" > "$env_file"
   log "Generated $env_file"
 fi
+# One connection string as well, for services that take DATABASE_URL (the scorer does).
+# Added to older files too; the hex password needs no URL escaping.
+if ! grep -q '^DATABASE_URL=' "$env_file"; then
+  ( . "$env_file"; printf 'DATABASE_URL=postgresql://%s:%s@postgres.data.svc:5432/cdc\n' "$PGUSER" "$PGPASSWORD" ) >> "$env_file"
+fi
 
 for ns in data pipeline scoring web; do
   kubectl -n "$ns" create secret generic postgres-credentials --from-env-file="$env_file" \

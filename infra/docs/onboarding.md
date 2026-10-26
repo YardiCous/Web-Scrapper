@@ -26,6 +26,7 @@ Environment (from the `cdc-env` ConfigMap, the `postgres-credentials` Secret and
 | `KAFKA_GROUP_ID` | `cdc.normaliser` | Kafka workers only |
 | `KAFKA_INPUT_TOPIC`, `KAFKA_OUTPUT_TOPIC`, `KAFKA_DLQ_TOPIC` | `listings.raw`, `listings.cleaned`, `listings.dlq` | Kafka workers only |
 | `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD` | `postgres.data.svc`, `5432`, `cdc`, … | libpq names: `psycopg.connect()` needs no arguments |
+| `DATABASE_URL` | `postgresql://cdc:…@postgres.data.svc:5432/cdc` | the same database as one connection string |
 | `SERVICE_NAME` | `normaliser` | use it as the Kafka `client.id` and in log lines |
 | `PORT` | `8080` | Knative/HTTP services: listen on it |
 

@@ -32,13 +32,14 @@ spec:
           env:
             - name: SERVICE_NAME
               value: scorer
+          # Sized for the real scorer (FastAPI, datasketch, a psycopg pool), not the placeholder.
           resources:
             requests:
-              cpu: 50m
-              memory: 64Mi
+              cpu: 100m
+              memory: 192Mi
             limits:
               cpu: "1"
-              memory: 256Mi
+              memory: 512Mi
           readinessProbe:
             httpGet:
               path: /healthz

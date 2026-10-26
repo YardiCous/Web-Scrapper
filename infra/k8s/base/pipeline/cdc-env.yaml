@@ -1,5 +1,5 @@
 # Shared client settings (same keys in pipeline, scoring and web). Workloads load it with envFrom,
-# plus the postgres-credentials Secret for PGUSER/PGPASSWORD. See templates/.
+# plus the postgres-credentials Secret for PGUSER/PGPASSWORD/DATABASE_URL. See templates/.
 apiVersion: v1
 kind: ConfigMap
 metadata:

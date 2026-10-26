@@ -35,7 +35,7 @@ spec:
             - configMapRef:
                 name: cdc-env     # KAFKA_BOOTSTRAP_SERVERS, PGHOST, PGPORT, PGDATABASE
             - secretRef:
-                name: postgres-credentials   # PGUSER, PGPASSWORD; drop if no database access
+                name: postgres-credentials   # PGUSER, PGPASSWORD, DATABASE_URL; drop if no database access
           env:
             - name: SERVICE_NAME
               value: my-service
