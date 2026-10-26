@@ -91,5 +91,5 @@ Then commit the `kustomization.yaml` change. The images built in this repo (`cdc
 | Logs | `kubectl -n pipeline logs deploy/<service> -f` |
 | Topics and messages | Kafka UI at http://kafka-ui.localhost:8080 |
 | Database shell | `kubectl -n data exec -it postgres-0 -- psql -U cdc -d cdc` |
-| Kafka from your laptop | bootstrap `localhost:32100` |
+| Kafka from the machine running the cluster | bootstrap `localhost:32100` |
 | Push test traffic | `make -C infra load N=1000 RATE=100` (synthetic listings into `listings.raw`) |

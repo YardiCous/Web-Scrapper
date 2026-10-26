@@ -1,6 +1,11 @@
 # Testing instructions (for the marker)
 
-These steps start the whole system on one machine, check that it works, and reproduce the evaluation graphs. Every command runs from the repository root. On Windows, run them in an **Ubuntu (WSL2) terminal**, not PowerShell.
+These steps start the whole system on one machine, check that it works, and reproduce the evaluation graphs. Every command runs from the folder you cloned the repository into (the one that contains `infra/`). On Windows, run them in an **Ubuntu (WSL2) terminal**, not PowerShell, and clone the repository inside Ubuntu.
+
+```bash
+git clone <repository URL>
+cd <repository folder>
+```
 
 ## 1. Prerequisites (once)
 

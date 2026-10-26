@@ -4,7 +4,7 @@ Lost messages = acknowledged by Kafka (loadgen) minus rows that reached Postgres
 smoke-consumer; expected 0 (acks=all, idempotent producer, persistent storage, commit-after-write).
 Recovery is reported three ways: broker pod Ready again, all partitions fully in sync again, and the
 longest gap in the producer's acknowledgements. On the lite profile (1 broker, RF 1) the kill is a
-full outage that the producer rides out with retries; the default profile shows real failover.
+full outage that the producer rides out with retries; the default profile should show a short leader failover instead.
 Writes results/broker_kill.csv.
 """
 import argparse

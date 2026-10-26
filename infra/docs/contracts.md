@@ -19,7 +19,7 @@ Replication: RF 3 with `min.insync.replicas=2` in the default profile, RF 1 in t
 | Client runs in | Bootstrap servers |
 |---|---|
 | a pod in the cluster | `cdc-kafka-bootstrap.kafka.svc:9092` (also `KAFKA_BOOTSTRAP_SERVERS` in the `cdc-env` ConfigMap) |
-| your laptop (k3d) | `localhost:32100` |
+| the machine running the k3d cluster | `localhost:32100` (local testing only; not reachable from other machines) |
 
 Plaintext, no authentication. The cluster is only reachable from your own machine.
 
