@@ -24,7 +24,7 @@ if [ -z "$(kafka_pod)" ]; then
   echo "Kafka is not running"
   exit 0
 fi
-printf '%-36s %-22s %10s %8s\n' GROUP TOPIC LAG MEMBERS
+printf '%-36s %-22s %10s %8s\n' GROUP TOPIC LAG ASSIGNED
 kafka_exec /opt/kafka/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --all-groups 2>/dev/null |
   awk '$3 ~ /^[0-9]+$/ {
          k = $1 " " $2
