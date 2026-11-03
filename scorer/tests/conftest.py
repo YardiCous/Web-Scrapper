@@ -2,7 +2,7 @@ import pytest
 
 from scorer_engine.models import Listing
 
-# The normaliser's sample output (fixtures/sample_store_a.json).
+# An older normaliser sample listing (its fixture file has since been removed).
 SAMPLE = {
     "cluster_id": "store_a:A-1001", "cluster_size": 3,
     "cluster_platforms": ["store_a", "store_b", "store_c"],

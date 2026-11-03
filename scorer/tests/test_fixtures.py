@@ -43,7 +43,7 @@ def test_every_signal_fires_somewhere(scores):
 
 
 def test_normaliser_sample_is_low(scores):
-    assert scores["store_a:A-1001"].band == "low"
+    assert scores["Cartlane:78"].band == "low"
 
 
 def test_review_date_key_parsed():

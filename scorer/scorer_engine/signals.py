@@ -52,18 +52,6 @@ def seller_age(age_days: Optional[int]) -> Optional[float]:
     return math.exp(-max(age_days, 0) / config.SELLER_AGE_SCALE_DAYS)
 
 
-def seller_volume(sales: Optional[int]) -> Optional[float]:
-    if sales is None:
-        return None
-    return 1.0 / (1.0 + math.log1p(sales))
-
-
-def official(is_official: Optional[bool]) -> Optional[float]:
-    if is_official is None:
-        return None
-    return 1.0 if is_official else 0.0
-
-
 def title_kw(title: str) -> float:
     return 1.0 if config.TITLE_KW_RE.search(title or "") else 0.0
 
@@ -150,8 +138,6 @@ def compute(listing: Listing, sentiment: Sentiment = default_sentiment):
     signals = {
         "price_dev": price_dev(listing.price_sgd, med, listing.cluster_size),
         "seller_age": seller_age(listing.seller_age_days),
-        "seller_volume": seller_volume(listing.seller_sales),
-        "official": official(listing.seller_is_official),
         "title_kw": title_kw(listing.title),
         "dup_reviews": dup_reviews(texts),
         "burst": burst([r.date for r in listing.reviews]),
@@ -159,7 +145,7 @@ def compute(listing: Listing, sentiment: Sentiment = default_sentiment):
         "mismatch": mismatch([r.rating for r in listing.reviews], labels),
     }
 
-    facts = {"age_days": listing.seller_age_days, "sales": listing.seller_sales}
+    facts = {"age_days": listing.seller_age_days}
     if med:
         facts["cluster_median"] = med
         facts["pct_below_median"] = (med - listing.price_sgd) / med * 100

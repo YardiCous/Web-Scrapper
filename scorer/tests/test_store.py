@@ -49,12 +49,6 @@ def test_hash_changes_with_cluster_median(make_listing):
     assert store.input_hash(make_listing()) != store.input_hash(make_listing(cluster_price_median_sgd=400))
 
 
-def test_hash_ignores_fetched_at(make_listing):
-    a = make_listing(fetched_at="2026-10-25T03:00:00Z")
-    b = make_listing(fetched_at="2026-10-26T03:00:00Z")
-    assert store.input_hash(a) == store.input_hash(b)
-
-
 def test_replay_is_noop(conn, make_listing):
     l = make_listing(listing_id=f"test:{uuid.uuid4()}")
     result, h = _score(l)

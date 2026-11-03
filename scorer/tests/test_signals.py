@@ -46,18 +46,6 @@ def test_seller_age():
     assert signals.seller_age(-5) == 1.0  # clock skew clamps to "brand new"
 
 
-def test_seller_volume():
-    assert signals.seller_volume(None) is None
-    assert signals.seller_volume(0) == 1.0
-    assert signals.seller_volume(10_000) < signals.seller_volume(10) < 1.0
-
-
-def test_official():
-    assert signals.official(None) is None
-    assert signals.official(True) == 1.0
-    assert signals.official(False) == 0.0
-
-
 @pytest.mark.parametrize("title", [
     "AirPods 1:1 copy", "Jordan AAA grade", "OEM factory", "mirror quality bag",
     "Super Copy watch", "supercopy", "高仿 包包", "Replica",
@@ -149,8 +137,6 @@ def test_compute_missing_data_is_none_not_zero(make_listing):
     sig, _ = signals.compute(l)
     assert sig["price_dev"] is None
     assert sig["seller_age"] is None
-    assert sig["seller_volume"] is None  # normaliser doesn't send sales
-    assert sig["official"] is None       # ...or an official-store flag
     assert sig["title_kw"] == 0.0
     assert set(sig) == set(config.WEIGHTS)
 

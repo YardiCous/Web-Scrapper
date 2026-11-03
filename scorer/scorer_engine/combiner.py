@@ -42,9 +42,6 @@ def _reason(key, value, facts):
     if key == "seller_age":
         days = facts.get("age_days")
         return f"Shop is only {days} days old" if days is not None else "Shop is very new"
-    if key == "seller_volume":
-        sales = facts.get("sales")
-        return f"Seller has only {sales} recorded sales" if sales is not None else "Seller has few sales"
     if key == "title_kw":
         kw = facts.get("title_keyword")
         return f"Title contains the counterfeit keyword “{kw}”" if kw else "Title contains counterfeit keywords"

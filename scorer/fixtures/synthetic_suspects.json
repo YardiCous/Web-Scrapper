@@ -74,10 +74,7 @@
         "review_date": "2026-08-18T00:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/mbp-official",
-    "seller_sales": 52000,
-    "seller_is_official": true,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/mbp-official"
   },
   {
     "cluster_id": "c_78",
@@ -129,10 +126,7 @@
         "review_date": "2026-08-16T00:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/mbp-reseller",
-    "seller_sales": 3400,
-    "seller_is_official": false,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/mbp-reseller"
   },
   {
     "cluster_id": "c_78",
@@ -204,10 +198,7 @@
         "review_date": "2026-10-21T11:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/mbp-suspect",
-    "seller_sales": 12,
-    "seller_is_official": false,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/mbp-suspect"
   },
   {
     "cluster_id": "c_88",
@@ -254,10 +245,7 @@
         "review_date": "2026-08-16T00:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/aj1-official",
-    "seller_sales": 80000,
-    "seller_is_official": true,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/aj1-official"
   },
   {
     "cluster_id": "c_88",
@@ -299,10 +287,7 @@
         "review_date": "2026-08-15T00:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/aj1-reseller",
-    "seller_sales": 900,
-    "seller_is_official": false,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/aj1-reseller"
   },
   {
     "cluster_id": "c_88",
@@ -354,10 +339,7 @@
         "review_date": "2026-10-22T19:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/aj1-suspect",
-    "seller_sales": 3,
-    "seller_is_official": false,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/aj1-suspect"
   },
   {
     "cluster_id": "c_101",
@@ -408,10 +390,7 @@
         "review_date": "2026-08-05T00:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/apm-official",
-    "seller_sales": 52000,
-    "seller_is_official": true,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/apm-official"
   },
   {
     "cluster_id": "c_101",
@@ -462,10 +441,7 @@
         "review_date": "2026-07-14T00:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/apm-reseller",
-    "seller_sales": 7600,
-    "seller_is_official": false,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/apm-reseller"
   },
   {
     "cluster_id": "c_101",
@@ -546,9 +522,6 @@
         "review_date": "2026-10-24T10:00:00Z"
       }
     ],
-    "product_url": "https://example.invalid/synthetic/apm-suspect",
-    "seller_sales": 40,
-    "seller_is_official": false,
-    "fetched_at": "2026-10-25T05:00:00Z"
+    "product_url": "https://example.invalid/synthetic/apm-suspect"
   }
 ]

@@ -18,8 +18,7 @@ MODEL_VERSION = os.environ.get("SCORER_MODEL_VERSION", "v1-handweights")
 # --- combiner ---------------------------------------------------------------
 _DEFAULT_WEIGHTS = {
     "price_dev": 2.5, "title_kw": 2.0, "neg_share": 1.8, "dup_reviews": 1.5,
-    "seller_age": 1.2, "mismatch": 1.0, "burst": 0.8, "seller_volume": 0.6,
-    "official": -2.5,
+    "seller_age": 1.2, "mismatch": 1.0, "burst": 0.8,
 }
 WEIGHTS = {k: _num(f"SCORER_W_{k.upper()}", v) for k, v in _DEFAULT_WEIGHTS.items()}
 BIAS = _num("SCORER_BIAS", -2.0)

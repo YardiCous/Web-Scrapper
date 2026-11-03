@@ -27,16 +27,10 @@ def test_missing_is_not_zero():
 
 
 def test_score_formula_and_contributions():
-    r = combine({"price_dev": 1.0, "title_kw": 1.0, "official": 0.0})
-    assert r.contributions == {"price_dev": 2.5, "title_kw": 2.0, "official": 0.0}
+    r = combine({"price_dev": 1.0, "title_kw": 1.0, "burst": 0.0})
+    assert r.contributions == {"price_dev": 2.5, "title_kw": 2.0, "burst": 0.0}
     assert r.score == pytest.approx(_sig(config.BIAS + 4.5), abs=1e-4)
     assert r.coverage == pytest.approx(3 / len(config.WEIGHTS), abs=1e-4)
-
-
-def test_official_store_pulls_score_down():
-    risky = combine({"seller_age": 1.0, "official": 0.0})
-    official = combine({"seller_age": 1.0, "official": 1.0})
-    assert official.score < risky.score
 
 
 def test_reasons_top_three_ordered_and_thresholded():

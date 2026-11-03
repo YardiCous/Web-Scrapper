@@ -32,7 +32,9 @@ class Review(BaseModel):
 class Listing(BaseModel):
     # --- cluster (computed by the normaliser/matcher) -----------------------
     cluster_id: str
-    cluster_size: int = Field(default=1, ge=1)  # listings in the cluster, this one included
+    cluster_size: int = Field(
+        default=1, ge=1
+    )  # listings in the cluster, this one included
     cluster_platforms: list[str] = []
     cluster_price_median_sgd: Optional[float] = None
     cluster_price_min_sgd: Optional[float] = None
@@ -50,8 +52,3 @@ class Listing(BaseModel):
     review_count: Optional[int] = None
     reviews: list[Review] = []
     product_url: Optional[str] = None
-
-    # --- not sent by the normaliser yet; signals return None without them ---
-    seller_sales: Optional[int] = Field(default=None, ge=0)
-    seller_is_official: Optional[bool] = None
-    fetched_at: Optional[datetime] = None

@@ -15,9 +15,7 @@ Every file in `fixtures/` is normaliser output (one listing object or a list):
 
 | File | Contents |
 |---|---|
-| `normalised_output.json` | 22 listings from the normaliser (store_a/b/c) |
-| `sample_store_a.json` | the normaliser's single sample listing |
-| `dummy_sites.json` | 32 Cartlane/Tao/Lazora listings, converted once from the scrapers' raw output |
+| `normaliser_cartlane_78.json` | a real listing from the normaliser (Cartlane:78) |
 | `synthetic_suspects.json` | 9 **synthetic** listings (official / reseller / suspect) so every signal fires |
 
 The scorer trusts the `cluster_*` fields, so if you edit a price, update that cluster's statistics too.
@@ -40,7 +38,7 @@ pytest tests/test_store.py                               # replay x50 = no-op; m
 docker build -t scorer:v1 .
 docker run --rm -p 8080:8080 -e DATABASE_URL=postgresql://user:password@host.docker.internal:5432/listings scorer:v1
 curl -i -X POST localhost:8080/ -H 'content-type: application/json' -H 'ce-type: listing.normalised' \
-     -d @fixtures/sample_store_a.json
+     -d @fixtures/normaliser_cartlane_78.json
 curl localhost:8080/metrics/
 ```
 

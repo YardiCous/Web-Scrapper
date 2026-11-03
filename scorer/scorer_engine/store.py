@@ -34,8 +34,7 @@ _UPSERT = """
 
 
 def input_hash(listing: Listing) -> str:
-    # fetched_at is left out: a re-crawl with identical data is not a new input.
-    payload = listing.model_dump(mode="json", exclude={"fetched_at"})
+    payload = listing.model_dump(mode="json")
     canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 

@@ -14,7 +14,7 @@ Cloud-native system that collects listings + reviews from Shopee, TikTok Shop an
 Consumes normalised listings, computes heuristic signals (each 0–1, higher = riskier, or `None` if not computable), combines them with a logistic function into a score + band + top-3 human-readable reasons, upserts into `risk_scores`.
 
 ## Input message (topic `listings.normalised`, key = cluster_id)
-This is the normaliser's actual output (supersedes the originally agreed shape; real sample in `fixtures/normaliser_cartlane_78.json`, older-format samples in `fixtures/sample_store_a.json` and `fixtures/normalised_output.json`):
+This is the normaliser's actual output (supersedes the originally agreed shape; real sample in `fixtures/normaliser_cartlane_78.json`):
 ```json
 {
   "cluster_id": "Cartlane:78", "cluster_size": 2,
@@ -28,7 +28,7 @@ This is the normaliser's actual output (supersedes the originally agreed shape; 
   "product_url": "https://paegnium.github.io/dummysite/?product=78"
 }
 ```
-Prices are in SGD; currency conversion and cluster statistics are the normaliser's job. Validated by `scorer_engine/models.py` (Listing / Review); unknown fields are ignored. The model also accepts optional `seller_sales`, `seller_is_official` and `fetched_at`, which the normaliser does not send yet; without them `seller_volume` and `official` are `None`.
+Prices are in SGD; currency conversion and cluster statistics are the normaliser's job. Validated by `scorer_engine/models.py` (Listing / Review); unknown fields are ignored.
 
 ## Output table
 ```sql
@@ -47,8 +47,6 @@ CREATE INDEX ON risk_scores (cluster_id);
 |---|---|---|
 | price_dev | discount = (cluster_median − price)/cluster_median; risk = clip(discount/0.35, 0, 1). Only cheaper-than-median counts. *(Originally a robust MAD z-score; changed because the normaliser sends the median, not the prices; see Decisions.)* | cluster_size ≥3 (incl. self) and a median |
 | seller_age | exp(−seller_age_days/180) | seller_age_days present |
-| seller_volume | 1/(1+ln(1+sales)) | seller_sales present (not sent yet) |
-| official | 1.0 if official/mall store else 0.0 (negative weight) | seller_is_official present (not sent yet) |
 | title_kw | 1.0 if title matches `replica|1:1|\bAAA\b|mirror|\bOEM\b|高仿|复刻|原单|super ?copy` (case-insens.) | always |
 | dup_reviews | Fraction of reviews (len ≥15) with a near-duplicate: char 5-shingles, MinHash 64 perms, LSH threshold 0.8 (datasketch) | ≥5 reviews |
 | burst | Max share of reviews inside any 48 h window | ≥10 timestamped reviews |
@@ -65,8 +63,7 @@ CREATE INDEX ON risk_scores (cluster_id);
 ```python
 MODEL_VERSION = "v1-handweights"
 WEIGHTS = {"price_dev": 2.5, "title_kw": 2.0, "neg_share": 1.8, "dup_reviews": 1.5,
-           "seller_age": 1.2, "mismatch": 1.0, "burst": 0.8, "seller_volume": 0.6,
-           "official": -2.5}
+           "seller_age": 1.2, "mismatch": 1.0, "burst": 0.8}
 BIAS = -2.0
 ```
 - score = sigmoid(BIAS + Σ wᵢ·sᵢ) over available signals only (missing ≠ 0).
@@ -78,7 +75,7 @@ BIAS = -2.0
 ## Service design
 - FastAPI, `POST /` receives CloudEvents from a Knative **KafkaSource** (Knative Serving scales on HTTP, not Kafka lag — this bridge is a deliberate design point).
 - No price lookups: cluster statistics arrive in each message, so the scorer only writes to PostgreSQL.
-- input_hash = sha256(canonical listing JSON incl. cluster stats, excluding fetched_at) → score updates when the median moves, duplicates are no-ops.
+- input_hash = sha256(canonical listing JSON incl. cluster stats) → score updates when the median moves, duplicates are no-ops.
 - Idempotent upsert: `ON CONFLICT (listing_id) DO UPDATE ... WHERE input_hash IS DISTINCT FROM EXCLUDED.input_hash OR model_version IS DISTINCT FROM EXCLUDED.model_version`.
 - Return 202 on success; raise (non-2xx) on failure so KafkaSource retries. Validation failures → `deliverySpec.deadLetterSink`.
 - Use psycopg_pool in final version. DATABASE_URL from a Kubernetes Secret.
@@ -94,7 +91,7 @@ Quality (labelled set):
 
 Systems:
 - Cold start (from zero pods to row written), median/p95 over 10 runs, with and without sentiment model.
-- Load ramp 10/50/100/200 msg/s via producer script: pods over time, throughput, end-to-end latency (computed_at − fetched_at).
+- Load ramp 10/50/100/200 msg/s via producer script: pods over time, throughput, end-to-end latency (computed_at − Kafka record timestamp, which the KafkaSource passes as the CloudEvent `time` attribute; not implemented yet).
 - Time to scale back to zero.
 - Duplicate replay ×1000 → one row, unchanged computed_at; kill a pod mid-load → no listing left unscored.
 
@@ -120,3 +117,7 @@ Items 2–4 above are done: `scorer/scorer_engine/` package, 69 unit tests, CLI,
 
 ## Decisions (26 Oct 2026)
 - **Normaliser output updated:** reviews carry `review_date` (was `date`); new `seller_id` and `source_listing_id`; cluster ids are now `<platform>:<id>` (e.g. `Cartlane:78`). `Review.date` reads `review_date` and still accepts the legacy `date` key (pydantic `AliasChoices`). *Why:* unknown keys are ignored, so without the alias every review date was silently `None` and `burst` could never fire. All fixtures were switched to `review_date`; fixture cluster ids (`c_78` etc.) were left as they are because ids are opaque to the scorer. `seller_id` / `source_listing_id` are ignored for now.
+
+## Decisions (3 Nov 2026)
+- **Removed `seller_volume`, `official` and `fetched_at`.** The `seller_sales`, `seller_is_official` and `fetched_at` fields, the two signals, their weights (0.6 and −2.5) and their tests are gone, and the fields were stripped from `fixtures/synthetic_suspects.json`. *Why:* the normaliser will not provide these fields, so the signals could never fire on real data and only lowered coverage (max 7/9). There are now 7 signals, so coverage is out of 7. Consequences: genuine listings no longer get the negative "official store" pull, so the only things lowering a score are the bias and the absence of risk signals (the synthetic official/reseller controls still score low). End-to-end latency for the load-ramp evaluation must use the Kafka record timestamp instead of `fetched_at`. Mention the lost signals in the report's missing-functionality discussion.
+- **Fixtures reduced to two files:** `dummy_sites.json`, `normalised_output.json` and `sample_store_a.json` were deleted; `fixtures/` now holds only `normaliser_cartlane_78.json` (real normaliser output) and `synthetic_suspects.json`. The "normaliser sample is low" test now checks `Cartlane:78`. The 25 Oct note on converting `dummy_sites.json` is kept for history only.
