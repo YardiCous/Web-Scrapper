@@ -1,0 +1,27 @@
+# DRAFT (not yet deployed): bridges Kafka to the scorer over HTTP.
+# Offsets are committed only after the sink returns 2xx (at-least-once);
+# non-retryable failures (400 from invalid messages) go to the dead-letter sink.
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+    name: scorer-source
+spec:
+    consumerGroup: scorer
+    bootstrapServers:
+      - kafka-kafka-bootstrap.kafka:9092 #TODO: Change depending on how Kafka is deployed
+    topics:
+      - listings.normalised
+    delivery:
+        retry: 5
+        backoffPolicy: exponential
+        backoffDelay: PT0.5S
+        deadLetterSink:
+            ref:
+                apiVersion: serving.knative.dev/v1
+                kind: Service
+                name: scorer-dlq # TODO: a small service that logs/stores dead letters, might not do it
+    sink:
+        ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: scorer

@@ -1,0 +1,25 @@
+{
+  "cluster_id": "Cartlane:78",
+  "cluster_size": 2,
+  "cluster_platforms": ["Cartlane", "Tao Market"],
+  "cluster_price_median_sgd": 1788.74,
+  "cluster_price_min_sgd": 877.49,
+  "cluster_price_max_sgd": 2699.99,
+  "listing_id": "Cartlane:78",
+  "source_platform": "Cartlane",
+  "source_listing_id": "78",
+  "title": "Apple MacBook Pro 14 Inch Space Grey",
+  "brand": "apple",
+  "price_sgd": 877.49,
+  "seller_id": "cartlane-001",
+  "seller_name": "Cartlane",
+  "seller_age_days": 18,
+  "rating": 4.7,
+  "review_count": 3,
+  "reviews": [
+    {"text": "Very happy with my purchase!", "rating": 5, "review_date": "2025-04-30"},
+    {"text": "Very happy with my purchase!", "rating": 5, "review_date": "2025-04-30"},
+    {"text": "Very satisfied!", "rating": 4, "review_date": "2025-04-30"}
+  ],
+  "product_url": "https://paegnium.github.io/dummysite/?product=78"
+}
