@@ -1,0 +1,202 @@
+[
+  {
+    "sku": "lazora-1",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-1",
+    "title": "FjΣllrΣven Foldsack No. 1 Backpack",
+    "price": "89.9",
+    "currency": "SGD",
+    "seller_id": "lazora-everyday",
+    "seller_name": "Lazora Everyday",
+    "selling_since": "2021-03-15",
+    "rating": "4.8",
+    "review_count": 128,
+    "reviews": [
+      {
+        "text": "Comfortable straps and just the right size for my laptop and everyday essentials.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-2",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-2",
+    "title": "SanDisk SSD PLUS 1TB",
+    "price": "79.9",
+    "currency": "SGD",
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "selling_since": "2020-08-10",
+    "rating": "4.7",
+    "review_count": 86,
+    "reviews": [
+      {
+        "text": "A practical storage upgrade. My everyday apps feel much quicker to open.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-3",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-3",
+    "title": "John Hardy Legends Naga Bracelet",
+    "price": "349",
+    "currency": "SGD",
+    "seller_id": "lazora-everyday",
+    "seller_name": "Lazora Everyday",
+    "selling_since": "2021-03-15",
+    "rating": "4.9",
+    "review_count": 42,
+    "reviews": [
+      {
+        "text": "The intricate detail is lovely. A statement piece that works with a simple outfit.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-4",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-4",
+    "title": "WD Elements 2TB Portable Hard Drive",
+    "price": "69.9",
+    "currency": "SGD",
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "selling_since": "2020-08-10",
+    "rating": "4.6",
+    "review_count": 215,
+    "reviews": [
+      {
+        "text": "Compact enough for my work bag, with plenty of room for photos and documents.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-5",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-5",
+    "title": "Acer SB220Q 21.5-inch Full HD Monitor",
+    "price": "139.9",
+    "currency": "SGD",
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "selling_since": "2020-08-10",
+    "rating": "4.5",
+    "review_count": 94,
+    "reviews": [
+      {
+        "text": "A good size for a compact desk. The slim frame makes the setup look tidy.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-6",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-6",
+    "title": "Samsung CHG90 49-inch Gaming Monitor",
+    "price": "899",
+    "currency": "SGD",
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "selling_since": "2020-08-10",
+    "rating": "4.8",
+    "review_count": 67,
+    "reviews": [
+      {
+        "text": "The wide display is especially useful when working with several windows at once.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-7",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-7",
+    "title": "BIYLACLESEN WomenÆs 3-in-1 Snow Jacket",
+    "price": "69.9",
+    "currency": "SGD",
+    "seller_id": "lazora-style",
+    "seller_name": "Lazora Style",
+    "selling_since": "2022-01-20",
+    "rating": "4.6",
+    "review_count": 73,
+    "reviews": [
+      {
+        "text": "I like being able to change the layers. The pockets are handy for days outdoors.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  },
+  {
+    "sku": "lazora-8",
+    "source_platform": "Lazora",
+    "product_url": "https://paegnium.github.io/dummysite3/#product-8",
+    "title": "Lock and Love Faux Leather Moto Jacket",
+    "price": "49.9",
+    "currency": "SGD",
+    "seller_id": "lazora-style",
+    "seller_name": "Lazora Style",
+    "selling_since": "2022-01-20",
+    "rating": "4.4",
+    "review_count": 119,
+    "reviews": [
+      {
+        "text": "Easy to style with jeans. The removable hood gives it a little more versatility.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ]
+  }
+]

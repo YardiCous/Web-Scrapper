@@ -1,0 +1,362 @@
+[
+  {
+    "sku": "101",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/101.html",
+    "title": "Apple AirPods Max Silver",
+    "price": "549.99",
+    "currency": "USD",
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "selling_since": "2020-03-15",
+    "rating": "3.47",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "88",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/88.html",
+    "title": "Nike Air Jordan 1 Red And Black",
+    "price": "149.99",
+    "currency": "USD",
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "selling_since": "2019-06-01",
+    "rating": "4.77",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Waste of money!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "174",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/174.html",
+    "title": "Prada Galleria Saffiano Leather Bag",
+    "price": "599.99",
+    "currency": "USD",
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "selling_since": "2019-06-01",
+    "rating": "2.71",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would not buy again!",
+        "rating": 2,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Highly recommended!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "78",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/78.html",
+    "title": "Apple MacBook Pro 14-inch",
+    "price": "1999.99",
+    "currency": "USD",
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "selling_since": "2020-03-15",
+    "rating": "3.65",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "7",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/7.html",
+    "title": "Chanel Coco Noir Eau de Parfum",
+    "price": "129.99",
+    "currency": "USD",
+    "seller_id": "tao-beauty",
+    "seller_name": "Tao Beauty Edit",
+    "selling_since": "2020-09-20",
+    "rating": "4.26",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "47",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/47.html",
+    "title": "Table Lamp",
+    "price": "49.99",
+    "currency": "USD",
+    "seller_id": "tao-home",
+    "seller_name": "Tao Home Finds",
+    "selling_since": "2021-02-10",
+    "rating": "3.55",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would not recommend!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "100",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/100.html",
+    "title": "Apple AirPods",
+    "price": "129.99",
+    "currency": "USD",
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "selling_since": "2020-03-15",
+    "rating": "4.15",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would not buy again!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Great product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "123",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/123.html",
+    "title": "iPhone 13 Pro",
+    "price": "1099.99",
+    "currency": "USD",
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "selling_since": "2020-03-15",
+    "rating": "4.12",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Not worth the price!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "90",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/90.html",
+    "title": "Puma Future Rider Trainers",
+    "price": "89.99",
+    "currency": "USD",
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "selling_since": "2019-06-01",
+    "rating": "4.9",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very disappointed!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "10",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/10.html",
+    "title": "Gucci Bloom Eau de Parfum",
+    "price": "79.99",
+    "currency": "USD",
+    "seller_id": "tao-beauty",
+    "seller_name": "Tao Beauty Edit",
+    "selling_since": "2020-09-20",
+    "rating": "2.74",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very dissatisfied!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "103",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/103.html",
+    "title": "Apple HomePod Mini Cosmic Grey",
+    "price": "99.99",
+    "currency": "USD",
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "selling_since": "2020-03-15",
+    "rating": "4.62",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Great product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would not buy again!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ]
+  },
+  {
+    "sku": "173",
+    "source_platform": "Tao Market",
+    "product_url": "https://paegnium.github.io/dummysite2/products/173.html",
+    "title": "HESHE Leather Shoulder Bag",
+    "price": "129.99",
+    "currency": "USD",
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "selling_since": "2019-06-01",
+    "rating": "4.92",
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ]
+  }
+]
