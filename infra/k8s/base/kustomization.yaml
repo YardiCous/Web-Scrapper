@@ -25,29 +25,31 @@ images:
     newName: ghcr.io/GHCR_OWNER/store-c
     newTag: 24ee76c44f610ad486efcde2c49c406722e8d29f
 
-  # Teammates' services, on the placeholder until their image exists. To swap one in, change only
-  # its own entry, e.g. newName: ghcr.io/GHCR_OWNER/scorer and newTag: "1.0.0".
-  - name: scorer              # Declan
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+  # Teammates' services, built from this repository by scripts/images.sh. The collectors, normaliser
+  # and matcher share one image (adapters/): it runs the team's code and picks the role from SERVICE_NAME.
+  - name: scorer              # Declan: scorer/
+    newName: ghcr.io/GHCR_OWNER/scorer
     newTag: "0.1.0"
+  - name: collector-store-a   # web/scraper.py via adapters/collector.py
+    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newTag: "0.1.0"
+  - name: collector-store-b
+    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newTag: "0.1.0"
+  - name: collector-store-c
+    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newTag: "0.1.0"
+  - name: normaliser          # Gordon: normaliser/core via adapters/normaliser.py
+    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newTag: "0.1.0"
+  - name: matcher             # Gordon: normaliser/core via adapters/matcher.py
+    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newTag: "0.1.0"
+
+  # Still on the placeholder.
   - name: gateway             # Yu Da
     newName: ghcr.io/GHCR_OWNER/cdc-placeholder
     newTag: "0.1.0"
   - name: frontend
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
-    newTag: "0.1.0"
-  - name: collector-store-a   # JJ
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
-    newTag: "0.1.0"
-  - name: collector-store-b   # JJ
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
-    newTag: "0.1.0"
-  - name: collector-store-c   # JJ
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
-    newTag: "0.1.0"
-  - name: normaliser          # Gordon
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
-    newTag: "0.1.0"
-  - name: matcher             # Gordon
     newName: ghcr.io/GHCR_OWNER/cdc-placeholder
     newTag: "0.1.0"

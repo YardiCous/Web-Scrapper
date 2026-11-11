@@ -31,45 +31,43 @@ Plaintext, no authentication. The cluster is only reachable from your own machin
 4. **Expect duplicates.** Redeliveries after a crash or rebalance are normal. Every write must be idempotent: upsert by natural key (`listing_id`, `cluster_id`) and never blind-insert or increment.
 5. **Ordering** holds within a partition, so per key, and nowhere else.
 6. **Poison messages:** after a few retries, produce the original key and value to `listings.dlq` with headers `dlq-error`, `dlq-service`, `dlq-source-topic`, `dlq-source-partition` and `dlq-source-offset`. Then commit and carry on; don't block the partition.
-7. **Collectors:** with murmur2 over 3 partitions, `store_a`→0, `store_b`→1 and `store_c`→2, but a future `store_d` also hashes to 2. Each collector therefore uses its own group `cdc.collector.<platform>`, reads all partitions and skips keys for other platforms, instead of relying on owning a partition.
+7. **Collectors:** `scrape.requests` is keyed by platform name over 3 partitions, so two platforms can share a partition. Each collector therefore uses its own group `cdc.collector.<store>`, reads all partitions and skips requests for other platforms, instead of relying on owning a partition.
+
+## Who runs what
+
+The pipeline services run the team's code unchanged, through thin Kafka adapters in [`../../adapters/`](../../adapters/) (one image; `SERVICE_NAME` picks the role):
+
+| Slot | Team code it runs | Adapter |
+|---|---|---|
+| `collector-store-a/b/c` | `web/scraper.py` `scrape()` | `adapters/collector.py`: one request in, one `listings.raw` message per listing out |
+| `normaliser` | `normaliser/core/pipeline.py` `normalise_record()` | `adapters/normaliser.py` |
+| `matcher` | `normaliser/core` `find_matches()`, `build_clusters()`, `to_scoring_rows()` | `adapters/matcher.py`: re-clusters each brand it touches; saves `clusters` with the version check |
+| `scorer` (Knative) | `scorer/` as is (its own Dockerfile) | none: the KafkaSource POSTs each `listings.normalized` message to it |
+
+Platforms keep the names the scraper reports: `Cartlane` (store-a, dummysite), `Tao Market` (store-b, dummysite2) and `Lazora` (store-c, dummysite3). A `listing_id` is `<source_platform>:<sku>`, for example `Cartlane:78`, as in the normaliser and scorer.
 
 ## Payloads
 
 ### `listings.raw`
-One scraped listing. Extra fields are allowed and ignored.
+One listing exactly as `web/scraper.py` returns it, with numbers as numbers, plus `source_listing_id` (= `sku`) and `scraped_at` (the collector's UTC time). Extra fields are allowed and ignored.
 ```json
-{"source_platform":"store_a","source_listing_id":"A-1001","title":"...","price":329.0,"currency":"USD",
- "seller_id":"sel_a_01","seller_name":"AudioHub SG","selling_since":"2021-02-01","rating":4.7,"review_count":230,
- "review":[{"text":"...","rating":5,"date":"2026-09-01T00:00:00Z"}],
- "product_url":"https://...","scraped_at":"2026-10-26T10:00:00Z"}
+{"sku":"78","source_platform":"Cartlane","source_listing_id":"78","title":"Apple MacBook Pro 14 Inch Space Grey",
+ "price":649.99,"currency":"USD","seller_id":"cartlane-001","seller_name":"Cartlane","selling_since":"2026-10-08",
+ "rating":4.7,"review_count":3,"reviews":[{"text":"Very happy with my purchase!","rating":5,"review_date":"2025-04-30"}],
+ "product_url":"https://paegnium.github.io/dummysite/?product=78","scraped_at":"2026-11-11T00:00:00Z"}
 ```
-What the dummy sites give and what the collector (JJ) must do:
+The collectors fetch pages from the in-cluster copies of the stores (`FETCH_FROM`), while `product_url` keeps the public `paegnium.github.io` address. [`samples/raw_listings.json`](../samples/raw_listings.json) is the 32 listings in `normaliser/data` in this form.
 
-| Field | store_a = dummysite ("Cartlane") | store_b = dummysite2 ("Tao Market") | store_c = dummysite3 ("Lazora") |
-|---|---|---|---|
-| `source_platform` | site says `Cartlane`; emit `store_a` | `Tao Market` → `store_b` | `Lazora` → `store_c` |
-| `source_listing_id` | not given; use the record's numeric `id` as a string | same | same |
-| `currency` | USD | USD | SGD |
-| `review[].date` | ISO timestamp | ISO timestamp | `YYYY-MM-DD` (schema accepts both) |
-| `scraped_at` | not given; collector's UTC time | same | same |
-
-All three sites embed their full catalogue as JSON in `<script id="product-data">` in the initial HTML; dummysite and dummysite2 also serve `products.json`. Their `product_url` values point at `paegnium.github.io`, while in the cluster the sites are served as `store-a`, `store-b` and `store-c` (Phase 2).
-
-[`samples/raw_listings.json`](../samples/raw_listings.json) holds the 22 listings of Gordon's sample in raw form (price in SGD, `selling_since` = 2026-10-26 minus `seller_age_days`). It is test data for this topic, not real site output.
-
-### `listings.cleaned` (proposed: Gordon)
-`listings.normalized` without the `cluster_*` fields, plus `scraped_at`. Keyed by `brand` so one matcher replica sees every listing of a brand, which LSH blocking needs.
+### `listings.cleaned`
+The raw fields plus what `normalise_record()` adds: `price_sgd`, `seller_age_days`, `clean_title`, `brand`, and the adapter's `listing_id`. Keyed by `brand` (or `unbranded`) so one matcher replica sees every listing of a brand. Matching per brand gives the same clusters as the normaliser's batch run over all listings.
 
 ### `listings.normalized`
-One message per listing, carrying its cluster's aggregates. The schema is derived from Gordon's sample, [`samples/normalised_output.json`](../samples/normalised_output.json). Notes:
-- `listing_id` = `<source_platform>:<source_listing_id>` (the `listings.raw` key); `cluster_id` is a `listing_id` chosen by the matcher.
-- Prices are in SGD; `reviews[].date` is `YYYY-MM-DD`.
-- **Requested from Gordon:** pass `scraped_at` through. The database needs it for `last_seen_at` (TTL refresh) and to drop out-of-order updates.
+One message per listing with its cluster's price statistics: the rows of `to_scoring_rows()`, which is what the scorer's `Listing` model reads. `cluster_id` is the smallest `listing_id` in the cluster. [`samples/normalised_output.json`](../samples/normalised_output.json) is the normaliser's batch output for the 32 sample listings.
 
 ### `scrape.requests` (proposed: JJ, Yu Da)
 ```json
-{"request_id":"6f1c…","source_platform":"store_b","product_url":"https://…","source_listing_id":null,
- "reason":"user_request","requested_at":"2026-10-26T10:00:00Z"}
+{"request_id":"6f1c…","source_platform":"Tao Market","product_url":"https://paegnium.github.io/dummysite2/products/78.html",
+ "source_listing_id":null,"reason":"user_request","requested_at":"2026-11-11T10:00:00Z"}
 ```
 `reason` is `user_request` (gateway: a URL pasted by a user, `source_listing_id` may be null) or `ttl_refresh` (CronJob: re-crawl a listing older than the TTL).
 
@@ -85,7 +83,8 @@ The tables are in [`k8s/base/data/schema.sql`](../k8s/base/data/schema.sql). Eve
 | Table | Key | Written by | Notes |
 |---|---|---|---|
 | `listings` | `listing_id` | first consumer of `listings.raw` (smoke-consumer today) | `last_seen_at` = newest `scraped_at`; the TTL refresh reads it |
-| `clusters` | `cluster_id` | matcher (Gordon) | `version` for optimistic concurrency |
+| `matcher_listings` | `listing_id` | matcher | every cleaned listing seen, so any replica can re-cluster a brand |
+| `clusters` | `cluster_id` | matcher | `version` for optimistic concurrency |
 | `risk_scores` | `listing_id` (latest score) | scorer (Declan) | same columns as `scorer/sql/risk_scores.sql` |
 | cache table | | gateway (Yu Da) | not created here; add it to `schema.sql` |
 
@@ -115,10 +114,7 @@ WHERE cluster_id = $1 AND version = $6;          -- $6 = n
 
 | Who | What |
 |---|---|
-| Gordon | `brand` as the `listings.cleaned` key; the `listings.cleaned` shape; adding `scraped_at` to `listings.normalized` |
-| JJ | platform id mapping and `source_listing_id` rule above; `murmur2_random` partitioner; `scrape.requests` shape |
-| Yu Da | `scrape.requests` shape; a 4th store's key shares partition 2 with `store_c` (fine with rule 7); the cache table |
-| Team | Topic name: `listings.normalized` here, `listings.normalised` in the scorer's docs. One has to change. |
-| Team | Freshness field: `scraped_at` here, `fetched_at` in the scorer's model |
-| Team | One `listings` table: `init.sql` (docker-compose) has its own (`id`, `sku`, `reviews` table) that differs from the one here |
-| JJ / Yu Da | The scraper's `save_listings` writes to Postgres directly; in this design collectors publish to `listings.raw` |
+| Gordon | The matcher adapter re-clusters a whole brand per batch: fine for the dummy sites, but it grows with the brand. Listings with no known brand are matched among themselves only. |
+| Wylie / Yu Da | `feature/collector-containers` (HTTP collectors behind the Flask site) is not merged here. The site could publish to `scrape.requests` and read results from Postgres instead. `scrape.requests` shape; the cache table |
+| Team | Topic name: `listings.normalized` here; the scorer's docs say `listings.normalised`. Only the KafkaSource names the topic, so the scorer code needs no change. |
+| Team | One `listings` table: `init.sql` (docker-compose: `id`, `sku`, `reviews` table) differs from the one here; in the cluster only this one exists |

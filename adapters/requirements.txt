@@ -1,0 +1,8 @@
+confluent-kafka==2.16.0
+psycopg[binary]==3.3.6
+# web/scraper.py
+requests==2.32.3
+beautifulsoup4==4.12.3
+# normaliser/core
+datasketch==2.0.0
+rapidfuzz==3.14.6

@@ -39,13 +39,15 @@ With 16 GB or more of memory available to Docker, `make -C infra up PROFILE=defa
 ```bash
 make -C infra smoke
 ```
-Expected last line: `==> Smoke test passed`. The test publishes 22 sample listings to `listings.raw`, 22 matched listings to `listings.normalized` and 3 scrape requests. It checks that:
+Expected last line: `==> Smoke test passed`. The test publishes the 32 listings scraped from the three dummy stores to `listings.raw`, their 32 matched rows to `listings.normalized`, and one scrape request per store. It checks that:
 - every record matches its topic's JSON Schema;
 - every message can be read back unchanged, on the partition its key determines;
-- `smoke-consumer` wrote all 22 listings to PostgreSQL;
-- the Knative KafkaSource delivered all 22 matched listings to the scorer, which scales up from zero to receive them.
+- each store's collector handled the scrape requests;
+- `smoke-consumer` wrote all 32 listings to PostgreSQL;
+- the Knative KafkaSource delivered all 32 matched rows to the scorer, which scales up from zero to receive them;
+- every listing went through the normaliser, matcher and scorer into `risk_scores` (`risk_scores_rows: 32/32`).
 
-Run it twice: the second run still shows `listings_rows: 22/22`, because the database writes are idempotent.
+Run it twice: the second run still shows `listings_rows: 32/32`, because the database writes are idempotent.
 
 ```bash
 make -C infra status

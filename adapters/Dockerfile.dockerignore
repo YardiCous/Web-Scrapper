@@ -1,0 +1,6 @@
+*
+!adapters/
+!web/scraper.py
+!normaliser/core/
+!infra/images/tools/cdc_tools/
+**/__pycache__

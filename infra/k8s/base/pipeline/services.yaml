@@ -1,6 +1,5 @@
-# Slots for teammates' pipeline services. Parked at replicas: 0 so a placeholder never commits offsets
-# in the real consumer group. To go live: set the image in k8s/base/kustomization.yaml, then raise
-# replicas here or add a ScaledObject (templates/kafka-worker-scaledobject.yaml).
+# Pipeline services running the team's code through adapters/ (one image; SERVICE_NAME picks the role).
+# One replica each; add a ScaledObject (templates/kafka-worker-scaledobject.yaml) to autoscale on lag.
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -11,7 +10,7 @@ metadata:
     app.kubernetes.io/name: collector-store-a
     cdc/owner: jj
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: collector-store-a
@@ -32,6 +31,10 @@ spec:
           env:
             - name: SERVICE_NAME
               value: collector-store-a
+            - name: COLLECTOR_PLATFORM          # source_platform as web/scraper.py reports it
+              value: Cartlane
+            - name: FETCH_FROM                  # scrape the in-cluster copy of the store
+              value: https://paegnium.github.io/dummysite/=http://store-a.web.svc/
             - name: KAFKA_GROUP_ID
               value: cdc.collector.store_a
             - name: KAFKA_INPUT_TOPIC
@@ -47,6 +50,12 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,7 +66,7 @@ metadata:
     app.kubernetes.io/name: collector-store-b
     cdc/owner: jj
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: collector-store-b
@@ -78,6 +87,10 @@ spec:
           env:
             - name: SERVICE_NAME
               value: collector-store-b
+            - name: COLLECTOR_PLATFORM          # source_platform as web/scraper.py reports it
+              value: Tao Market
+            - name: FETCH_FROM                  # scrape the in-cluster copy of the store
+              value: https://paegnium.github.io/dummysite2/=http://store-b.web.svc/
             - name: KAFKA_GROUP_ID
               value: cdc.collector.store_b
             - name: KAFKA_INPUT_TOPIC
@@ -93,6 +106,12 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -103,7 +122,7 @@ metadata:
     app.kubernetes.io/name: collector-store-c
     cdc/owner: jj
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: collector-store-c
@@ -124,6 +143,10 @@ spec:
           env:
             - name: SERVICE_NAME
               value: collector-store-c
+            - name: COLLECTOR_PLATFORM          # source_platform as web/scraper.py reports it
+              value: Lazora
+            - name: FETCH_FROM                  # scrape the in-cluster copy of the store
+              value: https://paegnium.github.io/dummysite3/=http://store-c.web.svc/
             - name: KAFKA_GROUP_ID
               value: cdc.collector.store_c
             - name: KAFKA_INPUT_TOPIC
@@ -139,6 +162,12 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -149,7 +178,7 @@ metadata:
     app.kubernetes.io/name: normaliser
     cdc/owner: gordon
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: normaliser
@@ -181,10 +210,16 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 96Mi
+              memory: 160Mi
             limits:
               cpu: 500m
-              memory: 256Mi
+              memory: 384Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -195,7 +230,7 @@ metadata:
     app.kubernetes.io/name: matcher
     cdc/owner: gordon
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: matcher
@@ -227,7 +262,13 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 96Mi
+              memory: 160Mi
             limits:
               cpu: 500m
-              memory: 256Mi
+              memory: 384Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3

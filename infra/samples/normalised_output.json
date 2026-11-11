@@ -1,691 +1,1250 @@
 [
   {
-    "cluster_id": "store_a:A-1001",
-    "cluster_size": 3,
+    "cluster_id": "Cartlane:78",
+    "cluster_size": 2,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Cartlane",
+      "Tao Market"
     ],
-    "cluster_price_median_sgd": 445.5,
-    "cluster_price_min_sgd": 399.0,
-    "cluster_price_max_sgd": 449.0,
-    "listing_id": "store_a:A-1001",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1001",
-    "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
-    "brand": "sony",
-    "price_sgd": 449.0,
-    "seller_id": "sel_a_01",
-    "seller_name": "AudioHub SG",
-    "seller_age_days": 2064,
+    "cluster_price_median_sgd": 1788.74,
+    "cluster_price_min_sgd": 877.49,
+    "cluster_price_max_sgd": 2699.99,
+    "listing_id": "Cartlane:78",
+    "source_platform": "Cartlane",
+    "source_listing_id": "78",
+    "title": "Apple MacBook Pro 14 Inch Space Grey",
+    "brand": "apple",
+    "price_sgd": 877.49,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
     "rating": 4.7,
-    "review_count": 230,
+    "review_count": 3,
     "reviews": [
       {
-        "text": "Great noise cancellation, worth the price.",
+        "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2026-09-01"
+        "review_date": "2025-04-30"
       },
       {
-        "text": "Battery life is excellent, very comfortable.",
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very satisfied!",
         "rating": 4,
-        "date": "2026-08-20"
+        "review_date": "2025-04-30"
       }
     ],
-    "product_url": "https://store-a.mock/items/A-1001"
+    "product_url": "https://paegnium.github.io/dummysite/?product=78"
   },
   {
-    "cluster_id": "store_a:A-1001",
-    "cluster_size": 3,
+    "cluster_id": "Cartlane:78",
+    "cluster_size": 2,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Cartlane",
+      "Tao Market"
     ],
-    "cluster_price_median_sgd": 445.5,
-    "cluster_price_min_sgd": 399.0,
-    "cluster_price_max_sgd": 449.0,
-    "listing_id": "store_b:B-2001",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2001",
-    "title": "Sony WH1000XM5 Over Ear Headphones",
-    "brand": "sony",
-    "price_sgd": 445.5,
-    "seller_id": "sel_b_01",
-    "seller_name": "SoundGear",
-    "seller_age_days": 1958,
-    "rating": 4.6,
-    "review_count": 85,
+    "cluster_price_median_sgd": 1788.74,
+    "cluster_price_min_sgd": 877.49,
+    "cluster_price_max_sgd": 2699.99,
+    "listing_id": "Tao Market:78",
+    "source_platform": "Tao Market",
+    "source_listing_id": "78",
+    "title": "Apple MacBook Pro 14-inch",
+    "brand": "apple",
+    "price_sgd": 2699.99,
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2432,
+    "selling_since": "2020-03-15",
+    "rating": 3.65,
+    "review_count": 3,
     "reviews": [
       {
-        "text": "Very comfortable for long listening sessions.",
+        "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2026-08-30"
-      }
-    ],
-    "product_url": "https://store-b.mock/p/B-2001"
-  },
-  {
-    "cluster_id": "store_a:A-1001",
-    "cluster_size": 3,
-    "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 445.5,
-    "cluster_price_min_sgd": 399.0,
-    "cluster_price_max_sgd": 449.0,
-    "listing_id": "store_c:C-3001",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3001",
-    "title": "Sony WH-1000XM5 Headphone - Black",
-    "brand": "sony",
-    "price_sgd": 399.0,
-    "seller_id": "sel_c_01",
-    "seller_name": "SoundBox88",
-    "seller_age_days": 85,
-    "rating": 4.0,
-    "review_count": 12,
-    "reviews": [
-      {
-        "text": "Good price good quality fast delivery",
-        "rating": 5,
-        "date": "2026-09-30"
+        "review_date": "2025-04-30"
       },
       {
-        "text": "Good price, good quality, fast delivery!",
+        "text": "Very happy with my purchase!",
         "rating": 5,
-        "date": "2026-10-01"
+        "review_date": "2025-04-30"
       },
       {
-        "text": "Good price good quality, fast delivery.",
-        "rating": 5,
-        "date": "2026-10-01"
+        "text": "Very satisfied!",
+        "rating": 4,
+        "review_date": "2025-04-30"
       }
     ],
-    "product_url": "https://store-c.mock/listing/C-3001"
+    "product_url": "https://paegnium.github.io/dummysite2/products/78.html"
   },
   {
-    "cluster_id": "store_a:A-1002",
-    "cluster_size": 3,
+    "cluster_id": "Cartlane:47",
+    "cluster_size": 2,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Cartlane",
+      "Tao Market"
     ],
-    "cluster_price_median_sgd": 329.0,
-    "cluster_price_min_sgd": 319.0,
-    "cluster_price_max_sgd": 330.75,
-    "listing_id": "store_a:A-1002",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1002",
-    "title": "Apple AirPods Pro 2nd Generation",
-    "brand": "apple",
-    "price_sgd": 329.0,
-    "seller_id": "sel_a_02",
-    "seller_name": "TechZone",
-    "seller_age_days": 2659,
-    "rating": 4.8,
-    "review_count": 540,
+    "cluster_price_median_sgd": 53.99,
+    "cluster_price_min_sgd": 40.49,
+    "cluster_price_max_sgd": 67.49,
+    "listing_id": "Cartlane:47",
+    "source_platform": "Cartlane",
+    "source_listing_id": "47",
+    "title": "Table Lamp",
+    "brand": null,
+    "price_sgd": 40.49,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 4.3,
+    "review_count": 3,
     "reviews": [
       {
-        "text": "Fits well and the noise cancellation is great.",
+        "text": "Excellent quality!",
         "rating": 5,
-        "date": "2026-09-10"
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would not recommend!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
       }
     ],
-    "product_url": "https://store-a.mock/items/A-1002"
+    "product_url": "https://paegnium.github.io/dummysite/?product=47"
   },
   {
-    "cluster_id": "store_a:A-1002",
-    "cluster_size": 3,
+    "cluster_id": "Cartlane:47",
+    "cluster_size": 2,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Cartlane",
+      "Tao Market"
     ],
-    "cluster_price_median_sgd": 329.0,
-    "cluster_price_min_sgd": 319.0,
-    "cluster_price_max_sgd": 330.75,
-    "listing_id": "store_b:B-2002",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2002",
-    "title": "Apple AirPods Pro (2nd Gen)",
-    "brand": "apple",
-    "price_sgd": 330.75,
-    "seller_id": "sel_b_02",
-    "seller_name": "GadgetBay",
-    "seller_age_days": 3575,
+    "cluster_price_median_sgd": 53.99,
+    "cluster_price_min_sgd": 40.49,
+    "cluster_price_max_sgd": 67.49,
+    "listing_id": "Tao Market:47",
+    "source_platform": "Tao Market",
+    "source_listing_id": "47",
+    "title": "Table Lamp",
+    "brand": null,
+    "price_sgd": 67.49,
+    "seller_id": "tao-home",
+    "seller_name": "Tao Home Finds",
+    "seller_age_days": 2100,
+    "selling_since": "2021-02-10",
+    "rating": 3.55,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would not recommend!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/47.html"
+  },
+  {
+    "cluster_id": "Cartlane:90",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "Cartlane",
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 97.86,
+    "cluster_price_min_sgd": 74.24,
+    "cluster_price_max_sgd": 121.49,
+    "listing_id": "Cartlane:90",
+    "source_platform": "Cartlane",
+    "source_listing_id": "90",
+    "title": "Puma Future Rider Trainers",
+    "brand": "puma",
+    "price_sgd": 74.24,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 3.7,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very disappointed!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=90"
+  },
+  {
+    "cluster_id": "Cartlane:90",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "Cartlane",
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 97.86,
+    "cluster_price_min_sgd": 74.24,
+    "cluster_price_max_sgd": 121.49,
+    "listing_id": "Tao Market:90",
+    "source_platform": "Tao Market",
+    "source_listing_id": "90",
+    "title": "Puma Future Rider Trainers",
+    "brand": "puma",
+    "price_sgd": 121.49,
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2720,
+    "selling_since": "2019-06-01",
     "rating": 4.9,
-    "review_count": 620,
+    "review_count": 3,
     "reviews": [
       {
-        "text": "Best earbuds I have owned, seamless pairing.",
+        "text": "Highly impressed!",
         "rating": 5,
-        "date": "2026-09-15"
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very disappointed!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "review_date": "2025-04-30"
       }
     ],
-    "product_url": "https://store-b.mock/p/B-2002"
+    "product_url": "https://paegnium.github.io/dummysite2/products/90.html"
   },
   {
-    "cluster_id": "store_a:A-1002",
-    "cluster_size": 3,
+    "cluster_id": "Cartlane:88",
+    "cluster_size": 2,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Cartlane",
+      "Tao Market"
     ],
-    "cluster_price_median_sgd": 329.0,
-    "cluster_price_min_sgd": 319.0,
-    "cluster_price_max_sgd": 330.75,
-    "listing_id": "store_c:C-3002",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3002",
-    "title": "Apple AirPods Pro Gen 2 White",
+    "cluster_price_median_sgd": 145.12,
+    "cluster_price_min_sgd": 87.74,
+    "cluster_price_max_sgd": 202.49,
+    "listing_id": "Cartlane:88",
+    "source_platform": "Cartlane",
+    "source_listing_id": "88",
+    "title": "Nike Air Jordan 1 Red And Black",
+    "brand": "nike",
+    "price_sgd": 87.74,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 3.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Waste of money!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=88"
+  },
+  {
+    "cluster_id": "Cartlane:88",
+    "cluster_size": 2,
+    "cluster_platforms": [
+      "Cartlane",
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 145.12,
+    "cluster_price_min_sgd": 87.74,
+    "cluster_price_max_sgd": 202.49,
+    "listing_id": "Tao Market:88",
+    "source_platform": "Tao Market",
+    "source_listing_id": "88",
+    "title": "Nike Air Jordan 1 Red And Black",
+    "brand": "nike",
+    "price_sgd": 202.49,
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2720,
+    "selling_since": "2019-06-01",
+    "rating": 4.77,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Waste of money!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/88.html"
+  },
+  {
+    "cluster_id": "Cartlane:51",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 53.99,
+    "cluster_price_min_sgd": 53.99,
+    "cluster_price_max_sgd": 53.99,
+    "listing_id": "Cartlane:51",
+    "source_platform": "Cartlane",
+    "source_listing_id": "51",
+    "title": "Boxed Blender",
+    "brand": null,
+    "price_sgd": 53.99,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 5.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=51"
+  },
+  {
+    "cluster_id": "Cartlane:14",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 202.49,
+    "cluster_price_min_sgd": 202.49,
+    "cluster_price_max_sgd": 202.49,
+    "listing_id": "Cartlane:14",
+    "source_platform": "Cartlane",
+    "source_listing_id": "14",
+    "title": "Knoll Saarinen Executive Conference Chair",
+    "brand": "knoll",
+    "price_sgd": 202.49,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 3.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Waste of money!",
+        "rating": 2,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very dissatisfied!",
+        "rating": 2,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=14"
+  },
+  {
+    "cluster_id": "Cartlane:93",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 67.49,
+    "cluster_price_min_sgd": 67.49,
+    "cluster_price_max_sgd": 67.49,
+    "listing_id": "Cartlane:93",
+    "source_platform": "Cartlane",
+    "source_listing_id": "93",
+    "title": "Brown Leather Belt Watch",
+    "brand": null,
+    "price_sgd": 67.49,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 3.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very unhappy with my purchase!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Fast shipping!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=93"
+  },
+  {
+    "cluster_id": "Cartlane:52",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 33.74,
+    "cluster_price_min_sgd": 33.74,
+    "cluster_price_max_sgd": 33.74,
+    "listing_id": "Cartlane:52",
+    "source_platform": "Cartlane",
+    "source_listing_id": "52",
+    "title": "Carbon Steel Wok",
+    "brand": null,
+    "price_sgd": 33.74,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 4.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=52"
+  },
+  {
+    "cluster_id": "Cartlane:46",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 17.54,
+    "cluster_price_min_sgd": 17.54,
+    "cluster_price_max_sgd": 17.54,
+    "listing_id": "Cartlane:46",
+    "source_platform": "Cartlane",
+    "source_listing_id": "46",
+    "title": "Plant Pot",
+    "brand": null,
+    "price_sgd": 17.54,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 4.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Fast shipping!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Poor quality!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=46"
+  },
+  {
+    "cluster_id": "Cartlane:81",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 674.99,
+    "cluster_price_min_sgd": 674.99,
+    "cluster_price_max_sgd": 674.99,
+    "listing_id": "Cartlane:81",
+    "source_platform": "Cartlane",
+    "source_listing_id": "81",
+    "title": "Lenovo Yoga 920",
+    "brand": "lenovo",
+    "price_sgd": 674.99,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 4.3,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=81"
+  },
+  {
+    "cluster_id": "Cartlane:65",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 22.94,
+    "cluster_price_min_sgd": 22.94,
+    "cluster_price_max_sgd": 22.94,
+    "listing_id": "Cartlane:65",
+    "source_platform": "Cartlane",
+    "source_listing_id": "65",
+    "title": "Lunch Box",
+    "brand": null,
+    "price_sgd": 22.94,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 4.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very pleased!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Poor quality!",
+        "rating": 2,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=65"
+  },
+  {
+    "cluster_id": "Cartlane:13",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Cartlane"
+    ],
+    "cluster_price_median_sgd": 107.99,
+    "cluster_price_min_sgd": 107.99,
+    "cluster_price_max_sgd": 107.99,
+    "listing_id": "Cartlane:13",
+    "source_platform": "Cartlane",
+    "source_listing_id": "13",
+    "title": "Bedside Table African Cherry",
+    "brand": null,
+    "price_sgd": 107.99,
+    "seller_id": "cartlane-001",
+    "seller_name": "Cartlane",
+    "seller_age_days": 34,
+    "selling_since": "2026-10-08",
+    "rating": 4.0,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Highly recommended!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite/?product=13"
+  },
+  {
+    "cluster_id": "Tao Market:101",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 742.49,
+    "cluster_price_min_sgd": 742.49,
+    "cluster_price_max_sgd": 742.49,
+    "listing_id": "Tao Market:101",
+    "source_platform": "Tao Market",
+    "source_listing_id": "101",
+    "title": "Apple AirPods Max Silver",
     "brand": "apple",
-    "price_sgd": 319.0,
-    "seller_id": "sel_c_02",
-    "seller_name": "iGadget Store",
-    "seller_age_days": 2445,
+    "price_sgd": 742.49,
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2432,
+    "selling_since": "2020-03-15",
+    "rating": 3.47,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would buy again!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/101.html"
+  },
+  {
+    "cluster_id": "Tao Market:174",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 809.99,
+    "cluster_price_min_sgd": 809.99,
+    "cluster_price_max_sgd": 809.99,
+    "listing_id": "Tao Market:174",
+    "source_platform": "Tao Market",
+    "source_listing_id": "174",
+    "title": "Prada Galleria Saffiano Leather Bag",
+    "brand": "prada",
+    "price_sgd": 809.99,
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2720,
+    "selling_since": "2019-06-01",
+    "rating": 2.71,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would not buy again!",
+        "rating": 2,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Great value for money!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Highly recommended!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/174.html"
+  },
+  {
+    "cluster_id": "Tao Market:7",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 175.49,
+    "cluster_price_min_sgd": 175.49,
+    "cluster_price_max_sgd": 175.49,
+    "listing_id": "Tao Market:7",
+    "source_platform": "Tao Market",
+    "source_listing_id": "7",
+    "title": "Chanel Coco Noir Eau de Parfum",
+    "brand": "chanel",
+    "price_sgd": 175.49,
+    "seller_id": "tao-beauty",
+    "seller_name": "Tao Beauty Edit",
+    "seller_age_days": 2243,
+    "selling_since": "2020-09-20",
+    "rating": 4.26,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/7.html"
+  },
+  {
+    "cluster_id": "Tao Market:100",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 175.49,
+    "cluster_price_min_sgd": 175.49,
+    "cluster_price_max_sgd": 175.49,
+    "listing_id": "Tao Market:100",
+    "source_platform": "Tao Market",
+    "source_listing_id": "100",
+    "title": "Apple AirPods",
+    "brand": "apple",
+    "price_sgd": 175.49,
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2432,
+    "selling_since": "2020-03-15",
+    "rating": 4.15,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would not buy again!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Great product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Excellent quality!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/100.html"
+  },
+  {
+    "cluster_id": "Tao Market:123",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 1484.99,
+    "cluster_price_min_sgd": 1484.99,
+    "cluster_price_max_sgd": 1484.99,
+    "listing_id": "Tao Market:123",
+    "source_platform": "Tao Market",
+    "source_listing_id": "123",
+    "title": "iPhone 13 Pro",
+    "brand": null,
+    "price_sgd": 1484.99,
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2432,
+    "selling_since": "2020-03-15",
+    "rating": 4.12,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Would buy again!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Not worth the price!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very satisfied!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/123.html"
+  },
+  {
+    "cluster_id": "Tao Market:10",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 107.99,
+    "cluster_price_min_sgd": 107.99,
+    "cluster_price_max_sgd": 107.99,
+    "listing_id": "Tao Market:10",
+    "source_platform": "Tao Market",
+    "source_listing_id": "10",
+    "title": "Gucci Bloom Eau de Parfum",
+    "brand": "gucci",
+    "price_sgd": 107.99,
+    "seller_id": "tao-beauty",
+    "seller_name": "Tao Beauty Edit",
+    "seller_age_days": 2243,
+    "selling_since": "2020-09-20",
+    "rating": 2.74,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Very dissatisfied!",
+        "rating": 1,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very happy with my purchase!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Highly impressed!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/10.html"
+  },
+  {
+    "cluster_id": "Tao Market:103",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 134.99,
+    "cluster_price_min_sgd": 134.99,
+    "cluster_price_max_sgd": 134.99,
+    "listing_id": "Tao Market:103",
+    "source_platform": "Tao Market",
+    "source_listing_id": "103",
+    "title": "Apple HomePod Mini Cosmic Grey",
+    "brand": "apple",
+    "price_sgd": 134.99,
+    "seller_id": "tao-tech",
+    "seller_name": "Tao Tech Studio",
+    "seller_age_days": 2432,
+    "selling_since": "2020-03-15",
+    "rating": 4.62,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Great product!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Would not buy again!",
+        "rating": 3,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Very pleased!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/103.html"
+  },
+  {
+    "cluster_id": "Tao Market:173",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Tao Market"
+    ],
+    "cluster_price_median_sgd": 175.49,
+    "cluster_price_min_sgd": 175.49,
+    "cluster_price_max_sgd": 175.49,
+    "listing_id": "Tao Market:173",
+    "source_platform": "Tao Market",
+    "source_listing_id": "173",
+    "title": "HESHE Leather Shoulder Bag",
+    "brand": null,
+    "price_sgd": 175.49,
+    "seller_id": "tao-style",
+    "seller_name": "Tao Style House",
+    "seller_age_days": 2720,
+    "selling_since": "2019-06-01",
+    "rating": 4.92,
+    "review_count": 3,
+    "reviews": [
+      {
+        "text": "Excellent quality!",
+        "rating": 5,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      },
+      {
+        "text": "Awesome product!",
+        "rating": 4,
+        "review_date": "2025-04-30"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite2/products/173.html"
+  },
+  {
+    "cluster_id": "Lazora:lazora-1",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Lazora"
+    ],
+    "cluster_price_median_sgd": 89.9,
+    "cluster_price_min_sgd": 89.9,
+    "cluster_price_max_sgd": 89.9,
+    "listing_id": "Lazora:lazora-1",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-1",
+    "title": "FjΣllrΣven Foldsack No. 1 Backpack",
+    "brand": null,
+    "price_sgd": 89.9,
+    "seller_id": "lazora-everyday",
+    "seller_name": "Lazora Everyday",
+    "seller_age_days": 2067,
+    "selling_since": "2021-03-15",
+    "rating": 4.8,
+    "review_count": 128,
+    "reviews": [
+      {
+        "text": "Comfortable straps and just the right size for my laptop and everyday essentials.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-1"
+  },
+  {
+    "cluster_id": "Lazora:lazora-2",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Lazora"
+    ],
+    "cluster_price_median_sgd": 79.9,
+    "cluster_price_min_sgd": 79.9,
+    "cluster_price_max_sgd": 79.9,
+    "listing_id": "Lazora:lazora-2",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-2",
+    "title": "SanDisk SSD PLUS 1TB",
+    "brand": "sandisk",
+    "price_sgd": 79.9,
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2284,
+    "selling_since": "2020-08-10",
     "rating": 4.7,
-    "review_count": 410,
+    "review_count": 86,
     "reviews": [
       {
-        "text": "Works perfectly with all my Apple devices.",
+        "text": "A practical storage upgrade. My everyday apps feel much quicker to open.",
         "rating": 5,
-        "date": "2026-09-12"
-      }
-    ],
-    "product_url": "https://store-c.mock/listing/C-3002"
-  },
-  {
-    "cluster_id": "store_a:A-1003",
-    "cluster_size": 3,
-    "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 249.0,
-    "cluster_price_min_sgd": 243.0,
-    "cluster_price_max_sgd": 259.0,
-    "listing_id": "store_a:A-1003",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1003",
-    "title": "Samsung Galaxy Buds2 Pro",
-    "brand": "samsung",
-    "price_sgd": 249.0,
-    "seller_id": "sel_a_03",
-    "seller_name": "MobileWorld",
-    "seller_age_days": 2165,
-    "rating": 4.5,
-    "review_count": 180,
-    "reviews": [
-      {
-        "text": "Good sound quality for the price.",
-        "rating": 4,
-        "date": "2026-07-18"
-      }
-    ],
-    "product_url": "https://store-a.mock/items/A-1003"
-  },
-  {
-    "cluster_id": "store_a:A-1003",
-    "cluster_size": 3,
-    "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 249.0,
-    "cluster_price_min_sgd": 243.0,
-    "cluster_price_max_sgd": 259.0,
-    "listing_id": "store_b:B-2003",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2003",
-    "title": "Samsung Buds2 Pro Wireless Earbuds",
-    "brand": "samsung",
-    "price_sgd": 243.0,
-    "seller_id": "sel_b_03",
-    "seller_name": "ElectroMart",
-    "seller_age_days": 54,
-    "rating": 4.2,
-    "review_count": 40,
-    "reviews": [
-      {
-        "text": "Amazing product super fast shipping highly recommend",
-        "rating": 5,
-        "date": "2026-09-28"
+        "review_date": "2026-09-20"
       },
       {
-        "text": "Amazing product super fast shipping highly recommend!",
-        "rating": 5,
-        "date": "2026-09-28"
-      },
-      {
-        "text": "Amazing product, super fast shipping, highly recommend.",
-        "rating": 5,
-        "date": "2026-09-29"
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
       }
     ],
-    "product_url": "https://store-b.mock/p/B-2003"
+    "product_url": "https://paegnium.github.io/dummysite3/#product-2"
   },
   {
-    "cluster_id": "store_a:A-1003",
-    "cluster_size": 3,
+    "cluster_id": "Lazora:lazora-3",
+    "cluster_size": 1,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Lazora"
     ],
-    "cluster_price_median_sgd": 249.0,
-    "cluster_price_min_sgd": 243.0,
-    "cluster_price_max_sgd": 259.0,
-    "listing_id": "store_c:C-3003",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3003",
-    "title": "Samsung Galaxy Buds 2 Pro - Graphite",
-    "brand": "samsung",
-    "price_sgd": 259.0,
-    "seller_id": "sel_c_03",
-    "seller_name": "MobileWorld",
-    "seller_age_days": 2165,
-    "rating": 4.5,
-    "review_count": 90,
+    "cluster_price_median_sgd": 349.0,
+    "cluster_price_min_sgd": 349.0,
+    "cluster_price_max_sgd": 349.0,
+    "listing_id": "Lazora:lazora-3",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-3",
+    "title": "John Hardy Legends Naga Bracelet",
+    "brand": null,
+    "price_sgd": 349.0,
+    "seller_id": "lazora-everyday",
+    "seller_name": "Lazora Everyday",
+    "seller_age_days": 2067,
+    "selling_since": "2021-03-15",
+    "rating": 4.9,
+    "review_count": 42,
     "reviews": [
       {
-        "text": "Solid earbuds, good for calls.",
+        "text": "The intricate detail is lovely. A statement piece that works with a simple outfit.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A thoughtful design with an appealing finish. The product details helped me choose.",
         "rating": 4,
-        "date": "2026-07-01"
+        "review_date": "2026-09-12"
       }
     ],
-    "product_url": "https://store-c.mock/listing/C-3003"
+    "product_url": "https://paegnium.github.io/dummysite3/#product-3"
   },
   {
-    "cluster_id": "store_a:A-1004",
-    "cluster_size": 3,
+    "cluster_id": "Lazora:lazora-4",
+    "cluster_size": 1,
     "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
+      "Lazora"
+    ],
+    "cluster_price_median_sgd": 69.9,
+    "cluster_price_min_sgd": 69.9,
+    "cluster_price_max_sgd": 69.9,
+    "listing_id": "Lazora:lazora-4",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-4",
+    "title": "WD Elements 2TB Portable Hard Drive",
+    "brand": "wd",
+    "price_sgd": 69.9,
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2284,
+    "selling_since": "2020-08-10",
+    "rating": 4.6,
+    "review_count": 215,
+    "reviews": [
+      {
+        "text": "Compact enough for my work bag, with plenty of room for photos and documents.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-4"
+  },
+  {
+    "cluster_id": "Lazora:lazora-5",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Lazora"
+    ],
+    "cluster_price_median_sgd": 139.9,
+    "cluster_price_min_sgd": 139.9,
+    "cluster_price_max_sgd": 139.9,
+    "listing_id": "Lazora:lazora-5",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-5",
+    "title": "Acer SB220Q 21.5-inch Full HD Monitor",
+    "brand": "acer",
+    "price_sgd": 139.9,
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2284,
+    "selling_since": "2020-08-10",
+    "rating": 4.5,
+    "review_count": 94,
+    "reviews": [
+      {
+        "text": "A good size for a compact desk. The slim frame makes the setup look tidy.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-5"
+  },
+  {
+    "cluster_id": "Lazora:lazora-6",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Lazora"
     ],
     "cluster_price_median_sgd": 899.0,
-    "cluster_price_min_sgd": 879.0,
-    "cluster_price_max_sgd": 904.5,
-    "listing_id": "store_a:A-1004",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1004",
-    "title": "Dyson V15 Detect Cordless Vacuum",
-    "brand": "dyson",
+    "cluster_price_min_sgd": 899.0,
+    "cluster_price_max_sgd": 899.0,
+    "listing_id": "Lazora:lazora-6",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-6",
+    "title": "Samsung CHG90 49-inch Gaming Monitor",
+    "brand": "samsung",
     "price_sgd": 899.0,
-    "seller_id": "sel_a_04",
-    "seller_name": "HomeEssentials",
-    "seller_age_days": 3179,
-    "rating": 4.6,
-    "review_count": 95,
+    "seller_id": "lazora-tech",
+    "seller_name": "Lazora Tech",
+    "seller_age_days": 2284,
+    "selling_since": "2020-08-10",
+    "rating": 4.8,
+    "review_count": 67,
     "reviews": [
       {
-        "text": "Powerful suction, the laser feature is handy.",
+        "text": "The wide display is especially useful when working with several windows at once.",
         "rating": 5,
-        "date": "2026-06-02"
-      }
-    ],
-    "product_url": "https://store-a.mock/items/A-1004"
-  },
-  {
-    "cluster_id": "store_a:A-1004",
-    "cluster_size": 3,
-    "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 899.0,
-    "cluster_price_min_sgd": 879.0,
-    "cluster_price_max_sgd": 904.5,
-    "listing_id": "store_b:B-2004",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2004",
-    "title": "Dyson V15 Detect Vacuum Cleaner",
-    "brand": "dyson",
-    "price_sgd": 904.5,
-    "seller_id": "sel_b_04",
-    "seller_name": "CleanTech",
-    "seller_age_days": 2743,
-    "rating": 4.5,
-    "review_count": 60,
-    "reviews": [
+        "review_date": "2026-09-20"
+      },
       {
-        "text": "Does a great job on carpets.",
+        "text": "A useful addition to my everyday setup. Check the specifications for compatibility.",
         "rating": 4,
-        "date": "2026-06-19"
+        "review_date": "2026-09-12"
       }
     ],
-    "product_url": "https://store-b.mock/p/B-2004"
+    "product_url": "https://paegnium.github.io/dummysite3/#product-6"
   },
   {
-    "cluster_id": "store_a:A-1004",
-    "cluster_size": 3,
-    "cluster_platforms": [
-      "store_a",
-      "store_b",
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 899.0,
-    "cluster_price_min_sgd": 879.0,
-    "cluster_price_max_sgd": 904.5,
-    "listing_id": "store_c:C-3004",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3004",
-    "title": "Dyson V15 Detect Absolute Vacuum",
-    "brand": "dyson",
-    "price_sgd": 879.0,
-    "seller_id": "sel_c_04",
-    "seller_name": "HomeEssentials",
-    "seller_age_days": 3179,
-    "rating": 4.6,
-    "review_count": 70,
-    "reviews": [
-      {
-        "text": "Worth it for pet hair pickup.",
-        "rating": 5,
-        "date": "2026-06-28"
-      }
-    ],
-    "product_url": "https://store-c.mock/listing/C-3004"
-  },
-  {
-    "cluster_id": "store_a:A-1005",
-    "cluster_size": 2,
-    "cluster_platforms": [
-      "store_a",
-      "store_b"
-    ],
-    "cluster_price_median_sgd": 138.35,
-    "cluster_price_min_sgd": 137.7,
-    "cluster_price_max_sgd": 139.0,
-    "listing_id": "store_a:A-1005",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1005",
-    "title": "Logitech MX Master 3S Wireless Mouse",
-    "brand": "logitech",
-    "price_sgd": 139.0,
-    "seller_id": "sel_a_05",
-    "seller_name": "PeripheralPlus",
-    "seller_age_days": 1638,
-    "rating": 4.7,
-    "review_count": 310,
-    "reviews": [
-      {
-        "text": "Silent clicks and great ergonomics.",
-        "rating": 5,
-        "date": "2026-08-01"
-      }
-    ],
-    "product_url": "https://store-a.mock/items/A-1005"
-  },
-  {
-    "cluster_id": "store_a:A-1005",
-    "cluster_size": 2,
-    "cluster_platforms": [
-      "store_a",
-      "store_b"
-    ],
-    "cluster_price_median_sgd": 138.35,
-    "cluster_price_min_sgd": 137.7,
-    "cluster_price_max_sgd": 139.0,
-    "listing_id": "store_b:B-2005",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2005",
-    "title": "Logitech MX Master 3S Mouse",
-    "brand": "logitech",
-    "price_sgd": 137.7,
-    "seller_id": "sel_b_05",
-    "seller_name": "PeripheralPlus",
-    "seller_age_days": 1638,
-    "rating": 4.7,
-    "review_count": 95,
-    "reviews": [
-      {
-        "text": "Smooth scroll wheel, works great on glass.",
-        "rating": 5,
-        "date": "2026-07-22"
-      }
-    ],
-    "product_url": "https://store-b.mock/p/B-2005"
-  },
-  {
-    "cluster_id": "store_a:A-1006",
+    "cluster_id": "Lazora:lazora-7",
     "cluster_size": 1,
     "cluster_platforms": [
-      "store_a"
+      "Lazora"
     ],
-    "cluster_price_median_sgd": 139.0,
-    "cluster_price_min_sgd": 139.0,
-    "cluster_price_max_sgd": 139.0,
-    "listing_id": "store_a:A-1006",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1006",
-    "title": "JBL Flip 6 Portable Bluetooth Speaker",
-    "brand": "jbl",
-    "price_sgd": 139.0,
-    "seller_id": "sel_a_01",
-    "seller_name": "AudioHub SG",
-    "seller_age_days": 2064,
+    "cluster_price_median_sgd": 69.9,
+    "cluster_price_min_sgd": 69.9,
+    "cluster_price_max_sgd": 69.9,
+    "listing_id": "Lazora:lazora-7",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-7",
+    "title": "BIYLACLESEN WomenÆs 3-in-1 Snow Jacket",
+    "brand": null,
+    "price_sgd": 69.9,
+    "seller_id": "lazora-style",
+    "seller_name": "Lazora Style",
+    "seller_age_days": 1756,
+    "selling_since": "2022-01-20",
+    "rating": 4.6,
+    "review_count": 73,
+    "reviews": [
+      {
+        "text": "I like being able to change the layers. The pockets are handy for days outdoors.",
+        "rating": 5,
+        "review_date": "2026-09-20"
+      },
+      {
+        "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
+        "rating": 4,
+        "review_date": "2026-09-12"
+      }
+    ],
+    "product_url": "https://paegnium.github.io/dummysite3/#product-7"
+  },
+  {
+    "cluster_id": "Lazora:lazora-8",
+    "cluster_size": 1,
+    "cluster_platforms": [
+      "Lazora"
+    ],
+    "cluster_price_median_sgd": 49.9,
+    "cluster_price_min_sgd": 49.9,
+    "cluster_price_max_sgd": 49.9,
+    "listing_id": "Lazora:lazora-8",
+    "source_platform": "Lazora",
+    "source_listing_id": "lazora-8",
+    "title": "Lock and Love Faux Leather Moto Jacket",
+    "brand": null,
+    "price_sgd": 49.9,
+    "seller_id": "lazora-style",
+    "seller_name": "Lazora Style",
+    "seller_age_days": 1756,
+    "selling_since": "2022-01-20",
     "rating": 4.4,
-    "review_count": 150,
+    "review_count": 119,
     "reviews": [
       {
-        "text": "Loud for its size, good bass.",
-        "rating": 4,
-        "date": "2026-05-14"
-      }
-    ],
-    "product_url": "https://store-a.mock/items/A-1006"
-  },
-  {
-    "cluster_id": "store_a:A-1007",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_a"
-    ],
-    "cluster_price_median_sgd": 469.0,
-    "cluster_price_min_sgd": 469.0,
-    "cluster_price_max_sgd": 469.0,
-    "listing_id": "store_a:A-1007",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1007",
-    "title": "Nintendo Switch OLED Console",
-    "brand": "nintendo",
-    "price_sgd": 469.0,
-    "seller_id": "sel_a_06",
-    "seller_name": "GameStopSG",
-    "seller_age_days": 3341,
-    "rating": 4.8,
-    "review_count": 710,
-    "reviews": [
-      {
-        "text": "Screen is a big upgrade over the original.",
+        "text": "Easy to style with jeans. The removable hood gives it a little more versatility.",
         "rating": 5,
-        "date": "2026-09-22"
-      }
-    ],
-    "product_url": "https://store-a.mock/items/A-1007"
-  },
-  {
-    "cluster_id": "store_a:A-1008",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_a"
-    ],
-    "cluster_price_median_sgd": 219.0,
-    "cluster_price_min_sgd": 219.0,
-    "cluster_price_max_sgd": 219.0,
-    "listing_id": "store_a:A-1008",
-    "source_platform": "store_a",
-    "source_listing_id": "A-1008",
-    "title": "Fitbit Charge 6 Fitness Tracker",
-    "brand": "fitbit",
-    "price_sgd": 219.0,
-    "seller_id": "sel_a_07",
-    "seller_name": "WearableWorld",
-    "seller_age_days": 2485,
-    "rating": 4.3,
-    "review_count": 88,
-    "reviews": [
+        "review_date": "2026-09-20"
+      },
       {
-        "text": "Accurate heart rate tracking.",
+        "text": "A useful addition to my wardrobe. Check the size guide before choosing your fit.",
         "rating": 4,
-        "date": "2026-04-11"
+        "review_date": "2026-09-12"
       }
     ],
-    "product_url": "https://store-a.mock/items/A-1008"
-  },
-  {
-    "cluster_id": "store_b:B-2006",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_b"
-    ],
-    "cluster_price_median_sgd": 486.0,
-    "cluster_price_min_sgd": 486.0,
-    "cluster_price_max_sgd": 486.0,
-    "listing_id": "store_b:B-2006",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2006",
-    "title": "Bose QuietComfort Ultra Headphones",
-    "brand": "bose",
-    "price_sgd": 486.0,
-    "seller_id": "sel_b_06",
-    "seller_name": "AudioDepot",
-    "seller_age_days": 2412,
-    "rating": 4.6,
-    "review_count": 142,
-    "reviews": [
-      {
-        "text": "Excellent ANC, slightly pricey though.",
-        "rating": 4,
-        "date": "2026-05-25"
-      }
-    ],
-    "product_url": "https://store-b.mock/p/B-2006"
-  },
-  {
-    "cluster_id": "store_b:B-2007",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_b"
-    ],
-    "cluster_price_median_sgd": 472.5,
-    "cluster_price_min_sgd": 472.5,
-    "cluster_price_max_sgd": 472.5,
-    "listing_id": "store_b:B-2007",
-    "source_platform": "store_b",
-    "source_listing_id": "B-2007",
-    "title": "GoPro Hero 12 Action Camera",
-    "brand": "gopro",
-    "price_sgd": 472.5,
-    "seller_id": "sel_b_07",
-    "seller_name": "ActionCamHQ",
-    "seller_age_days": 2549,
-    "rating": 4.5,
-    "review_count": 203,
-    "reviews": [
-      {
-        "text": "Stabilisation is incredible for action shots.",
-        "rating": 5,
-        "date": "2026-08-05"
-      }
-    ],
-    "product_url": "https://store-b.mock/p/B-2007"
-  },
-  {
-    "cluster_id": "store_c:C-3005",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 599.0,
-    "cluster_price_min_sgd": 599.0,
-    "cluster_price_max_sgd": 599.0,
-    "listing_id": "store_c:C-3005",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3005",
-    "title": "Xiaomi Robot Vacuum X20",
-    "brand": "xiaomi",
-    "price_sgd": 599.0,
-    "seller_id": "sel_c_05",
-    "seller_name": "SmartHomeSG",
-    "seller_age_days": 1842,
-    "rating": 4.3,
-    "review_count": 54,
-    "reviews": [
-      {
-        "text": "Mapping is accurate, app could be better.",
-        "rating": 4,
-        "date": "2026-05-02"
-      }
-    ],
-    "product_url": "https://store-c.mock/listing/C-3005"
-  },
-  {
-    "cluster_id": "store_c:C-3006",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 729.0,
-    "cluster_price_min_sgd": 729.0,
-    "cluster_price_max_sgd": 729.0,
-    "listing_id": "store_c:C-3006",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3006",
-    "title": "PlayStation 5 Slim Console",
-    "brand": "playstation",
-    "price_sgd": 729.0,
-    "seller_id": "sel_c_06",
-    "seller_name": "GameStopSG",
-    "seller_age_days": 3341,
-    "rating": 4.8,
-    "review_count": 390,
-    "reviews": [
-      {
-        "text": "Loads games noticeably faster than the original PS5.",
-        "rating": 5,
-        "date": "2026-09-19"
-      }
-    ],
-    "product_url": "https://store-c.mock/listing/C-3006"
-  },
-  {
-    "cluster_id": "store_c:C-3007",
-    "cluster_size": 1,
-    "cluster_platforms": [
-      "store_c"
-    ],
-    "cluster_price_median_sgd": 219.0,
-    "cluster_price_min_sgd": 219.0,
-    "cluster_price_max_sgd": 219.0,
-    "listing_id": "store_c:C-3007",
-    "source_platform": "store_c",
-    "source_listing_id": "C-3007",
-    "title": "Kindle Paperwhite 11th Gen",
-    "brand": "kindle",
-    "price_sgd": 219.0,
-    "seller_id": "sel_c_07",
-    "seller_name": "BookNookSG",
-    "seller_age_days": 2630,
-    "rating": 4.6,
-    "review_count": 165,
-    "reviews": [
-      {
-        "text": "Great for reading at night, warm light works well.",
-        "rating": 5,
-        "date": "2026-07-09"
-      }
-    ],
-    "product_url": "https://store-c.mock/listing/C-3007"
+    "product_url": "https://paegnium.github.io/dummysite3/#product-8"
   }
 ]

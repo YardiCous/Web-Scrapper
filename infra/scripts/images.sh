@@ -4,6 +4,7 @@
 . "$(dirname "$0")/lib.sh"
 need docker kubectl
 cmd=${1:?usage: images.sh build|import|push}
+REPO_DIR=$(cd "$INFRA_DIR/.." && pwd)
 
 refs() {
   render | grep -Eo "ghcr.io/$GHCR_OWNER/[a-z0-9-]+:[A-Za-z0-9._-]+" | sort -u
@@ -18,6 +19,9 @@ build_spec() {
   case "$name" in
     cdc-tools) BUILD_ARGS="--target tools" ;;
     cdc-placeholder) BUILD_ARGS="--target placeholder" ;;
+    # The team's code, from the rest of this repository.
+    scorer) DOCKERFILE="$REPO_DIR/scorer/Dockerfile"; CTX="$REPO_DIR/scorer" ;;
+    cdc-adapters) DOCKERFILE="$REPO_DIR/adapters/Dockerfile"; CTX="$REPO_DIR" ;;
     store-a|store-b|store-c)
       case "$name" in
         store-a) repo=https://github.com/Paegnium/dummysite ;;

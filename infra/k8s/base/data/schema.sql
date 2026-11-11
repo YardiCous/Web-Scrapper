@@ -32,6 +32,17 @@ CREATE TABLE IF NOT EXISTS clusters (
   updated_at         timestamptz NOT NULL DEFAULT now()
 );
 
+-- Owned by the matcher: every cleaned listing it has seen, so any replica (or a restarted one) can
+-- re-cluster a whole brand. brand_key is the listings.cleaned message key.
+CREATE TABLE IF NOT EXISTS matcher_listings (
+  listing_id  text PRIMARY KEY,
+  brand_key   text        NOT NULL,
+  payload     jsonb       NOT NULL,
+  scraped_at  timestamptz,
+  updated_at  timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS matcher_listings_brand_key_idx ON matcher_listings (brand_key);
+
 -- Owned by the scorer: identical to scorer/sql/risk_scores.sql, so running either file is a no-op once the other has run. One row per listing (latest score);
 -- input_hash makes a replayed message a no-op.
 CREATE TABLE IF NOT EXISTS risk_scores (

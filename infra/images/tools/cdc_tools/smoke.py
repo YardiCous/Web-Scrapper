@@ -1,7 +1,8 @@
 """Smoke test: validate the sample records against the topic schemas, publish them, read them back,
 check every message landed on the partition a Java client would pick for its key, then check the
-pipeline picked them up: smoke-consumer wrote the raw listings to Postgres and the KafkaSource
-delivered the normalized ones to the scorer."""
+pipeline picked them up: every collector handled the scrape requests, smoke-consumer wrote the raw
+listings to Postgres, the KafkaSource delivered the normalized ones to the scorer, and every raw listing
+went all the way through normaliser, matcher and scorer into risk_scores."""
 import json
 import time
 import uuid
@@ -137,10 +138,10 @@ def group_caught_up(group, delivered, topic, deadline):
         consumer.close()
 
 
-def rows_in_db(listing_ids, deadline):
+def rows_in_db(table, listing_ids, deadline):
     with psycopg.connect() as db:
         while True:
-            n = db.execute("SELECT count(*) FROM listings WHERE listing_id = ANY(%s)", (listing_ids,)).fetchone()[0]
+            n = db.execute(f"SELECT count(*) FROM {table} WHERE listing_id = ANY(%s)", (listing_ids,)).fetchone()[0]
             if n == len(listing_ids) or time.monotonic() >= deadline:
                 return n
             time.sleep(2)
@@ -162,16 +163,21 @@ def run():
 
     deadline = time.monotonic() + PIPELINE_TIMEOUT_S
     raw_ids = [k for t, k, _ in msgs if t == "listings.raw"]
-    db_rows = rows_in_db(raw_ids, deadline)
+    db_rows = rows_in_db("listings", raw_ids, deadline)
     consumer_done = group_caught_up("cdc.smoke-consumer", delivered, "listings.raw", deadline)
     scorer_done = group_caught_up("cdc.scorer", delivered, "listings.normalized", deadline)
+    collectors_done = all(group_caught_up(f"cdc.collector.{s}", delivered, "scrape.requests", deadline)
+                          for s in ("store_a", "store_b", "store_c"))
+    scored = rows_in_db("risk_scores", raw_ids, deadline)
 
     ok = not failed and unflushed == 0 and len(delivered) == len(msgs) \
         and missing == 0 and mismatched == 0 and wrong_partition == 0 \
-        and db_rows == len(raw_ids) and consumer_done and scorer_done
+        and db_rows == len(raw_ids) and consumer_done and scorer_done and collectors_done \
+        and scored == len(raw_ids)
     log("smoke_result", ok=ok, run_id=run_id, validated=len(msgs), produced=len(delivered),
         delivery_errors=failed[:5], unflushed=unflushed, not_read_back=missing,
         content_mismatches=mismatched, wrong_partition=wrong_partition,
         listings_rows=f"{db_rows}/{len(raw_ids)}", smoke_consumer_caught_up=consumer_done,
-        scorer_feed_caught_up=scorer_done)
+        scorer_feed_caught_up=scorer_done, collectors_caught_up=collectors_done,
+        risk_scores_rows=f"{scored}/{len(raw_ids)}")
     return 0 if ok else 1

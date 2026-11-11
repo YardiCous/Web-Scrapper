@@ -1,6 +1,6 @@
 # Onboarding: plugging your service in
 
-Each teammate's service already has a slot in the cluster, running a placeholder image. Going live means building your image and pointing your slot at it. Message formats and Kafka rules are in [contracts.md](contracts.md); read that first.
+Each teammate's service has a slot in the cluster. The collectors, normaliser, matcher and scorer are live: they run your code from this repository (the pipeline ones through `adapters/`, see [contracts.md](contracts.md#who-runs-what)), and `make up` builds them. The gateway and frontend slots still run a placeholder. Message formats and Kafka rules are in [contracts.md](contracts.md); read that first.
 
 ## Your slot
 
@@ -14,7 +14,7 @@ Each teammate's service already has a slot in the cluster, running a placeholder
 | `frontend` | (team) | `k8s/base/web/apps.yaml` | web | – | HTTP at `app.localhost:8080` |
 | ScaledObjects | Wylie | copy `templates/kafka-worker-scaledobject.yaml` | pipeline | – | example: `k8s/base/pipeline/smoke-consumer.yaml` |
 
-The pipeline slots run at `replicas: 0` until you go live, so a placeholder never commits offsets in your consumer group. The annotated starting points are in [`templates/`](../templates/): `kafka-worker.yaml`, `kafka-worker-scaledobject.yaml` and `knative-service.yaml`.
+The pipeline slots run one replica each; add a ScaledObject to autoscale on lag. The annotated starting points are in [`templates/`](../templates/): `kafka-worker.yaml`, `kafka-worker-scaledobject.yaml` and `knative-service.yaml`.
 
 ## What your container gets and must do
 

@@ -31,7 +31,7 @@ flowchart LR
   gw -. results, 1 h cache .-> pg
 ```
 
-Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d with 1 server and 2 agents. The manifests in `k8s/base` are portable; everything specific to k3d lives in `bootstrap/k3d/`. Until teammates' images exist, `smoke-consumer` (listings.raw → `listings`) stands in for the pipeline, and placeholder echo services fill the scorer, gateway and frontend slots.
+Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d with 1 server and 2 agents. The manifests in `k8s/base` are portable; everything specific to k3d lives in `bootstrap/k3d/`. The collectors, normaliser and matcher run the team's code (`web/scraper.py`, `normaliser/core`) through thin Kafka adapters in `adapters/`, and the scorer runs `scorer/` as is. `smoke-consumer` writes `listings.raw` to the `listings` table; placeholder echo services still fill the gateway and frontend slots.
 
 ## Design decisions
 

@@ -42,6 +42,7 @@ def run(count, rate, run_id):
         rec["source_listing_id"] = f"LG-{run_id}-{seq:07d}"
         rec["price"] = round(rec["price"] * random.uniform(0.8, 1.2), 2)
         rec["scraped_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+        rec["synthetic"] = True   # the normaliser skips these, so load tests stay on the smoke-consumer
         key = f"{rec['source_platform']}:{rec['source_listing_id']}"
         while True:
             try:
