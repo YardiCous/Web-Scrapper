@@ -1,3 +1,4 @@
 .env
 .venv/
 __pycache__/
+scorer/k8s/secret.yaml
