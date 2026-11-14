@@ -10,5 +10,15 @@ form.addEventListener("submit", (e) => {
   } catch {
     e.preventDefault();
     error.textContent = "Please enter a valid http(s) URL.";
+    return;
   }
+  const button = form.querySelector("button");
+  button.disabled = true;
+  button.textContent = "Searching…";
+});
+
+window.addEventListener("pageshow", () => {
+  const button = form.querySelector("button");
+  button.disabled = false;
+  button.textContent = "Look up";
 });

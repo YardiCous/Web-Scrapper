@@ -1,3 +1,25 @@
+x-collector: &collector
+  build:
+    context: .
+    dockerfile: Dockerfile.collector
+  environment: &database-environment
+    PGHOST: db
+    PGPORT: "5432"
+    PGUSER: ${POSTGRES_USER}
+    PGPASSWORD: ${POSTGRES_PASSWORD}
+    PGDATABASE: ${POSTGRES_DB}
+    PGCONNECT_TIMEOUT: "10"
+  depends_on:
+    db:
+      condition: service_healthy
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
+    interval: 10s
+    timeout: 3s
+    retries: 3
+    start_period: 5s
+
 services:
   db:
     image: postgres:16-alpine
@@ -14,6 +36,51 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       retries: 5
+
+  collector-cartlane:
+    <<: *collector
+    environment:
+      <<: *database-environment
+      COLLECTOR_PLATFORM: cartlane
+    ports:
+      - "127.0.0.1:8101:8000"
+
+  collector-tao:
+    <<: *collector
+    environment:
+      <<: *database-environment
+      COLLECTOR_PLATFORM: tao
+    ports:
+      - "127.0.0.1:8102:8000"
+
+  collector-lazora:
+    <<: *collector
+    environment:
+      <<: *database-environment
+      COLLECTOR_PLATFORM: lazora
+    ports:
+      - "127.0.0.1:8103:8000"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.collector
+    entrypoint: ["python", "app.py"]
+    environment:
+      <<: *database-environment
+      COLLECTOR_CARTLANE_URL: http://collector-cartlane:8000
+      COLLECTOR_TAO_URL: http://collector-tao:8000
+      COLLECTOR_LAZORA_URL: http://collector-lazora:8000
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      collector-cartlane:
+        condition: service_healthy
+      collector-tao:
+        condition: service_healthy
+      collector-lazora:
+        condition: service_healthy
+    restart: unless-stopped
 
 volumes:
   pgdata:
