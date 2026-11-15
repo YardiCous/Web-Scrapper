@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "cdc/listings.raw.schema.json",
   "title": "listings.raw",
-  "description": "One listing as the team's scraper (web/scraper.py) returns it, published by the collector adapter (adapters/collector.py) with source_listing_id (= sku) and scraped_at added. Kafka key: \"<source_platform>:<source_listing_id>\". Extra fields are allowed.",
+  "description": "One listing as the team's scraper (services/collector/scraper.py) returns it, published by the collector adapter (services/collector/worker.py) with source_listing_id (= sku) and scraped_at added. Kafka key: \"<source_platform>:<source_listing_id>\". Extra fields are allowed.",
   "type": "object",
   "required": [
     "sku",

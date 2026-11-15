@@ -112,7 +112,7 @@ def keda_burst(series, summary):
     a1.set_ylabel("messages behind")
     a2.step(t, [int(s["desired"]) for s in pts], where="post", color=ORANGE, label="desired")
     a2.step(t, [int(s["ready"]) for s in pts], where="post", color=AQUA, label="ready")
-    a2.set_title("smoke-consumer replicas")
+    a2.set_title("listing-store replicas")
     a2.set_ylabel("pods")
     a2.set_xlabel("seconds since the first message of the burst")
     a2.yaxis.get_major_locator().set_params(integer=True)

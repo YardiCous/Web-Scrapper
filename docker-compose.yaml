@@ -1,24 +1,29 @@
+x-database-environment: &database-environment
+  PGHOST: db
+  PGPORT: "5432"
+  PGUSER: ${POSTGRES_USER}
+  PGPASSWORD: ${POSTGRES_PASSWORD}
+  PGDATABASE: ${POSTGRES_DB}
+  PGCONNECT_TIMEOUT: "10"
+
+x-http-healthcheck: &http-healthcheck
+  test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/healthz', timeout=2)"]
+  interval: 10s
+  timeout: 3s
+  retries: 3
+  start_period: 10s
+
 x-collector: &collector
   build:
     context: .
-    dockerfile: Dockerfile.collector
-  environment: &database-environment
-    PGHOST: db
-    PGPORT: "5432"
-    PGUSER: ${POSTGRES_USER}
-    PGPASSWORD: ${POSTGRES_PASSWORD}
-    PGDATABASE: ${POSTGRES_DB}
-    PGCONNECT_TIMEOUT: "10"
+    dockerfile: services/collector/Dockerfile
   depends_on:
     db:
       condition: service_healthy
   restart: unless-stopped
   healthcheck:
-    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
-    interval: 10s
-    timeout: 3s
-    retries: 3
-    start_period: 5s
+    <<: *http-healthcheck
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=2)"]
 
 services:
   db:
@@ -43,7 +48,7 @@ services:
       <<: *database-environment
       COLLECTOR_PLATFORM: cartlane
     ports:
-      - "127.0.0.1:8101:8000"
+      - "127.0.0.1:8101:8080"
 
   collector-tao:
     <<: *collector
@@ -51,7 +56,7 @@ services:
       <<: *database-environment
       COLLECTOR_PLATFORM: tao
     ports:
-      - "127.0.0.1:8102:8000"
+      - "127.0.0.1:8102:8080"
 
   collector-lazora:
     <<: *collector
@@ -59,22 +64,55 @@ services:
       <<: *database-environment
       COLLECTOR_PLATFORM: lazora
     ports:
-      - "127.0.0.1:8103:8000"
+      - "127.0.0.1:8103:8080"
 
-  web:
+  normaliser:
     build:
       context: .
-      dockerfile: Dockerfile.collector
-    entrypoint: ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "180", "web.app:app"]
+      dockerfile: services/normaliser/Dockerfile
+    ports:
+      - "127.0.0.1:8300:8080"
+    healthcheck: *http-healthcheck
+    restart: unless-stopped
+
+  matcher:
+    build:
+      context: .
+      dockerfile: services/matcher/Dockerfile
+    ports:
+      - "127.0.0.1:8400:8080"
+    healthcheck: *http-healthcheck
+    restart: unless-stopped
+
+  scorer:
+    build:
+      context: .
+      dockerfile: services/scorer/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    ports:
+      - "127.0.0.1:8200:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck: *http-healthcheck
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
     environment:
       <<: *database-environment
-      COLLECTOR_CARTLANE_URL: http://collector-cartlane:8000
-      COLLECTOR_TAO_URL: http://collector-tao:8000
-      COLLECTOR_LAZORA_URL: http://collector-lazora:8000
-      SCORER_URL: http://scorer:8080
       PIPELINE_MODE: http
+      COLLECTOR_CARTLANE_URL: http://collector-cartlane:8080
+      COLLECTOR_TAO_URL: http://collector-tao:8080
+      COLLECTOR_LAZORA_URL: http://collector-lazora:8080
+      NORMALISER_URL: http://normaliser:8080
+      MATCHER_URL: http://matcher:8080
+      SCORER_URL: http://scorer:8080
     ports:
-      - "127.0.0.1:5000:5000"
+      - "127.0.0.1:8500:8080"
     depends_on:
       collector-cartlane:
         condition: service_healthy
@@ -82,27 +120,27 @@ services:
         condition: service_healthy
       collector-lazora:
         condition: service_healthy
+      normaliser:
+        condition: service_healthy
+      matcher:
+        condition: service_healthy
       scorer:
         condition: service_healthy
+    healthcheck: *http-healthcheck
     restart: unless-stopped
 
-  scorer:
+  frontend:
     build:
-      context: ./scorer
+      context: .
+      dockerfile: services/frontend/Dockerfile
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      PORT: "8080"
+      GATEWAY_URL: http://gateway:8080
     ports:
-      - "127.0.0.1:8200:8080"
+      - "127.0.0.1:5000:8080"
     depends_on:
-      db:
+      gateway:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/healthz', timeout=2)"]
-      interval: 10s
-      timeout: 3s
-      retries: 3
-      start_period: 10s
+    healthcheck: *http-healthcheck
     restart: unless-stopped
 
 volumes:

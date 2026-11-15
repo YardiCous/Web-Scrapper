@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "cdc/listings.cleaned.schema.json",
   "title": "listings.cleaned",
-  "description": "One listing after Gordon's normalise_record() (normaliser/core/pipeline.py), published by adapters/normaliser.py: the raw fields plus price_sgd, seller_age_days, clean_title, brand and listing_id. Kafka key: brand, or \"unbranded\" when no known brand is found, so one matcher replica sees every listing of a brand.",
+  "description": "One listing after Gordon's normalise_record() (services/normaliser/pipeline.py), published by services/normaliser/worker.py: the raw fields plus price_sgd, seller_age_days, clean_title, brand and listing_id. Kafka key: brand, or \"unbranded\" when no known brand is found, so one matcher replica sees every listing of a brand.",
   "type": "object",
   "required": [
     "listing_id",

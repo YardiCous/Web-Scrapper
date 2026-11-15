@@ -29,7 +29,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: ttl-refresh
-              image: cdc-tools
+              image: maintenance
               args: ["ttl-refresh"]
               envFrom:
                 - configMapRef:

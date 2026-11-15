@@ -8,48 +8,45 @@ resources:
   - scoring
   - web
 
-# Every image our manifests use, by the short name on the left. GHCR_OWNER is replaced with the
-# Makefile's GHCR_OWNER at deploy time.
+# Logical workload images map to a dedicated Dockerfile in services/.
+# GHCR_OWNER is filled in by scripts/lib.sh; scripts/images.sh builds each image once.
 images:
-  # Built by scripts/images.sh. Store tags are the dummy-site commit served.
-  - name: cdc-tools
-    newName: ghcr.io/GHCR_OWNER/cdc-tools
-    newTag: "0.1.0"
   - name: store-a
     newName: ghcr.io/GHCR_OWNER/store-a
-    newTag: 2b8093c186c86c205feea65655569c472cfe33b7
+    newTag: "2b8093c186c86c205feea65655569c472cfe33b7"
   - name: store-b
     newName: ghcr.io/GHCR_OWNER/store-b
-    newTag: 0526795c327979887e730aee6ba0d265aa922039
+    newTag: "0526795c327979887e730aee6ba0d265aa922039"
   - name: store-c
     newName: ghcr.io/GHCR_OWNER/store-c
-    newTag: 24ee76c44f610ad486efcde2c49c406722e8d29f
-
-  # Teammates' services, built from this repository by scripts/images.sh. The collectors, normaliser
-  # and matcher share one image (adapters/): it runs the team's code and picks the role from SERVICE_NAME.
-  - name: scorer              # Declan: scorer/
-    newName: ghcr.io/GHCR_OWNER/scorer
-    newTag: "0.1.0"
-  - name: collector-store-a   # web/scraper.py via adapters/collector.py
-    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newTag: "24ee76c44f610ad486efcde2c49c406722e8d29f"
+  - name: collector-store-a
+    newName: ghcr.io/GHCR_OWNER/cdc-collector
     newTag: "0.1.0"
   - name: collector-store-b
-    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newName: ghcr.io/GHCR_OWNER/cdc-collector
     newTag: "0.1.0"
   - name: collector-store-c
-    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+    newName: ghcr.io/GHCR_OWNER/cdc-collector
     newTag: "0.1.0"
-  - name: normaliser          # Gordon: normaliser/core via adapters/normaliser.py
-    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+  - name: normaliser
+    newName: ghcr.io/GHCR_OWNER/cdc-normaliser
     newTag: "0.1.0"
-  - name: matcher             # Gordon: normaliser/core via adapters/matcher.py
-    newName: ghcr.io/GHCR_OWNER/cdc-adapters
+  - name: matcher
+    newName: ghcr.io/GHCR_OWNER/cdc-matcher
     newTag: "0.1.0"
-
-  # The Flask gateway and frontend share an image; frontend forwards API calls to gateway.
-  - name: gateway             # Yu Da
-    newName: ghcr.io/GHCR_OWNER/cdc-web
+  - name: scorer
+    newName: ghcr.io/GHCR_OWNER/cdc-scorer
+    newTag: "0.1.0"
+  - name: gateway
+    newName: ghcr.io/GHCR_OWNER/cdc-gateway
     newTag: "0.1.0"
   - name: frontend
-    newName: ghcr.io/GHCR_OWNER/cdc-web
+    newName: ghcr.io/GHCR_OWNER/cdc-frontend
+    newTag: "0.1.0"
+  - name: listing-store
+    newName: ghcr.io/GHCR_OWNER/cdc-storage
+    newTag: "0.1.0"
+  - name: maintenance
+    newName: ghcr.io/GHCR_OWNER/cdc-maintenance
     newTag: "0.1.0"

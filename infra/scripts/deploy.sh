@@ -15,7 +15,7 @@ log "Waiting for Postgres initialisation"
 kubectl -n data rollout status statefulset/postgres --timeout=5m
 
 log "Waiting for pipeline, scoring and web"
-for d in smoke-consumer collector-store-a collector-store-b collector-store-c normaliser matcher; do
+for d in listing-store collector-store-a collector-store-b collector-store-c normaliser matcher; do
   kubectl -n pipeline rollout status "deploy/$d" --timeout=5m
 done
 kubectl -n pipeline wait scaledobject --all --for=condition=Ready --timeout=2m

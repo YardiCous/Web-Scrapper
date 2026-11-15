@@ -1,4 +1,4 @@
-"""Experiment: take one smoke-consumer replica away while it is processing a load.
+"""Experiment: take one listing-store replica away while it is processing a load.
 
 Two modes per trial:
   crash   the consumer process dies after writing a batch to Postgres but before committing its
@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (Lag, append_csv, group_members, json_logs, kubectl, new_run_id, now_iso, pause_keda,  # noqa: E402
                     pods, profile, psql, rows_for_run, start_job, wait_job, wait_lag_zero, wait_until)
 
-NS, APP, GROUP, TOPIC = "pipeline", "smoke-consumer", "cdc.smoke-consumer", "listings.raw"
+NS, APP, GROUP, TOPIC = "pipeline", "listing-store", "cdc.listing-store", "listings.raw"
 SELECTOR = f"app.kubernetes.io/name={APP}"
 
 

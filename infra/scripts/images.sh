@@ -15,21 +15,17 @@ refs() {
 # Store images are tagged with the full commit SHA of the site repo they serve.
 build_spec() {
   local name=${1%%:*} tag=${1#*:}
-  DOCKERFILE="$INFRA_DIR/images/tools/Dockerfile"; CTX="$INFRA_DIR"; BUILD_ARGS=""
+  CTX="$REPO_DIR"; BUILD_ARGS=""
   case "$name" in
-    cdc-tools) BUILD_ARGS="--target tools" ;;
-    cdc-placeholder) BUILD_ARGS="--target placeholder" ;;
-    # The team's code, from the rest of this repository.
-    scorer) DOCKERFILE="$REPO_DIR/scorer/Dockerfile"; CTX="$REPO_DIR/scorer" ;;
-    cdc-adapters) DOCKERFILE="$REPO_DIR/adapters/Dockerfile"; CTX="$REPO_DIR" ;;
-    cdc-web) DOCKERFILE="$REPO_DIR/Dockerfile.collector"; CTX="$REPO_DIR" ;;
+    cdc-collector|cdc-normaliser|cdc-matcher|cdc-scorer|cdc-gateway|cdc-frontend|cdc-storage|cdc-maintenance)
+      DOCKERFILE="$REPO_DIR/services/${name#cdc-}/Dockerfile" ;;
     store-a|store-b|store-c)
       case "$name" in
         store-a) repo=https://github.com/Paegnium/dummysite ;;
         store-b) repo=https://github.com/Paegnium/dummysite2 ;;
         store-c) repo=https://github.com/Paegnium/dummysite3 ;;
       esac
-      DOCKERFILE="$INFRA_DIR/images/site/Dockerfile"; CTX="$INFRA_DIR/images/site"
+      DOCKERFILE="$REPO_DIR/services/storefront/Dockerfile"
       BUILD_ARGS="--build-arg SITE_REPO=$repo --build-arg SITE_REF=$tag" ;;
     *) return 1 ;;
   esac

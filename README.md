@@ -1,14 +1,39 @@
 # Online Retail Item Authenticity & Price Checker
 
-Paste a Cartlane, Tao Market or Lazora product URL to compare matching listings across platforms. The system normalises prices to SGD, matches products with MinHash/LSH and string similarity, and calculates an explained counterfeit-risk score from prices, seller age and reviews.
+Paste a Cartlane, Tao Market or Lazora product URL to compare matching listings across platforms. The application converts prices to SGD, matches products and calculates explained counterfeit-risk scores.
+
+## Repository layout
+
+```text
+services/
+  collector/       scraper, HTTP endpoint and Kafka worker
+  normaliser/      normalisation logic, HTTP endpoint and Kafka worker
+  matcher/         matching logic, HTTP endpoint and Kafka worker
+  scorer/          risk scoring and persistence
+  gateway/         search API and orchestration
+  frontend/        browser pages, templates and styles
+  storage/         Kafka listing persistence
+  maintenance/     TTL refresh and load generation
+  storefront/      dummy shop image
+shared/            database, Kafka, URL and listing helpers
+data/              recorded listings and normalised sample rows
+infra/
+  k8s/             all Kubernetes manifests
+  scripts/         build and deployment scripts
+  schemas/         Kafka message contracts
+  docs/            architecture and deployment documentation
+  eval/            evaluation experiments
+```
+
+Every service has its own Dockerfile. See the [service map](services/README.md) for entry points and responsibilities.
 
 ## Run with Docker Compose
 
-Requires Docker Engine or Docker Desktop with WSL integration enabled for your distro.
+Requires Docker Engine or Docker Desktop with WSL integration enabled.
 
 ```bash
 cp env.example .env       # first setup only; keep an existing .env
-# Edit the credentials if needed.
+# Set PostgreSQL credentials in .env.
 docker compose up --build -d
 ```
 
@@ -18,47 +43,72 @@ Open http://localhost:5000 and try:
 - Tao Market: `https://paegnium.github.io/dummysite2/products/78.html`
 - Lazora: `https://paegnium.github.io/dummysite3/#product-7`
 
-A search asks the matching collector for the submitted product and the other two collectors for their catalogues. The website runs the shared normaliser/matcher, sends the resulting listings to the scorer, and renders matching listings with SGD prices, risk bands, explanations and signal coverage. A storefront URL returns that platform's catalogue and its matches. Collectors stay idle until a search arrives.
+Compose runs separate frontend, gateway, collector, normaliser, matcher and scorer containers, plus PostgreSQL. Each search follows this flow:
 
-Compose runs PostgreSQL, three HTTP collectors, the HTTP scorer and the website. This is the HTTP baseline. The Kubernetes deployment below provides Kafka, KEDA and Knative.
+```text
+Browser → Frontend → Gateway → Three collectors
+                            → Normaliser → Matcher → Scorer
+                            → Saved results → Frontend
+```
+
+The selected collector retrieves the submitted product; the other two retrieve their catalogues for comparison. Collectors save raw listings and reviews. The gateway sends those listings to the normaliser and matcher, asks the scorer to persist scores, then saves the completed search. A storefront URL returns that platform's catalogue and matching products.
 
 ```bash
-docker compose logs -f web scorer collector-cartlane collector-tao collector-lazora
+docker compose logs -f frontend gateway normaliser matcher scorer
 docker compose down      # retains the pgdata volume
 ```
 
-`init.sql` links to the shared schema in `infra/k8s/base/data/schema.sql`. PostgreSQL creates all tables on its first start with an empty data volume. Both deployment paths assume a fresh database with this integrated schema.
+`init.sql` links to `infra/k8s/base/data/schema.sql`. PostgreSQL creates the complete schema on its first start with an empty volume. Deployment assumes a fresh database; there is no migration service.
 
-## Run the distributed system
+## Run with Kubernetes
 
-Requires Docker, k3d, kubectl, Helm, Make, Python and OpenSSL. See [step-by-step instructions](infra/docs/deployment.md).
+Requires Docker, k3d, kubectl, Helm, Make, Python and OpenSSL. Follow the [deployment instructions](infra/docs/deployment.md).
 
 ```bash
 make -C infra up
 ```
 
-Open http://app.localhost:8080. The frontend calls the gateway, which publishes requests for all three platforms to Kafka. Collectors publish raw listings; the normaliser and matcher generate clusters; Knative delivers matched listings to the scorer. PostgreSQL holds search progress and results, so the browser can poll through gateway restarts. Results become ready when all three collections and their fresh scores are available. Searches time out after 300 seconds by default.
+Open http://app.localhost:8080. The same service folders supply the Kubernetes images, with collectors, normaliser and matcher running Kafka workers:
 
-KEDA scales collectors, normaliser and matcher on consumer lag. Knative scales scoring to zero when idle. A TTL CronJob refreshes stale listings. Writes are idempotent, and Kafka workers commit input offsets after successful output delivery and database writes.
+```text
+Frontend → Gateway → scrape.requests → Collectors → listings.raw
+                                                     ├→ Listing storage → PostgreSQL
+                                                     └→ Normaliser → listings.cleaned
+                                                                       → Matcher → listings.normalized
+                                                                                     → KafkaSource → Scorer → PostgreSQL
+```
 
-[Architecture](infra/docs/architecture.md) · [Message contracts](infra/docs/contracts.md) · [Infrastructure commands](infra/README.md)
+The frontend polls the gateway for durable search progress. The gateway waits for all three collections and fresh scores, then saves and returns the comparison. KEDA scales workers on consumer lag; Knative scales the scorer to zero when idle; a TTL CronJob refreshes stale listings. Searches time out after 300 seconds by default.
 
-## Run the website locally
+## Local development
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-docker compose up --build -d collector-cartlane collector-tao collector-lazora scorer
-python -m web.app
+docker compose up --build -d gateway
+python -m services.frontend.app
 ```
 
-The local app reads `DATABASE_URL` from `.env`, and uses collectors on ports 8101–8103 and the scorer on port 8200. Containers use the internal service names and PostgreSQL `PG*` variables. Override collector URLs with `COLLECTOR_CARTLANE_URL`, `COLLECTOR_TAO_URL`, `COLLECTOR_LAZORA_URL`, and scoring with `SCORER_URL`.
+The local frontend listens on port 5000 and calls the gateway on port 8500. For individual service development, install `services/<name>/requirements.txt` and run that service's entry point from the repository root.
+
+| Service | Host port | URL override |
+|---|---|---|
+| Frontend | 5000 | — |
+| Gateway | 8500 | `GATEWAY_URL` on the frontend |
+| Collectors | 8101–8103 | `COLLECTOR_CARTLANE_URL`, `COLLECTOR_TAO_URL`, `COLLECTOR_LAZORA_URL` |
+| Normaliser | 8300 | `NORMALISER_URL` |
+| Matcher | 8400 | `MATCHER_URL` |
+| Scorer | 8200 | `SCORER_URL` |
+
+Containers listen on port 8080. The collector image defaults to HTTP; Kubernetes starts its Kafka worker explicitly. The gateway reads `DATABASE_URL` from `.env` locally; containers receive PostgreSQL settings through environment variables.
 
 ## API
 
-`POST /api/searches` accepts `{"url":"https://paegnium.github.io/dummysite/?product=78"}`. It returns a search record with `request_id`, `status`, `listings` and `error`, and a `Location` header for `GET /api/searches/<request_id>`. Kafka searches return HTTP 202 while pending; the HTTP baseline returns completed results synchronously. `GET /searches/<request_id>` renders the saved result or progress page.
+`POST /api/searches` accepts `{"url":"https://paegnium.github.io/dummysite/?product=78"}` and returns `request_id`, `status`, `listings` and `error`. The `Location` header identifies `GET /api/searches/<request_id>`. Kafka searches return 202 while pending; HTTP searches return completed results synchronously. The frontend renders saved results at `/searches/<request_id>`.
 
-`GET /healthz` reports process health. `GET /health` checks database connectivity, or gateway connectivity on the separate frontend.
+The normaliser accepts `POST /normalise` and the matcher accepts `POST /match`, each with a `{"listings": [...]}` body and response. The scorer accepts one matched listing at `POST /`. HTTP services expose process health at `/healthz`; the frontend and gateway also expose dependency health at `/health`.
 
-Risk scores describe indicators rather than guaranteeing authenticity. Currency conversion uses fixed demonstration rates. Matching quality and scoring are limited by the available listing and review data.
+[Architecture](infra/docs/architecture.md) · [Message contracts](infra/docs/contracts.md) · [Infrastructure commands](infra/README.md)
+
+Risk scores describe available indicators and do not guarantee authenticity. SGD conversion uses fixed demonstration exchange rates.

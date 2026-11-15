@@ -1,4 +1,4 @@
-# Pipeline services running the team's code through adapters/ (one image; SERVICE_NAME picks the role).
+# Each pipeline stage has its own image and explicit Kafka worker entry point.
 # KEDA ScaledObjects in autoscaling.yaml scale these Deployments on consumer-group lag.
 ---
 apiVersion: apps/v1
@@ -23,6 +23,7 @@ spec:
       containers:
         - name: collector-store-a
           image: collector-store-a
+          command: ["python", "-m", "services.collector.worker"]
           envFrom:
             - configMapRef:
                 name: cdc-env
@@ -31,7 +32,7 @@ spec:
           env:
             - name: SERVICE_NAME
               value: collector-store-a
-            - name: COLLECTOR_PLATFORM          # source_platform as web/scraper.py reports it
+            - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
               value: Cartlane
             - name: FETCH_FROM                  # scrape the in-cluster copy of the store
               value: https://paegnium.github.io/dummysite/=http://store-a.web.svc/
@@ -79,6 +80,7 @@ spec:
       containers:
         - name: collector-store-b
           image: collector-store-b
+          command: ["python", "-m", "services.collector.worker"]
           envFrom:
             - configMapRef:
                 name: cdc-env
@@ -87,7 +89,7 @@ spec:
           env:
             - name: SERVICE_NAME
               value: collector-store-b
-            - name: COLLECTOR_PLATFORM          # source_platform as web/scraper.py reports it
+            - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
               value: Tao Market
             - name: FETCH_FROM                  # scrape the in-cluster copy of the store
               value: https://paegnium.github.io/dummysite2/=http://store-b.web.svc/
@@ -135,6 +137,7 @@ spec:
       containers:
         - name: collector-store-c
           image: collector-store-c
+          command: ["python", "-m", "services.collector.worker"]
           envFrom:
             - configMapRef:
                 name: cdc-env
@@ -143,7 +146,7 @@ spec:
           env:
             - name: SERVICE_NAME
               value: collector-store-c
-            - name: COLLECTOR_PLATFORM          # source_platform as web/scraper.py reports it
+            - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
               value: Lazora
             - name: FETCH_FROM                  # scrape the in-cluster copy of the store
               value: https://paegnium.github.io/dummysite3/=http://store-c.web.svc/
@@ -191,6 +194,7 @@ spec:
       containers:
         - name: normaliser
           image: normaliser
+          command: ["python", "-m", "services.normaliser.worker"]
           envFrom:
             - configMapRef:
                 name: cdc-env
@@ -243,6 +247,7 @@ spec:
       containers:
         - name: matcher
           image: matcher
+          command: ["python", "-m", "services.matcher.worker"]
           envFrom:
             - configMapRef:
                 name: cdc-env

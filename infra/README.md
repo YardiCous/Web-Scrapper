@@ -6,6 +6,7 @@ Infrastructure for the Online Retail Item Authenticity Checker (CSC3104 Group 1)
 - KEDA
 - Knative Serving and Eventing (KafkaSource → scorer)
 - the three dummy stores
+- the independently built services from `services/`
 
 It runs the integrated collectors, normaliser, matcher, scorer, API gateway and frontend, and provides deployment templates, message contracts and evaluation experiments.
 
@@ -15,7 +16,7 @@ It runs the integrated collectors, normaliser, matcher, scorer, API gateway and 
 
 ## Quick start
 
-Needs Docker, k3d, kubectl, helm, make, python3 and openssl. On Windows, run everything inside WSL2 (details in the testing instructions).
+Needs Docker, k3d, kubectl, helm, make, python3 and openssl. On Windows, run everything inside WSL2 (details in the deployment instructions).
 
 ```bash
 make -C infra up       # ~10-15 min the first time, ~1-2 min after; safe to re-run
@@ -52,8 +53,8 @@ Other targets (`make -C infra help` lists them all):
 | `bootstrap/k3d/` | everything k3d-specific: cluster creation, local-only manifest patches, Kourier NodePort |
 | `k8s/base/` | portable manifests, one folder per namespace (`kafka`, `data`, `pipeline`, `scoring`, `web`); `kustomization.yaml` lists every image |
 | `k8s/components/lite/`, `k8s/overlays/` | lite profile; `local-lite` / `local-default` = base + profile + k3d |
-| `images/` | `tools/` (listing persistence consumer, TTL refresh, load generator, optional echo utility), `site/` (dummy stores) |
+| `../services/` | all application code and Dockerfiles, including storage, maintenance and storefront images |
 | `templates/` | starting points for Kafka workers, KEDA ScaledObjects and Knative services |
-| `schemas/`, `samples/` | JSON Schema per topic, sample records |
+| `schemas/`, `../data/` | JSON Schema per topic, recorded raw and normalised listings |
 | `eval/` | experiment scripts and `plot.py` (run on this machine) |
-| `docs/` | contracts, onboarding, architecture, testing instructions |
+| `docs/` | contracts, onboarding, architecture and deployment instructions |

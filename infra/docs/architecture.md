@@ -31,7 +31,7 @@ flowchart LR
   gw -. search progress and results .-> pg
 ```
 
-Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d with 1 server and 2 agents. The manifests in `k8s/base` are portable; everything specific to k3d lives in `bootstrap/k3d/`. The collectors, normaliser and matcher run the team's code (`web/scraper.py`, `normaliser/core`) through thin Kafka adapters in `adapters/`, and the scorer runs `scorer/` as is. `smoke-consumer` writes `listings.raw` to the `listings` table; the Flask gateway publishes searches to Kafka and reads durable progress, clusters and risk scores from PostgreSQL. The separate Flask frontend forwards API calls to that gateway. Both use the image built from `Dockerfile.collector`.
+Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d. All application code and Dockerfiles live under `services/`; common helpers live under `shared/`. The collectors, normaliser and matcher each have an HTTP entry point for Compose and an explicit Kafka worker entry point for Kubernetes. Each stage has its own image. `listing-store` persists raw listings, the gateway manages durable searches, and the frontend renders results through the gateway API. All deployment manifests remain under `infra/k8s/`.
 
 ## Design decisions
 
@@ -57,4 +57,4 @@ A search has one UUID in `search_requests`. The gateway submits the selected pro
 
 The normaliser carries `scraped_at` through matching to scoring. The scorer stores `source_scraped_at` and rejects older writes, preventing an old replay from making a fresh search appear complete. Search snapshots remain readable after gateway restarts. Every search currently recollects the comparison catalogues; no cache is assumed.
 
-Root Docker Compose provides an HTTP baseline: the same collectors, matching functions and scorer, without Kafka, KEDA or Knative. Both deployment paths use the shared SQL schema. PostgreSQL creates the complete schema once on an empty data volume in both Compose and Kubernetes. Deployment assumes a fresh database; there is no migration step.
+Root Docker Compose provides an HTTP baseline: separate frontend, gateway, collector, normaliser, matcher and scorer containers connected over HTTP, without Kafka, KEDA or Knative. Both deployment paths use the shared SQL schema. PostgreSQL creates the complete schema once on an empty data volume in both Compose and Kubernetes. Deployment assumes a fresh database; there is no migration step.

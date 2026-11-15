@@ -59,7 +59,7 @@ CREATE TABLE matcher_listings (
 );
 CREATE INDEX matcher_listings_brand_key_idx ON matcher_listings (brand_key);
 
--- Owned by the scorer: same columns as scorer/sql/risk_scores.sql. One row per listing (latest score);
+-- Owned by services/scorer: one row per listing (latest score);
 -- input_hash makes a replayed message a no-op.
 CREATE TABLE risk_scores (
   listing_id     text PRIMARY KEY,

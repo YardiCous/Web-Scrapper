@@ -1,5 +1,5 @@
 # Template: scale a kafka-worker Deployment on consumer-group lag (KEDA).
-# Working example: k8s/base/pipeline/smoke-consumer.yaml.
+# Working example: k8s/base/pipeline/listing-store.yaml.
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:

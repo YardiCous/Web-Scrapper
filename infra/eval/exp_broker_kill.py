@@ -1,7 +1,7 @@
 """Experiment: force-kill a Kafka broker pod while the load generator is producing.
 
 Lost messages = acknowledged by Kafka (loadgen) minus rows that reached Postgres through
-smoke-consumer; expected 0 (acks=all, idempotent producer, persistent storage, commit-after-write).
+listing-store; expected 0 (acks=all, idempotent producer, persistent storage, commit-after-write).
 Recovery is reported three ways: broker pod Ready again, all partitions fully in sync again, and the
 longest gap in the producer's acknowledgements. On the lite profile (1 broker, RF 1) the kill is a
 full outage that the producer rides out with retries; the default profile should show a short leader failover instead.
@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (Lag, append_csv, json_logs, kubectl, kubectl_json, new_run_id, now_iso, pause_keda,  # noqa: E402
                     profile, rows_for_run, start_job, wait_job, wait_lag_zero, wait_until)
 
-GROUP, TOPIC = "cdc.smoke-consumer", "listings.raw"
+GROUP, TOPIC = "cdc.listing-store", "listings.raw"
 
 
 def broker_ready(name):
@@ -46,12 +46,12 @@ def main():
     p.add_argument("--trials", type=int, default=3)
     a = p.parse_args()
     lag = Lag(GROUP, TOPIC)
-    pause_keda("smoke-consumer", 2)
+    pause_keda("listing-store", 2)
     try:
         for trial in range(1, a.trials + 1):
             run_trial(a, lag, trial)
     finally:
-        pause_keda("smoke-consumer", None)
+        pause_keda("listing-store", None)
         lag.close()
 
 

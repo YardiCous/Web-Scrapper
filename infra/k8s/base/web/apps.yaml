@@ -182,7 +182,6 @@ spec:
       containers:
         - name: gateway
           image: gateway
-          command: ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "180", "web.app:app"]
           ports:
             - name: http
               containerPort: 8080
@@ -247,7 +246,6 @@ spec:
       containers:
         - name: frontend
           image: frontend
-          command: ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "180", "web.app:app"]
           ports:
             - name: http
               containerPort: 8080

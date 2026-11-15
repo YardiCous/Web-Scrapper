@@ -1,95 +1,41 @@
-# Onboarding: plugging your service in
+# Service development and deployment
 
-Each teammate's service has a slot in the cluster. The collectors, normaliser, matcher and scorer are live: they run your code from this repository (the pipeline ones through `adapters/`, see [contracts.md](contracts.md#who-runs-what)), and `make up` builds them. The gateway and frontend run `web/app.py`: gateway uses `PIPELINE_MODE=kafka`, and frontend forwards calls using `GATEWAY_URL`. Message formats and Kafka rules are in [contracts.md](contracts.md); read that first.
+Application code lives in [`services/`](../../services/README.md). Each service owns a Dockerfile and requirements file. Common database, Kafka and listing helpers live in `shared/`; deployment manifests remain in `infra/k8s/`.
 
-## Your slot
+| Service folder | Kubernetes workload | Manifest | Consumer group |
+|---|---|---|---|
+| `services/collector` | `collector-store-a/b/c` | `k8s/base/pipeline/services.yaml` | `cdc.collector.store_a/b/c` |
+| `services/normaliser` | `normaliser` | `k8s/base/pipeline/services.yaml` | `cdc.normaliser` |
+| `services/matcher` | `matcher` | `k8s/base/pipeline/services.yaml` | `cdc.matcher` |
+| `services/scorer` | Knative `scorer` | `k8s/base/scoring/scorer.yaml` | `cdc.scorer` through KafkaSource |
+| `services/gateway` | `gateway` | `k8s/base/web/apps.yaml` | — |
+| `services/frontend` | `frontend` | `k8s/base/web/apps.yaml` | — |
+| `services/storage` | `listing-store` | `k8s/base/pipeline/listing-store.yaml` | `cdc.listing-store` |
+| `services/maintenance` | `ttl-refresh`, `loadgen` CronJobs | `k8s/base/pipeline/` | — |
+| `services/storefront` | `store-a/b/c` | `k8s/base/web/apps.yaml` | — |
 
-| Service | Owner | Manifest | Namespace | Consumer group | Reads → writes |
-|---|---|---|---|---|---|
-| `collector-store-a/b/c` | JJ | `k8s/base/pipeline/services.yaml` | pipeline | `cdc.collector.store_a` … | `scrape.requests` → `listings.raw` |
-| `normaliser` | Gordon | `k8s/base/pipeline/services.yaml` | pipeline | `cdc.normaliser` | `listings.raw` → `listings.cleaned` |
-| `matcher` | Gordon | `k8s/base/pipeline/services.yaml` | pipeline | `cdc.matcher` | `listings.cleaned` → `listings.normalized` |
-| `scorer` | Declan | `k8s/base/scoring/scorer.yaml` (Knative) | scoring | `cdc.scorer` (KafkaSource) | CloudEvents over HTTP → `risk_scores` |
-| `gateway` | Yu Da | `k8s/base/web/apps.yaml` | web | – | HTTP at `api.localhost:8080` |
-| `frontend` | (team) | `k8s/base/web/apps.yaml` | web | – | HTTP at `app.localhost:8080` |
-| ScaledObjects | Wylie | `k8s/base/pipeline/autoscaling.yaml` | pipeline | – | example: `k8s/base/pipeline/smoke-consumer.yaml` |
+## Build and deploy
 
-The pipeline Deployments start at one replica and their ScaledObjects in `k8s/base/pipeline/autoscaling.yaml` scale on lag. The annotated starting points are in [`templates/`](../templates/): `kafka-worker.yaml`, `kafka-worker-scaledobject.yaml` and `knative-service.yaml`.
+Build contexts are always the repository root:
 
-## What your container gets and must do
-
-Environment (from the `cdc-env` ConfigMap, the `postgres-credentials` Secret and your slot):
-
-| Variable | Example | Notes |
-|---|---|---|
-| `KAFKA_BOOTSTRAP_SERVERS` | `cdc-kafka-bootstrap.kafka.svc:9092` | |
-| `KAFKA_GROUP_ID` | `cdc.normaliser` | Kafka workers only |
-| `KAFKA_INPUT_TOPIC`, `KAFKA_OUTPUT_TOPIC`, `KAFKA_DLQ_TOPIC` | `listings.raw`, `listings.cleaned`, `listings.dlq` | Kafka workers only |
-| `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD` | `postgres.data.svc`, `5432`, `cdc`, … | libpq names: `psycopg.connect()` needs no arguments |
-| `DATABASE_URL` | `postgresql://cdc:…@postgres.data.svc:5432/cdc` | the same database as one connection string |
-| `SERVICE_NAME` | `normaliser` | use it as the Kafka `client.id` and in log lines |
-| `PORT` | `8080` | Knative/HTTP services: listen on it |
-
-Requirements:
-- **Kafka workers:** follow the client rules in contracts.md (manual commit after the work, idempotent writes, murmur2 partitioner in confluent-kafka). On **SIGTERM**, stop polling, finish the batch, commit and `close()` the consumer within 30 s. Touch `/tmp/healthy` on every poll-loop iteration; the liveness probe restarts the pod if the file is more than 60 s old. If you'd rather not, delete the probe from your slot.
-- **HTTP services (scorer, gateway, frontend):** listen on `$PORT` (8080) and answer `GET /healthz` with 200.
-- Log to stdout; JSON lines are easiest to search.
-- Images must run on both `linux/amd64` and `linux/arm64`. Ernest's laptop is ARM; the marker's machine and the cloud may not be.
-
-Reference implementation: [`images/tools/cdc_tools/consume.py`](../images/tools/cdc_tools/consume.py) (smoke-consumer) does all of the above in Python.
-
-**Scorer (Declan):** the KafkaSource POSTs each `listings.normalized` message to `/` as a binary-mode CloudEvent. The body is the message JSON unchanged. Headers seen in the cluster:
-```
-ce-type: dev.knative.kafka.event        ce-id: partition:5/offset:17         ce-subject: partition:5#17
-ce-key: store_c:C-3005 (Kafka key)      ce-source: /apis/v1/namespaces/scoring/kafkasources/scorer-feed#listings.normalized
-ce-time, ce-knativekafkapartition, ce-knativekafkaoffset, ce-kafkaheader<name> (one per Kafka header)
-```
-Reply 2xx when done. Any other status is retried 5 times with exponential backoff (0.5 s, 1 s, 2 s …) and then sent to `listings.dlq`. Delivery is ordered per partition, so one event per `cluster_id` is in flight at a time. Write `risk_scores` idempotently (see contracts.md).
-
-## Build, try locally, go live
-
-1. **Build** for your machine and tag with a version (never `latest`):
-   ```bash
-   docker build -t ghcr.io/yardicous/normaliser:0.1.0 .
-   ```
-2. **Load it into the local cluster** (no registry needed):
-   ```bash
-   k3d image import -c cdc ghcr.io/yardicous/normaliser:0.1.0
-   ```
-3. **Point your slot at it.** In `k8s/base/kustomization.yaml`, change only your entry:
-   ```yaml
-   - name: normaliser          # Gordon
-     newName: ghcr.io/GHCR_OWNER/normaliser   # GHCR_OWNER is filled in from the Makefile
-     newTag: "0.1.0"
-   ```
-   For a pipeline slot, also set `replicas: 1` in `services.yaml`, or add a ScaledObject (KEDA then owns the replica count).
-4. **Deploy:** `make -C infra deploy`, then watch with `kubectl -n pipeline logs deploy/normaliser -f`.
-   Rebuilding under the same tag? Import again and run `kubectl -n pipeline rollout restart deploy/normaliser`.
-
-## Share it: push to GHCR
-
-The marker's machine pulls your image from GHCR, so push a multi-arch build and **make the package public** (GitHub → your profile → Packages → the package → Package settings → Change visibility). A private package would need an image pull secret in the cluster.
-
-One-time setup:
 ```bash
-gh auth refresh -s write:packages
-gh auth token | docker login ghcr.io -u <your-github-user> --password-stdin
-docker buildx create --name cdc --driver docker-container --use
-docker run --privileged --rm tonistiigi/binfmt --install amd64,arm64   # Linux/WSL only; Docker Desktop has this built in
+docker build -f services/normaliser/Dockerfile -t cdc-normaliser .
+make -C infra images
+make -C infra deploy
 ```
-Each release:
-```bash
-docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/yardicous/normaliser:0.1.0 --push .
-```
-Then commit the `kustomization.yaml` change. The images built in this repo (`cdc-tools`, `cdc-web`, `cdc-adapters`, `scorer`, `store-a/b/c`) are pushed with `make -C infra push`.
 
-## Useful commands
+`make images` builds each unique image referenced by the selected overlay and imports it into k3d. `k8s/base/kustomization.yaml` maps workload aliases to image names and tags. The three collectors share the collector image, with platform-specific environment settings; normaliser and matcher each have their own image.
 
-| What | Command |
-|---|---|
-| Everything at a glance | `make -C infra status` |
-| Logs | `kubectl -n pipeline logs deploy/<service> -f` |
-| Topics and messages | Kafka UI at http://kafka-ui.localhost:8080 |
-| Database shell | `kubectl -n data exec -it postgres-0 -- psql -U cdc -d cdc` |
-| Kafka from the machine running the cluster | bootstrap `localhost:32100` |
-| Push test traffic | `make -C infra load N=1000 RATE=100` (synthetic listings into `listings.raw`) |
+Docker Compose uses the HTTP entry points. Kubernetes starts collectors, normaliser and matcher with `python -m services.<name>.worker`. The gateway uses `PIPELINE_MODE=kafka`, while the frontend forwards API requests using `GATEWAY_URL`.
+
+## Runtime configuration
+
+- HTTP services listen on port 8080 and expose `/healthz` (collectors also expose `/health`).
+- Kafka workers receive `KAFKA_INPUT_TOPIC`, `KAFKA_OUTPUT_TOPIC`, `KAFKA_GROUP_ID`, `KAFKA_BOOTSTRAP_SERVERS` and `SERVICE_NAME` from their manifests and ConfigMaps.
+- PostgreSQL settings come from `cdc-env` and the `postgres-credentials` Secret. No credentials are built into images.
+- Workers use `shared/kafka.py` and `shared/kafka_worker.py` for consistent producer settings, offset commits, shutdown and liveness handling. `services/storage/worker.py` owns raw-listing persistence.
+- KEDA settings live in `k8s/base/pipeline/autoscaling.yaml` and `listing-store.yaml`. Knative scoring settings live in `k8s/base/scoring/scorer.yaml`.
+
+After rebuilding an image under the same tag, import it again and restart its Deployment, for example `kubectl -n pipeline rollout restart deploy/normaliser`. `make -C infra push` publishes the referenced images for both amd64 and arm64; registry credentials must already be configured.
+
+Read [contracts.md](contracts.md) before changing message formats. PostgreSQL initialises `k8s/base/data/schema.sql` once on an empty data volume; deployment assumes a fresh database.

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "cdc/listings.normalized.schema.json",
   "title": "listings.normalized",
-  "description": "One listing after matching, with its cluster's price statistics: Gordon's to_scoring_rows(), published by adapters/matcher.py and read by the scorer (scorer_engine/models.py). Kafka key: cluster_id.",
+  "description": "One listing after matching, with its cluster's price statistics: Gordon's to_scoring_rows(), published by services/matcher/worker.py and read by the scorer (services/scorer/models.py). Kafka key: cluster_id.",
   "type": "object",
   "required": [
     "cluster_id",

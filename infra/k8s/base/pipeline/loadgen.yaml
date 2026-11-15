@@ -20,7 +20,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: loadgen
-              image: cdc-tools
+              image: maintenance
               args: ["loadgen", "--count", "1000", "--rate", "100", "--run-id", "manual"]
               envFrom:
                 - configMapRef:

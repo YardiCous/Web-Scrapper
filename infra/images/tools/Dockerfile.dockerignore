@@ -1,6 +1,0 @@
-*
-!images/tools/requirements.txt
-!images/tools/cdc_tools
-!schemas
-!samples
-**/__pycache__

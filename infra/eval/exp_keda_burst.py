@@ -1,8 +1,8 @@
-"""Experiment: burst of listings into an idle pipeline; KEDA scales smoke-consumer on consumer lag.
+"""Experiment: burst of listings into an idle pipeline; KEDA scales listing-store on consumer lag.
 
 Samples replicas and lag every second from the start of the burst until the lag has drained
 (results/keda_burst_timeseries.csv) and summarises scale-out time, peak replicas and drain time
-(results/keda_burst.csv). smoke-consumer simulates WORK_MS_PER_MESSAGE of work per message, so one
+(results/keda_burst.csv). listing-store simulates WORK_MS_PER_MESSAGE of work per message, so one
 replica cannot keep up with the burst.
 """
 import argparse
@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (Lag, append_csv, json_logs, kubectl_json, new_run_id, now_iso, pause_keda, profile,  # noqa: E402
                     start_job, wait_job, wait_lag_zero, wait_until)
 
-NS, APP, GROUP, TOPIC = "pipeline", "smoke-consumer", "cdc.smoke-consumer", "listings.raw"
+NS, APP, GROUP, TOPIC = "pipeline", "listing-store", "cdc.listing-store", "listings.raw"
 
 
 def replicas():

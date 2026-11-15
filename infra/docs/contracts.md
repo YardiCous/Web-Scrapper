@@ -35,34 +35,37 @@ Plaintext, no authentication. The cluster is only reachable from your own machin
 
 ## Who runs what
 
-The pipeline services run the team's code unchanged, through thin Kafka adapters in [`../../adapters/`](../../adapters/) (one image; `SERVICE_NAME` picks the role):
+Each stage owns its code and Dockerfile under `services/`. Kubernetes selects the Kafka worker command explicitly in `k8s/base/pipeline/services.yaml`:
 
-| Slot | Team code it runs | Adapter |
+| Workload | Code | Input → output |
 |---|---|---|
-| `collector-store-a/b/c` | `web/scraper.py` `scrape()` | `adapters/collector.py`: one request in, one `listings.raw` message per listing out |
-| `normaliser` | `normaliser/core/pipeline.py` `normalise_record()` | `adapters/normaliser.py` |
-| `matcher` | `normaliser/core` `find_matches()`, `build_clusters()`, `to_scoring_rows()` | `adapters/matcher.py`: re-clusters each brand it touches; saves `clusters` with the version check |
-| `scorer` (Knative) | `scorer/` as is (its own Dockerfile) | none: the KafkaSource POSTs each `listings.normalized` message to it |
+| `collector-store-a/b/c` | `services/collector/worker.py`, `scraper.py` | scrape request → raw listings |
+| `normaliser` | `services/normaliser/worker.py`, `pipeline.py`, `core/` | raw listings → cleaned listings |
+| `matcher` | `services/matcher/worker.py`, `pipeline.py`, `core/` | cleaned listings → clusters and scoring rows |
+| `scorer` (Knative) | `services/scorer/app.py` | matched listing HTTP CloudEvent → risk score |
+| `listing-store` | `services/storage/worker.py` | raw listings → PostgreSQL |
+
+HTTP and Kafka entry points use the same processing code. The frontend and gateway have separate folders and images. Common Kafka delivery behaviour lives in `shared/kafka.py` and `shared/kafka_worker.py`.
 
 Platforms keep the names the scraper reports: `Cartlane` (store-a, dummysite), `Tao Market` (store-b, dummysite2) and `Lazora` (store-c, dummysite3). A `listing_id` is `<source_platform>:<sku>`, for example `Cartlane:78`, as in the normaliser and scorer.
 
 ## Payloads
 
 ### `listings.raw`
-One listing exactly as `web/scraper.py` returns it, with numbers as numbers, plus `source_listing_id` (= `sku`) and `scraped_at` (the collector's UTC time). Extra fields are allowed and ignored.
+One listing exactly as `services/collector/scraper.py` returns it, with numbers as numbers, plus `source_listing_id` (= `sku`) and `scraped_at` (the collector's UTC time). Extra fields are allowed and ignored.
 ```json
 {"sku":"78","source_platform":"Cartlane","source_listing_id":"78","title":"Apple MacBook Pro 14 Inch Space Grey",
  "price":649.99,"currency":"USD","seller_id":"cartlane-001","seller_name":"Cartlane","selling_since":"2026-10-08",
  "rating":4.7,"review_count":3,"reviews":[{"text":"Very happy with my purchase!","rating":5,"review_date":"2025-04-30"}],
  "product_url":"https://paegnium.github.io/dummysite/?product=78","scraped_at":"2026-11-11T00:00:00Z"}
 ```
-The collectors fetch pages from the in-cluster copies of the stores (`FETCH_FROM`), while `product_url` keeps the public `paegnium.github.io` address. [`samples/raw_listings.json`](../samples/raw_listings.json) is the 32 listings in `normaliser/data` in this form.
+The collectors fetch pages from the in-cluster copies of the stores (`FETCH_FROM`), while `product_url` keeps the public `paegnium.github.io` address. [`data/samples/raw_listings.json`](../../data/samples/raw_listings.json) is the 32 listings in `data/listings` in this form.
 
 ### `listings.cleaned`
 The raw fields plus what `normalise_record()` adds: `price_sgd`, `seller_age_days`, `clean_title`, `brand`, and the adapter's `listing_id`. Keyed by `brand` (or `unbranded`) so one matcher replica sees every listing of a brand. Matching per brand gives the same clusters as the normaliser's batch run over all listings.
 
 ### `listings.normalized`
-One message per listing with its cluster's price statistics: the rows of `to_scoring_rows()`, which is what the scorer's `Listing` model reads. `cluster_id` is the smallest `listing_id` in the cluster. [`samples/normalised_output.json`](../samples/normalised_output.json) is the normaliser's batch output for the 32 sample listings.
+One message per listing with its cluster's price statistics: the rows of `to_scoring_rows()`, which is what the scorer's `Listing` model reads. `cluster_id` is the smallest `listing_id` in the cluster. [`data/samples/normalised_output.json`](../../data/samples/normalised_output.json) is the normaliser's batch output for the 32 sample listings.
 
 ### `scrape.requests`
 ```json
@@ -82,10 +85,10 @@ The tables are in [`k8s/base/data/schema.sql`](../k8s/base/data/schema.sql). Pos
 
 | Table | Key | Written by | Notes |
 |---|---|---|---|
-| `listings` | `listing_id` | first consumer of `listings.raw` (smoke-consumer today) | `last_seen_at` = newest `scraped_at`; the TTL refresh reads it |
+| `listings` | `listing_id` | first consumer of `listings.raw` (listing-store today) | `last_seen_at` = newest `scraped_at`; the TTL refresh reads it |
 | `matcher_listings` | `listing_id` | matcher | every cleaned listing seen, so any replica can re-cluster a brand |
 | `clusters` | `cluster_id` | matcher | `version` for optimistic concurrency |
-| `risk_scores` | `listing_id` (latest score) | scorer (Declan) | same columns as `scorer/sql/risk_scores.sql` |
+| `risk_scores` | `listing_id` (latest score) | scorer (Declan) | defined in the shared initial schema |
 | `reviews` | `id` | HTTP collectors | references the listing's integer `id` |
 | `search_requests` | `request_id` | gateway | search progress and completed result snapshots |
 | `collection_runs` | `(request_id, source_platform)` | collectors | listing IDs or collection error per search and platform |
