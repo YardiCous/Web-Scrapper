@@ -6,8 +6,12 @@ import os
 from flask import Flask, jsonify, request
 import psycopg2
 
-from platforms import PLATFORMS, resolve_url
-from scraper import ScrapeError, save_listings, scrape
+try:
+    from .platforms import PLATFORMS, resolve_url
+    from .scraper import ScrapeError, save_listings, scrape
+except ImportError:
+    from platforms import PLATFORMS, resolve_url
+    from scraper import ScrapeError, save_listings, scrape
 
 
 def create_app(platform):

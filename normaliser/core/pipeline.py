@@ -53,6 +53,8 @@ def to_scoring_rows(cluster):
             "reviews": m["reviews"],
             "product_url": m["product_url"],
         })
+        if m.get("scraped_at"):
+            rows[-1]["scraped_at"] = m["scraped_at"]
     return rows
 
 

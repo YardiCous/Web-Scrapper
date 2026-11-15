@@ -1,4 +1,5 @@
 import os
+from contextlib import contextmanager
 import psycopg2
 from dotenv import load_dotenv
 
@@ -8,3 +9,14 @@ def get_conn():
     # Containers use libpq's PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE variables.
     # Keep DATABASE_URL support for running the Flask app and scraper locally.
     return psycopg2.connect(os.environ.get("DATABASE_URL") or "")
+
+
+@contextmanager
+def connection():
+    """psycopg2's transaction context doesn't close the connection on exit."""
+    conn = get_conn()
+    try:
+        with conn:
+            yield conn
+    finally:
+        conn.close()

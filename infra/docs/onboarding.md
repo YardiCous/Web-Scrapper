@@ -1,6 +1,6 @@
 # Onboarding: plugging your service in
 
-Each teammate's service has a slot in the cluster. The collectors, normaliser, matcher and scorer are live: they run your code from this repository (the pipeline ones through `adapters/`, see [contracts.md](contracts.md#who-runs-what)), and `make up` builds them. The gateway and frontend slots still run a placeholder. Message formats and Kafka rules are in [contracts.md](contracts.md); read that first.
+Each teammate's service has a slot in the cluster. The collectors, normaliser, matcher and scorer are live: they run your code from this repository (the pipeline ones through `adapters/`, see [contracts.md](contracts.md#who-runs-what)), and `make up` builds them. The gateway and frontend run `web/app.py`: gateway uses `PIPELINE_MODE=kafka`, and frontend forwards calls using `GATEWAY_URL`. Message formats and Kafka rules are in [contracts.md](contracts.md); read that first.
 
 ## Your slot
 
@@ -12,9 +12,9 @@ Each teammate's service has a slot in the cluster. The collectors, normaliser, m
 | `scorer` | Declan | `k8s/base/scoring/scorer.yaml` (Knative) | scoring | `cdc.scorer` (KafkaSource) | CloudEvents over HTTP → `risk_scores` |
 | `gateway` | Yu Da | `k8s/base/web/apps.yaml` | web | – | HTTP at `api.localhost:8080` |
 | `frontend` | (team) | `k8s/base/web/apps.yaml` | web | – | HTTP at `app.localhost:8080` |
-| ScaledObjects | Wylie | copy `templates/kafka-worker-scaledobject.yaml` | pipeline | – | example: `k8s/base/pipeline/smoke-consumer.yaml` |
+| ScaledObjects | Wylie | `k8s/base/pipeline/autoscaling.yaml` | pipeline | – | example: `k8s/base/pipeline/smoke-consumer.yaml` |
 
-The pipeline slots run one replica each; add a ScaledObject to autoscale on lag. The annotated starting points are in [`templates/`](../templates/): `kafka-worker.yaml`, `kafka-worker-scaledobject.yaml` and `knative-service.yaml`.
+The pipeline Deployments start at one replica and their ScaledObjects in `k8s/base/pipeline/autoscaling.yaml` scale on lag. The annotated starting points are in [`templates/`](../templates/): `kafka-worker.yaml`, `kafka-worker-scaledobject.yaml` and `knative-service.yaml`.
 
 ## What your container gets and must do
 
@@ -81,7 +81,7 @@ Each release:
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/yardicous/normaliser:0.1.0 --push .
 ```
-Then commit the `kustomization.yaml` change. The images built in this repo (`cdc-tools`, `cdc-placeholder`, `store-a/b/c`) are pushed with `make -C infra push`.
+Then commit the `kustomization.yaml` change. The images built in this repo (`cdc-tools`, `cdc-web`, `cdc-adapters`, `scorer`, `store-a/b/c`) are pushed with `make -C infra push`.
 
 ## Useful commands
 

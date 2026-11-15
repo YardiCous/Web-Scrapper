@@ -1,4 +1,4 @@
-# Dummy stores (static nginx) and the gateway/frontend slots (placeholders until Yu Da's images exist).
+# Dummy stores (static nginx), Kafka-backed API gateway and Flask frontend.
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -182,6 +182,7 @@ spec:
       containers:
         - name: gateway
           image: gateway
+          command: ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "180", "web.app:app"]
           ports:
             - name: http
               containerPort: 8080
@@ -193,6 +194,8 @@ spec:
           env:
             - name: SERVICE_NAME
               value: gateway
+            - name: PIPELINE_MODE
+              value: kafka
           resources:
             requests:
               cpu: 10m
@@ -244,12 +247,15 @@ spec:
       containers:
         - name: frontend
           image: frontend
+          command: ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "180", "web.app:app"]
           ports:
             - name: http
               containerPort: 8080
           env:
             - name: SERVICE_NAME
               value: frontend
+            - name: GATEWAY_URL
+              value: http://gateway.web.svc
           resources:
             requests:
               cpu: 10m

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "cdc/scrape.requests.schema.json",
-  "title": "scrape.requests (PROPOSED)",
-  "description": "PROPOSED, confirm with JJ and Yu Da. Ask a collector to (re)scrape one product URL. Kafka key: source_platform.",
+  "title": "scrape.requests",
+  "description": "Ask a collector to (re)scrape one product or storefront URL. Kafka key: source_platform.",
   "type": "object",
   "required": [
     "request_id",

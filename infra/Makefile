@@ -15,13 +15,12 @@ ARGS ?=
 
 export PROFILE OVERLAY CLUSTER GHCR_OWNER HTTP_PORT
 
-.PHONY: help up down status smoke deploy images push ttl-refresh load venv graphs experiments \n	exp-broker-kill exp-consumer-kill exp-keda-burst exp-coldstart
+.PHONY: help up down status deploy images push ttl-refresh load venv graphs experiments \n	exp-broker-kill exp-consumer-kill exp-keda-burst exp-coldstart
 
 help:
 	@echo "make up       create or update the local cluster and deploy everything (PROFILE=$(PROFILE))"
 	@echo "make down     delete the local cluster"
 	@echo "make status   pods, topics and consumer-group lag"
-	@echo "make smoke    run the smoke-test Job against the running cluster"
 	@echo "make deploy   re-apply manifests only (after editing k8s/)"
 	@echo "make images   build our images and import them into k3d"
 	@echo "make push     build multi-arch images and push them to ghcr.io/$(GHCR_OWNER)"
@@ -39,9 +38,6 @@ down:
 
 status:
 	@bash scripts/status.sh
-
-smoke:
-	@bash scripts/smoke.sh
 
 deploy:
 	@bash scripts/deploy.sh

@@ -46,10 +46,10 @@ images:
     newName: ghcr.io/GHCR_OWNER/cdc-adapters
     newTag: "0.1.0"
 
-  # Still on the placeholder.
+  # The Flask gateway and frontend share an image; frontend forwards API calls to gateway.
   - name: gateway             # Yu Da
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newName: ghcr.io/GHCR_OWNER/cdc-web
     newTag: "0.1.0"
   - name: frontend
-    newName: ghcr.io/GHCR_OWNER/cdc-placeholder
+    newName: ghcr.io/GHCR_OWNER/cdc-web
     newTag: "0.1.0"

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comparing products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Comparing products</h1>
+        {% include '_search_form.html' %}
+        <p id="search-status" role="status"
+           data-status-url="{{ url_for('get_search', request_id=job.request_id) }}"
+           data-result-url="{{ url_for('search_result', request_id=job.request_id) }}">
+            Collecting listings, finding matches and calculating risk scores…
+        </p>
+        <noscript><p>JavaScript is required for progress updates. <a href="{{ url_for('search_result', request_id=job.request_id) }}">Check results</a>.</p></noscript>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

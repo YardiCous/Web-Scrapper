@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - cdc-env.yaml
-  - smoke.yaml
   - smoke-consumer.yaml
   - ttl-refresh.yaml
   - loadgen.yaml
   - services.yaml
+  - autoscaling.yaml

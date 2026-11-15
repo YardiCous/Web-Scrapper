@@ -1,14 +1,14 @@
 # Message contracts
 
-Every Kafka message has a UTF-8 string key and a UTF-8 JSON value. JSON Schemas (draft 2020-12) are in [`../schemas/`](../schemas/). `make smoke` validates the sample records against them, publishes them and reads them back. Schemas marked **proposed** need the named teammate's confirmation.
+Every Kafka message has a UTF-8 string key and a UTF-8 JSON value. JSON Schemas (draft 2020-12) are in [`../schemas/`](../schemas/).
 
 ## Topics
 
 | Topic | Partitions | Key | Written by | Read by (consumer group) | Schema |
 |---|---|---|---|---|---|
-| `scrape.requests` | 3 | `source_platform` | gateway (Yu Da), TTL refresh CronJob | collectors (`cdc.collector.<platform>`) | [scrape.requests](../schemas/scrape.requests.schema.json) **proposed** |
+| `scrape.requests` | 3 | `source_platform` | gateway (Yu Da), TTL refresh CronJob | collectors (`cdc.collector.<platform>`) | [scrape.requests](../schemas/scrape.requests.schema.json) |
 | `listings.raw` | 6 | `<source_platform>:<source_listing_id>` | collectors (JJ) | normaliser (`cdc.normaliser`) | [listings.raw](../schemas/listings.raw.schema.json) |
-| `listings.cleaned` | 6 | `brand` (blocking key) | normaliser (Gordon) | matcher (`cdc.matcher`) | [listings.cleaned](../schemas/listings.cleaned.schema.json) **proposed** |
+| `listings.cleaned` | 6 | `brand` (blocking key) | normaliser (Gordon) | matcher (`cdc.matcher`) | [listings.cleaned](../schemas/listings.cleaned.schema.json) |
 | `listings.normalized` | 6 | `cluster_id` | matcher (Gordon) | scorer, via Knative KafkaSource (`cdc.scorer`) | [listings.normalized](../schemas/listings.normalized.schema.json) |
 | `listings.dlq` | 1 | the failed message's key | any service | people, via Kafka UI | original value plus `dlq-*` headers |
 
@@ -64,7 +64,7 @@ The raw fields plus what `normalise_record()` adds: `price_sgd`, `seller_age_day
 ### `listings.normalized`
 One message per listing with its cluster's price statistics: the rows of `to_scoring_rows()`, which is what the scorer's `Listing` model reads. `cluster_id` is the smallest `listing_id` in the cluster. [`samples/normalised_output.json`](../samples/normalised_output.json) is the normaliser's batch output for the 32 sample listings.
 
-### `scrape.requests` (proposed: JJ, Yu Da)
+### `scrape.requests`
 ```json
 {"request_id":"6f1c…","source_platform":"Tao Market","product_url":"https://paegnium.github.io/dummysite2/products/78.html",
  "source_listing_id":null,"reason":"user_request","requested_at":"2026-11-11T10:00:00Z"}
@@ -78,7 +78,7 @@ The failed message's original key and value, unchanged, with the `dlq-*` headers
 
 From a pod: `postgres.data.svc:5432`, database `cdc`. Pods that load the `cdc-env` ConfigMap and the `postgres-credentials` Secret (see `templates/`) get the standard libpq variables (`PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`), so `psycopg.connect()` with no arguments works. They also get `DATABASE_URL` (`postgresql://cdc:…@postgres.data.svc:5432/cdc`) for code that takes one connection string, like the scorer. The password is generated per machine by `make up` and is never committed. For a shell: `kubectl -n data exec -it postgres-0 -- psql -U cdc -d cdc`.
 
-The tables are in [`k8s/base/data/schema.sql`](../k8s/base/data/schema.sql). Every statement must stay idempotent, because it reruns on each `make up`.
+The tables are in [`k8s/base/data/schema.sql`](../k8s/base/data/schema.sql). PostgreSQL executes this initial schema once when it creates an empty data directory. Compose and Kubernetes use the same schema and assume a fresh database.
 
 | Table | Key | Written by | Notes |
 |---|---|---|---|
@@ -86,7 +86,9 @@ The tables are in [`k8s/base/data/schema.sql`](../k8s/base/data/schema.sql). Eve
 | `matcher_listings` | `listing_id` | matcher | every cleaned listing seen, so any replica can re-cluster a brand |
 | `clusters` | `cluster_id` | matcher | `version` for optimistic concurrency |
 | `risk_scores` | `listing_id` (latest score) | scorer (Declan) | same columns as `scorer/sql/risk_scores.sql` |
-| cache table | | gateway (Yu Da) | not created here; add it to `schema.sql` |
+| `reviews` | `id` | HTTP collectors | references the listing's integer `id` |
+| `search_requests` | `request_id` | gateway | search progress and completed result snapshots |
+| `collection_runs` | `(request_id, source_platform)` | collectors | listing IDs or collection error per search and platform |
 
 **Idempotent upsert.** A redelivered message rewrites the same values, and an older version that arrives late is skipped:
 ```sql
@@ -115,6 +117,12 @@ WHERE cluster_id = $1 AND version = $6;          -- $6 = n
 | Who | What |
 |---|---|
 | Gordon | The matcher adapter re-clusters a whole brand per batch: fine for the dummy sites, but it grows with the brand. Listings with no known brand are matched among themselves only. |
-| Wylie / Yu Da | `feature/collector-containers` (HTTP collectors behind the Flask site) is not merged here. The site could publish to `scrape.requests` and read results from Postgres instead. `scrape.requests` shape; the cache table |
 | Team | Topic name: `listings.normalized` here; the scorer's docs say `listings.normalised`. Only the KafkaSource names the topic, so the scorer code needs no change. |
-| Team | One `listings` table: `init.sql` (docker-compose: `id`, `sku`, `reviews` table) differs from the one here; in the cluster only this one exists |
+
+## Search API and freshness
+
+`POST /api/searches` takes `{"url": "<supported product or storefront URL>"}` and returns `{request_id, url, status, listings, error}`. Pending searches return 202 with a `Location` header for `GET /api/searches/<request_id>`. The frontend uses this API through the gateway.
+
+`search_requests` stores durable progress and completed result snapshots. `collection_runs` is keyed by `(request_id, source_platform)` and records collected listing IDs or an error after Kafka delivery succeeds. The gateway expects one completed collection per supported platform, then waits for fresh scores and current cluster metadata.
+
+`scraped_at` is an optional ISO timestamp on `listings.normalized` (present for live collected records). The scorer stores it as `risk_scores.source_scraped_at`, refuses older score writes and includes it in the input hash. The gateway compares it to the search timestamp before accepting a score. Legacy fixture messages without timestamps remain valid but cannot complete a fresh search.

@@ -1,5 +1,4 @@
-# Scorer slot (Declan). Placeholder image until the real scorer exists: set `scorer` in
-# k8s/base/kustomization.yaml. Scales to zero when listings.normalized is idle.
+# Real scorer service. Scales to zero when listings.normalized is idle.
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -32,7 +31,7 @@ spec:
           env:
             - name: SERVICE_NAME
               value: scorer
-          # Sized for the real scorer (FastAPI, datasketch, a psycopg pool), not the placeholder.
+          # Sized for FastAPI, datasketch and a psycopg pool.
           resources:
             requests:
               cpu: 100m

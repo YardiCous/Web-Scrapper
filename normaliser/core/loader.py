@@ -22,10 +22,11 @@ def adapt_record(raw):
         "seller_id": raw["seller_id"],
         "seller_name": raw["seller_name"],
         "selling_since": raw["selling_since"],
-        "rating": float(raw["rating"]),
+        "rating": float(raw["rating"]) if raw.get("rating") is not None else None,
         "review_count": int(raw["review_count"]),
         "reviews": raw["reviews"],
         "product_url": raw["product_url"],
+        "scraped_at": raw.get("scraped_at"),
     }
 
 

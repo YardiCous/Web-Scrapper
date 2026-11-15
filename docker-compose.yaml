@@ -33,7 +33,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       retries: 5
 
@@ -65,12 +65,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.collector
-    entrypoint: ["python", "app.py"]
+    entrypoint: ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "180", "web.app:app"]
     environment:
       <<: *database-environment
       COLLECTOR_CARTLANE_URL: http://collector-cartlane:8000
       COLLECTOR_TAO_URL: http://collector-tao:8000
       COLLECTOR_LAZORA_URL: http://collector-lazora:8000
+      SCORER_URL: http://scorer:8080
+      PIPELINE_MODE: http
     ports:
       - "127.0.0.1:5000:5000"
     depends_on:
@@ -80,6 +82,27 @@ services:
         condition: service_healthy
       collector-lazora:
         condition: service_healthy
+      scorer:
+        condition: service_healthy
+    restart: unless-stopped
+
+  scorer:
+    build:
+      context: ./scorer
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      PORT: "8080"
+    ports:
+      - "127.0.0.1:8200:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/healthz', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
     restart: unless-stopped
 
 volumes:

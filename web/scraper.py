@@ -12,7 +12,7 @@ python scraper.py --save https://paegnium.github.io/dummysite/ https://paegnium.
 import json
 import re
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 from decimal import Decimal
 from urllib.parse import urljoin, urlsplit, urlunsplit, parse_qs
 
@@ -203,14 +203,21 @@ def scrape(url):
 # --------------------------------------------------------------------------- #
 _UPSERT_LISTING = """
     INSERT INTO listings (
+        listing_id, source_listing_id, payload, last_seen_at,
         sku, source_platform, product_url, title, price, currency,
         seller_id, seller_name, selling_since, rating, review_count, scraped_at
     )
     VALUES (
+        %(listing_id)s, %(source_listing_id)s, %(payload)s, %(scraped_at)s,
         %(sku)s, %(source_platform)s, %(product_url)s, %(title)s, %(price)s, %(currency)s,
-        %(seller_id)s, %(seller_name)s, %(selling_since)s, %(rating)s, %(review_count)s, now()
+        %(seller_id)s, %(seller_name)s, %(selling_since)s, %(rating)s, %(review_count)s, %(scraped_at)s
     )
-    ON CONFLICT (source_platform, product_url) DO UPDATE SET
+    ON CONFLICT (listing_id) DO UPDATE SET
+        source_listing_id = EXCLUDED.source_listing_id,
+        payload       = EXCLUDED.payload,
+        last_seen_at  = EXCLUDED.last_seen_at,
+        updated_at    = now(),
+        product_url   = EXCLUDED.product_url,
         sku           = EXCLUDED.sku,
         title         = EXCLUDED.title,
         price         = EXCLUDED.price,
@@ -220,7 +227,8 @@ _UPSERT_LISTING = """
         selling_since = EXCLUDED.selling_since,
         rating        = EXCLUDED.rating,
         review_count  = EXCLUDED.review_count,
-        scraped_at    = now()
+        scraped_at    = EXCLUDED.scraped_at
+    WHERE listings.last_seen_at <= EXCLUDED.last_seen_at
     RETURNING id
 """
 
@@ -244,15 +252,28 @@ def save_listings(listings, conn=None):
     """
     own_conn = conn is None
     if own_conn:
-        import db  # imported here so scraping alone doesn't need a database or .env
+        try:
+            from . import db
+        except ImportError:
+            import db  # script entry point
         conn = db.get_conn()
     try:
         ids = []
         with conn:  # commits on success, rolls back on any exception
             with conn.cursor() as cur:
                 for listing in listings:
-                    cur.execute(_UPSERT_LISTING, listing)
-                    listing_id = cur.fetchone()[0]
+                    raw = json.loads(json.dumps(listing, default=_json_default))
+                    raw["source_listing_id"] = str(listing["sku"])
+                    raw["scraped_at"] = datetime.now(timezone.utc).isoformat()
+                    listing.update(source_listing_id=raw["source_listing_id"], scraped_at=raw["scraped_at"])
+                    cur.execute(_UPSERT_LISTING, {
+                        **listing, "listing_id": f"{listing['source_platform']}:{listing['sku']}",
+                        "payload": json.dumps(raw),
+                    })
+                    saved = cur.fetchone()
+                    if saved is None:
+                        continue
+                    listing_id = saved[0]
                     cur.execute("DELETE FROM reviews WHERE listing_id = %s", (listing_id,))
                     cur.executemany(_INSERT_REVIEW, [
                         (listing_id, r["text"], r["rating"], r["review_date"])
@@ -269,8 +290,10 @@ def save_listings(listings, conn=None):
 # Command line: python scraper.py [--save] <url> [<url> ...]
 # --------------------------------------------------------------------------- #
 def _json_default(o):
-    if isinstance(o, (date, Decimal)):
-        return str(o)
+    if isinstance(o, Decimal):
+        return float(o)
+    if isinstance(o, date):
+        return o.isoformat()
     raise TypeError(type(o))
 
 

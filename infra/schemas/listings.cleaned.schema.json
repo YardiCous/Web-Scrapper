@@ -57,7 +57,10 @@
       "type": "string"
     },
     "seller_age_days": {
-      "type": "integer"
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "rating": {
       "type": [

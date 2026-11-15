@@ -20,14 +20,14 @@ class Reject(Exception):
     """The message itself is bad (not retryable): send it to the DLQ."""
 
 
-def _to_dlq(producer, msg, error):
+def _to_dlq(producer, msg, error, on_delivery=None):
     producer.produce(DLQ_TOPIC, key=msg.key(), value=msg.value(), headers=[
         ("dlq-error", str(error)[:500].encode()),
         ("dlq-service", GROUP.encode()),
         ("dlq-source-topic", msg.topic().encode()),
         ("dlq-source-partition", str(msg.partition()).encode()),
         ("dlq-source-offset", str(msg.offset()).encode()),
-    ])
+    ], on_delivery=on_delivery)
 
 
 def run(handle, end_batch=None, after_publish=None):
@@ -41,6 +41,11 @@ def run(handle, end_batch=None, after_publish=None):
                        on_assign=lambda _c, p: log("assigned", partitions=sorted(x.partition for x in p)),
                        on_revoke=lambda _c, p: log("revoked", partitions=sorted(x.partition for x in p)))
     log("started", input=INPUT_TOPIC, output=OUTPUT_TOPIC, group=GROUP)
+    delivery_errors = []
+
+    def delivered(error, _msg):
+        if error:
+            delivery_errors.append(str(error))
 
     while not stop.requested:
         heartbeat()
@@ -57,14 +62,15 @@ def run(handle, end_batch=None, after_publish=None):
                 out += handle(msg.key().decode() if msg.key() else None, value)
             except (Reject, ValueError, KeyError, TypeError) as e:
                 log("rejected", key=msg.key().decode(errors="replace") if msg.key() else None, error=str(e)[:300])
-                _to_dlq(producer, msg, e)
+                _to_dlq(producer, msg, e, delivered)
                 dlq += 1
         if end_batch:
             out += end_batch()
         for key, value in out:
-            producer.produce(OUTPUT_TOPIC, key=key.encode(), value=json.dumps(value, default=str).encode())
+            producer.produce(OUTPUT_TOPIC, key=key.encode(), value=json.dumps(value, default=str).encode(),
+                             on_delivery=delivered)
             producer.poll(0)
-        if producer.flush(60):
+        if producer.flush(60) or delivery_errors:
             raise RuntimeError("could not deliver every output message")
         if after_publish:
             after_publish()

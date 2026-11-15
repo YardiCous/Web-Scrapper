@@ -8,5 +8,5 @@ configMapGenerator:
     files:
       - schema.sql
 generatorOptions:
-  # Schema edits are applied by `make up`; they shouldn't restart Postgres.
+  # The initial schema runs only when PostgreSQL creates an empty data directory.
   disableNameSuffixHash: true

@@ -22,3 +22,27 @@ window.addEventListener("pageshow", () => {
   button.disabled = false;
   button.textContent = "Look up";
 });
+
+const status = document.getElementById("search-status");
+if (status) {
+  const poll = async () => {
+    try {
+      const response = await fetch(status.dataset.statusUrl);
+      if (!response.ok) throw new Error();
+      const job = await response.json();
+      if (job.status === "complete") {
+        window.location.replace(status.dataset.resultUrl);
+        return;
+      }
+      if (job.status === "failed") {
+        status.textContent = job.error;
+        return;
+      }
+      setTimeout(poll, 2000);
+    } catch {
+      status.textContent = "Waiting for the comparison service to reconnect…";
+      setTimeout(poll, 5000);
+    }
+  };
+  setTimeout(poll, 1000);
+}

@@ -17,7 +17,14 @@
                 <article class="listing">
                         <h2>{{ listing.title or 'Untitled product' }}</h2>
                         <p>{{ listing.source_platform }} · {{ listing.seller_name or 'Unknown seller' }}</p>
-                        <p><strong>{{ listing.currency or '' }} {{ listing.price if listing.price is not none else 'Price unavailable' }}</strong></p>
+                        <p><strong>SGD {{ '%.2f'|format(listing.price_sgd) }}</strong></p>
+                        <p>Cluster median: SGD {{ '%.2f'|format(listing.cluster_price_median_sgd) }}
+                                · {{ listing.cluster_size }} matching listing{{ '' if listing.cluster_size == 1 else 's' }}</p>
+                        <p><strong>{{ listing.risk_band|capitalize }} counterfeit risk ({{ '%.0f'|format(listing.risk_score * 100) }} / 100)</strong>
+                                · Signal coverage: {{ '%.0f'|format(listing.coverage * 100) }}%</p>
+                        {% if listing.reasons %}
+                        <ul>{% for reason in listing.reasons %}<li>{{ reason.text }}</li>{% endfor %}</ul>
+                        {% else %}<p>No strong risk indicators were found in the available data.</p>{% endif %}
                         <p>Rating: {{ listing.rating if listing.rating is not none else 'Unavailable' }} / 5
                                 · {{ listing.review_count }} reviews</p>
                         <a href="{{ listing.product_url }}" target="_blank" rel="noopener noreferrer">View product</a>
@@ -31,6 +38,7 @@
                         {% endif %}
                 </article>
                 {% endfor %}
+                <p>Risk scores reflect available indicators and do not guarantee authenticity. SGD comparisons use fixed demonstration exchange rates.</p>
         </main>
         <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>

@@ -32,5 +32,5 @@ cat <<EOF
   Stores     http://store-a.localhost:$HTTP_PORT  http://store-b.localhost:$HTTP_PORT  http://store-c.localhost:$HTTP_PORT
   Gateway    http://api.localhost:$HTTP_PORT   Frontend  http://app.localhost:$HTTP_PORT
   Kafka      localhost:32100 (from this machine)
-Next: make smoke
+Next: open http://app.localhost:$HTTP_PORT
 EOF

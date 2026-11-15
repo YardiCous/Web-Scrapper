@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS risk_scores (
     reasons        JSONB NOT NULL,
     model_version  TEXT NOT NULL,
     input_hash     TEXT NOT NULL,
+    source_scraped_at TIMESTAMPTZ,
     computed_at    TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 

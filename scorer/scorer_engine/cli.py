@@ -2,8 +2,8 @@
 Score files of normaliser output offline, or save the scores to PostgreSQL.
 Each file holds one listing object or a list of them.
 
-    python -m scorer_engine.cli fixtures/*.json
-    python -m scorer_engine.cli --save fixtures/*.json
+    python -m scorer_engine.cli ../infra/samples/normalised_output.json
+    python -m scorer_engine.cli --save ../infra/samples/normalised_output.json
     python -m scorer_engine.cli --json ...          # full results as JSON
 """
 

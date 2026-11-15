@@ -46,6 +46,7 @@ async def lifespan(app):
     yield
     if state["pool"] is not None:
         state["pool"].close()
+        state["pool"] = None
 
 
 app = FastAPI(title="scorer", lifespan=lifespan)

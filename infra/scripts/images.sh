@@ -22,6 +22,7 @@ build_spec() {
     # The team's code, from the rest of this repository.
     scorer) DOCKERFILE="$REPO_DIR/scorer/Dockerfile"; CTX="$REPO_DIR/scorer" ;;
     cdc-adapters) DOCKERFILE="$REPO_DIR/adapters/Dockerfile"; CTX="$REPO_DIR" ;;
+    cdc-web) DOCKERFILE="$REPO_DIR/Dockerfile.collector"; CTX="$REPO_DIR" ;;
     store-a|store-b|store-c)
       case "$name" in
         store-a) repo=https://github.com/Paegnium/dummysite ;;

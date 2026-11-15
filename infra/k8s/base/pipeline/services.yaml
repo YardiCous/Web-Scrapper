@@ -1,5 +1,5 @@
 # Pipeline services running the team's code through adapters/ (one image; SERVICE_NAME picks the role).
-# One replica each; add a ScaledObject (templates/kafka-worker-scaledobject.yaml) to autoscale on lag.
+# KEDA ScaledObjects in autoscaling.yaml scale these Deployments on consumer-group lag.
 ---
 apiVersion: apps/v1
 kind: Deployment

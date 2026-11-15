@@ -15,9 +15,9 @@ from .models import Listing
 
 _UPSERT = """
     INSERT INTO risk_scores (listing_id, cluster_id, score, band, coverage,
-                             contributions, reasons, model_version, input_hash)
+                             contributions, reasons, model_version, input_hash, source_scraped_at)
     VALUES (%(listing_id)s, %(cluster_id)s, %(score)s, %(band)s, %(coverage)s,
-            %(contributions)s, %(reasons)s, %(model_version)s, %(input_hash)s)
+            %(contributions)s, %(reasons)s, %(model_version)s, %(input_hash)s, %(source_scraped_at)s)
     ON CONFLICT (listing_id) DO UPDATE SET
         cluster_id    = EXCLUDED.cluster_id,
         score         = EXCLUDED.score,
@@ -27,9 +27,12 @@ _UPSERT = """
         reasons       = EXCLUDED.reasons,
         model_version = EXCLUDED.model_version,
         input_hash    = EXCLUDED.input_hash,
+        source_scraped_at = EXCLUDED.source_scraped_at,
         computed_at   = now()
-    WHERE risk_scores.input_hash    IS DISTINCT FROM EXCLUDED.input_hash
-       OR risk_scores.model_version IS DISTINCT FROM EXCLUDED.model_version
+    WHERE (risk_scores.source_scraped_at IS NULL
+           OR EXCLUDED.source_scraped_at >= risk_scores.source_scraped_at)
+      AND (risk_scores.input_hash IS DISTINCT FROM EXCLUDED.input_hash
+           OR risk_scores.model_version IS DISTINCT FROM EXCLUDED.model_version)
 """
 
 
@@ -52,5 +55,6 @@ def upsert(conn, listing: Listing, result: ScoreResult, hash_: str) -> bool:
             "reasons": Jsonb(result.reasons),
             "model_version": result.model_version,
             "input_hash": hash_,
+            "source_scraped_at": listing.scraped_at,
         })
         return cur.rowcount == 1

@@ -14,7 +14,7 @@ Cloud-native system that collects listings + reviews from Shopee, TikTok Shop an
 Consumes normalised listings, computes heuristic signals (each 0–1, higher = riskier, or `None` if not computable), combines them with a logistic function into a score + band + top-3 human-readable reasons, upserts into `risk_scores`.
 
 ## Input message (topic `listings.normalised`, key = cluster_id)
-This is the normaliser's actual output (supersedes the originally agreed shape; real sample in `fixtures/normaliser_cartlane_78.json`):
+This is the normaliser's actual output (supersedes the originally agreed shape; sample rows in `../infra/samples/normalised_output.json`):
 ```json
 {
   "cluster_id": "Cartlane:78", "cluster_size": 2,
@@ -121,3 +121,5 @@ Items 2–4 above are done: `scorer/scorer_engine/` package, 69 unit tests, CLI,
 ## Decisions (3 Nov 2026)
 - **Removed `seller_volume`, `official` and `fetched_at`.** The `seller_sales`, `seller_is_official` and `fetched_at` fields, the two signals, their weights (0.6 and −2.5) and their tests are gone, and the fields were stripped from `fixtures/synthetic_suspects.json`. *Why:* the normaliser will not provide these fields, so the signals could never fire on real data and only lowered coverage (max 7/9). There are now 7 signals, so coverage is out of 7. Consequences: genuine listings no longer get the negative "official store" pull, so the only things lowering a score are the bias and the absence of risk signals (the synthetic official/reseller controls still score low). End-to-end latency for the load-ramp evaluation must use the Kafka record timestamp instead of `fetched_at`. Mention the lost signals in the report's missing-functionality discussion.
 - **Fixtures reduced to two files:** `dummy_sites.json`, `normalised_output.json` and `sample_store_a.json` were deleted; `fixtures/` now holds only `normaliser_cartlane_78.json` (real normaliser output) and `synthetic_suspects.json`. The "normaliser sample is low" test now checks `Cartlane:78`. The 25 Oct note on converting `dummy_sites.json` is kept for history only.
+
+- **Test files removed:** automated tests, test configuration, test dependencies and scorer fixtures have been removed. Earlier fixture references above record historical decisions. Use `../infra/samples/normalised_output.json` for offline scoring examples.

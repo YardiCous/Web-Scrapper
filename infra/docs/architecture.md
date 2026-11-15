@@ -28,10 +28,10 @@ flowchart LR
   src -- CloudEvent --> scorer[scorer<br/>Knative Service<br/>scales to zero]
   src -. after retries .-> sink[KafkaSink] --> dlq
   scorer -. risk_scores .-> pg
-  gw -. results, 1 h cache .-> pg
+  gw -. search progress and results .-> pg
 ```
 
-Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d with 1 server and 2 agents. The manifests in `k8s/base` are portable; everything specific to k3d lives in `bootstrap/k3d/`. The collectors, normaliser and matcher run the team's code (`web/scraper.py`, `normaliser/core`) through thin Kafka adapters in `adapters/`, and the scorer runs `scorer/` as is. `smoke-consumer` writes `listings.raw` to the `listings` table; placeholder echo services still fill the gateway and frontend slots.
+Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d with 1 server and 2 agents. The manifests in `k8s/base` are portable; everything specific to k3d lives in `bootstrap/k3d/`. The collectors, normaliser and matcher run the team's code (`web/scraper.py`, `normaliser/core`) through thin Kafka adapters in `adapters/`, and the scorer runs `scorer/` as is. `smoke-consumer` writes `listings.raw` to the `listings` table; the Flask gateway publishes searches to Kafka and reads durable progress, clusters and risk scores from PostgreSQL. The separate Flask frontend forwards API calls to that gateway. Both use the image built from `Dockerfile.collector`.
 
 ## Design decisions
 
@@ -48,5 +48,13 @@ Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, 
 | **PostgreSQL: one StatefulSet, official image** | One source of truth for listings, clusters, scores and the gateway cache; a PVC keeps data across pod restarts. HA Postgres was out of scope. |
 | **TTL refresh as a CronJob** | Re-crawls only listings older than a configurable TTL, through the same `scrape.requests` path as user requests. |
 | **Helm for operators, Kustomize for our manifests, Make as the entry point** | Third-party operators upgrade as versioned charts (versions in one file); our manifests stay plain YAML with overlays per environment; `make up` is one idempotent command that waits on readiness. |
-| **One `images:` list** | Every workload's image is set in `k8s/base/kustomization.yaml`, so swapping a placeholder for a teammate's image changes one entry. |
+| **One `images:` list** | Every workload's image is set in `k8s/base/kustomization.yaml`, so deploying another image version changes one entry. |
 | **Multi-arch images on GHCR** | The team develops on ARM and x86 laptops; the cloud and the marker may be either. |
+
+## Search completion and the HTTP baseline
+
+A search has one UUID in `search_requests`. The gateway submits the selected product URL plus the other two storefront URLs. Each collector writes a `collection_runs` row with the resulting listing IDs after its output reaches Kafka. The gateway waits for all three runs and for corresponding matched/scored rows whose source timestamps are at least the search creation time. It then stores a result snapshot. A collector failure or the configurable 300-second deadline produces a failed search instead of an indefinite spinner.
+
+The normaliser carries `scraped_at` through matching to scoring. The scorer stores `source_scraped_at` and rejects older writes, preventing an old replay from making a fresh search appear complete. Search snapshots remain readable after gateway restarts. Every search currently recollects the comparison catalogues; no cache is assumed.
+
+Root Docker Compose provides an HTTP baseline: the same collectors, matching functions and scorer, without Kafka, KEDA or Knative. Both deployment paths use the shared SQL schema. PostgreSQL creates the complete schema once on an empty data volume in both Compose and Kubernetes. Deployment assumes a fresh database; there is no migration step.

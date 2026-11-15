@@ -4,9 +4,9 @@ import re
 from urllib.parse import parse_qs, urlsplit, urlunsplit
 
 PLATFORMS = {
-    "cartlane": {"path": "/dummysite/", "port": 8101},
-    "tao": {"path": "/dummysite2/", "port": 8102},
-    "lazora": {"path": "/dummysite3/", "port": 8103},
+    "cartlane": {"path": "/dummysite/", "port": 8101, "name": "Cartlane"},
+    "tao": {"path": "/dummysite2/", "port": 8102, "name": "Tao Market"},
+    "lazora": {"path": "/dummysite3/", "port": 8103, "name": "Lazora"},
 }
 
 
@@ -43,3 +43,10 @@ def resolve_url(value):
             break
         return platform, urlunsplit(("https", "paegnium.github.io", path, parts.query, parts.fragment))
     raise ValueError("Use a product or storefront URL from one of the three supported dummy sites.")
+
+
+def collection_targets(url):
+    """Fetch the submitted product and the other catalogues to find price comparisons."""
+    selected, canonical = resolve_url(url)
+    return [(key, canonical if key == selected else "https://paegnium.github.io" + config["path"])
+            for key, config in PLATFORMS.items()]

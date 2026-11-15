@@ -1,0 +1,119 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: collector-store-a
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: collector-store-a
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.collector.store_a
+        topic: scrape.requests
+        lagThreshold: "50"
+        offsetResetPolicy: earliest
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: collector-store-b
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: collector-store-b
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.collector.store_b
+        topic: scrape.requests
+        lagThreshold: "50"
+        offsetResetPolicy: earliest
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: collector-store-c
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: collector-store-c
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.collector.store_c
+        topic: scrape.requests
+        lagThreshold: "50"
+        offsetResetPolicy: earliest
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: normaliser
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: normaliser
+  minReplicaCount: 1
+  maxReplicaCount: 6
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.normaliser
+        topic: listings.raw
+        lagThreshold: "50"
+        offsetResetPolicy: earliest
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: matcher
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: matcher
+  minReplicaCount: 1
+  maxReplicaCount: 6
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.matcher
+        topic: listings.cleaned
+        lagThreshold: "50"
+        offsetResetPolicy: earliest

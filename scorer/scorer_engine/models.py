@@ -52,3 +52,4 @@ class Listing(BaseModel):
     review_count: Optional[int] = None
     reviews: list[Review] = []
     product_url: Optional[str] = None
+    scraped_at: Optional[datetime] = None

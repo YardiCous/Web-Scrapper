@@ -4,19 +4,13 @@ Counterfeit-risk scorer. The design is in [SCORER_CONTEXT.md](SCORER_CONTEXT.md)
 
 ```bash
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements-dev.txt
+pip install -r requirements.txt
 
-pytest                                                   # unit tests (DB tests skip without DATABASE_URL)
-python -m scorer_engine.cli fixtures/*.json             # score table
-python -m scorer_engine.cli --json fixtures/synthetic_suspects.json   # full detail
+python -m scorer_engine.cli ../infra/samples/normalised_output.json
+python -m scorer_engine.cli --json ../infra/samples/normalised_output.json
 ```
 
-Every file in `fixtures/` is normaliser output (one listing object or a list):
-
-| File | Contents |
-|---|---|
-| `normaliser_cartlane_78.json` | a real listing from the normaliser (Cartlane:78) |
-| `synthetic_suspects.json` | 9 **synthetic** listings (official / reseller / suspect) so every signal fires |
+The CLI accepts normaliser output as one listing object or a list. Recorded sample rows are available in `../infra/samples/normalised_output.json`.
 
 The scorer trusts the `cluster_*` fields, so if you edit a price, update that cluster's statistics too.
 
@@ -27,9 +21,7 @@ Start the database from the repo root first: `docker compose up -d db`.
 ```bash
 export DATABASE_URL=postgresql://user:password@localhost:5432/listings
 psql "$DATABASE_URL" -f sql/risk_scores.sql
-python -m scorer_engine.cli --save fixtures/*.json
-python -m scorer_engine.cli --save fixtures/*.json      # 2nd run: all unchanged
-pytest tests/test_store.py                               # replay x50 = no-op; moved median rescores
+python -m scorer_engine.cli --save ../infra/samples/normalised_output.json
 ```
 
 ## As a container
@@ -38,11 +30,11 @@ pytest tests/test_store.py                               # replay x50 = no-op; m
 docker build -t scorer:v1 .
 docker run --rm -p 8080:8080 -e DATABASE_URL=postgresql://user:password@host.docker.internal:5432/listings scorer:v1
 curl -i -X POST localhost:8080/ -H 'content-type: application/json' -H 'ce-type: listing.normalised' \
-     -d @fixtures/normaliser_cartlane_78.json
+     -d @listing.json
 curl localhost:8080/metrics/
 ```
 
-The endpoint returns three status codes:
+Create `listing.json` containing one normalised listing before sending the request. The endpoint returns three status codes:
 - `202`: the listing was scored.
 - `400`: the message is invalid. KafkaSource does not retry it and sends it to the dead-letter sink.
 - `503`: the database failed. KafkaSource retries it.

@@ -30,7 +30,10 @@ def to_sgd(price, currency):
 
 def compute_seller_age_days(selling_since_str, as_of=None):
     # selling_since_str is an ISO date like '2021-03-01'.
-    selling_since = date.fromisoformat(selling_since_str)
+    if not selling_since_str:
+        return None
+    selling_since = (selling_since_str if isinstance(selling_since_str, date)
+                     else date.fromisoformat(selling_since_str))
     as_of = as_of or date.today()
     return (as_of - selling_since).days
 

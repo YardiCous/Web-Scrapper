@@ -2,6 +2,9 @@
 !requirements.txt
 !web/
 !web/**
+!normaliser/
+!normaliser/core/
+!normaliser/core/**
 **/__pycache__/
 **/*.pyc
 **/.env
