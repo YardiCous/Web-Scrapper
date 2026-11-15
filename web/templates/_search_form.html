@@ -1,0 +1,7 @@
+<form id="lookup-form" action="{{ url_for('lookup') }}" method="get">
+        <input type="url" id="url" name="url" aria-label="Product URL"
+                value="{{ pasted_url|default('') }}"
+                placeholder="https://paegnium.github.io/dummysite/?product=78" required>
+        <button type="submit">Look up</button>
+</form>
+<p id="error" role="alert">{{ error|default('') }}</p>

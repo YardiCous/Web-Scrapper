@@ -4,4 +4,9 @@ form { display: flex; gap: .5rem; }
 input { flex: 1; padding: .7rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
 button { padding: .7rem 1.2rem; border: 0; border-radius: 6px; background: #2b6cb0; color: #fff; font-size: 1rem; cursor: pointer; }
 #error { color: #c53030; min-height: 1.2em; }
+input { min-width: 0; }
+button:disabled { opacity: .7; cursor: wait; }
+.listing { margin: 1rem 0; padding: 1.25rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+.listing h2 { margin-top: 0; }
+.listing details { margin-top: 1rem; }
 
