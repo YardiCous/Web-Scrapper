@@ -10,23 +10,14 @@ refs() {
   render | grep -Eo "ghcr.io/$GHCR_OWNER/[a-z0-9-]+:[A-Za-z0-9._-]+" | sort -u
 }
 
-# Sets DOCKERFILE, CTX and BUILD_ARGS for an image built here, given "name:tag"; fails for anything
+# Sets DOCKERFILE and CTX for an image built here, given "name:tag"; fails for anything
 # else (e.g. a teammate's image, which is pulled from the registry instead).
-# Store images are tagged with the full commit SHA of the site repo they serve.
 build_spec() {
-  local name=${1%%:*} tag=${1#*:}
-  CTX="$REPO_DIR"; BUILD_ARGS=""
+  local name=${1%%:*}
+  CTX="$REPO_DIR"
   case "$name" in
     cdc-collector|cdc-normaliser|cdc-matcher|cdc-scorer|cdc-gateway|cdc-frontend|cdc-storage|cdc-maintenance)
       DOCKERFILE="$REPO_DIR/services/${name#cdc-}/Dockerfile" ;;
-    store-a|store-b|store-c)
-      case "$name" in
-        store-a) repo=https://github.com/Paegnium/dummysite ;;
-        store-b) repo=https://github.com/Paegnium/dummysite2 ;;
-        store-c) repo=https://github.com/Paegnium/dummysite3 ;;
-      esac
-      DOCKERFILE="$REPO_DIR/services/storefront/Dockerfile"
-      BUILD_ARGS="--build-arg SITE_REPO=$repo --build-arg SITE_REF=$tag" ;;
     *) return 1 ;;
   esac
 }
@@ -42,8 +33,7 @@ case "$cmd" in
     for ref in $ours; do
       build_spec "${ref#ghcr.io/$GHCR_OWNER/}"
       log "docker build $ref"
-      # shellcheck disable=SC2086
-      docker build -t "$ref" -f "$DOCKERFILE" $BUILD_ARGS "$CTX"
+      docker build -t "$ref" -f "$DOCKERFILE" "$CTX"
     done
     ;;
   import)
@@ -61,9 +51,8 @@ case "$cmd" in
     for ref in $ours; do
       build_spec "${ref#ghcr.io/$GHCR_OWNER/}"
       log "docker buildx build --push $ref (linux/amd64,linux/arm64)"
-      # shellcheck disable=SC2086
       docker buildx build --builder cdc --platform linux/amd64,linux/arm64 \
-        -t "$ref" -f "$DOCKERFILE" $BUILD_ARGS --push "$CTX"
+        -t "$ref" -f "$DOCKERFILE" --push "$CTX"
     done
     ;;
   *) die "usage: images.sh build|import|push" ;;

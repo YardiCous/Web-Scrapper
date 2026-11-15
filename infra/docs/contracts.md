@@ -47,7 +47,7 @@ Each stage owns its code and Dockerfile under `services/`. Kubernetes selects th
 
 HTTP and Kafka entry points use the same processing code. The frontend and gateway have separate folders and images. Common Kafka delivery behaviour lives in `shared/kafka.py` and `shared/kafka_worker.py`.
 
-Platforms keep the names the scraper reports: `Cartlane` (store-a, dummysite), `Tao Market` (store-b, dummysite2) and `Lazora` (store-c, dummysite3). A `listing_id` is `<source_platform>:<sku>`, for example `Cartlane:78`, as in the normaliser and scorer.
+Platforms keep the names the scraper reports: `Cartlane` (dummysite), `Tao Market` (dummysite2) and `Lazora` (dummysite3). A `listing_id` is `<source_platform>:<sku>`, for example `Cartlane:78`, as in the normaliser and scorer.
 
 ## Payloads
 
@@ -59,7 +59,7 @@ One listing exactly as `services/collector/scraper.py` returns it, with numbers 
  "rating":4.7,"review_count":3,"reviews":[{"text":"Very happy with my purchase!","rating":5,"review_date":"2025-04-30"}],
  "product_url":"https://paegnium.github.io/dummysite/?product=78","scraped_at":"2026-11-11T00:00:00Z"}
 ```
-The collectors fetch pages from the in-cluster copies of the stores (`FETCH_FROM`), while `product_url` keeps the public `paegnium.github.io` address. [`data/samples/raw_listings.json`](../../data/samples/raw_listings.json) is the 32 listings in `data/listings` in this form.
+The collectors fetch the public `paegnium.github.io` websites directly. The websites are external data sources and are not deployed by this application. [`data/samples/raw_listings.json`](../../data/samples/raw_listings.json) is the 32 listings in `data/listings` in this form.
 
 ### `listings.cleaned`
 The raw fields plus what `normalise_record()` adds: `price_sgd`, `seller_age_days`, `clean_title`, `brand`, and the adapter's `listing_id`. Keyed by `brand` (or `unbranded`) so one matcher replica sees every listing of a brand. Matching per brand gives the same clusters as the normaliser's batch run over all listings.

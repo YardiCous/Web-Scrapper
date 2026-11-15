@@ -11,15 +11,6 @@ resources:
 # Logical workload images map to a dedicated Dockerfile in services/.
 # GHCR_OWNER is filled in by scripts/lib.sh; scripts/images.sh builds each image once.
 images:
-  - name: store-a
-    newName: ghcr.io/GHCR_OWNER/store-a
-    newTag: "2b8093c186c86c205feea65655569c472cfe33b7"
-  - name: store-b
-    newName: ghcr.io/GHCR_OWNER/store-b
-    newTag: "0526795c327979887e730aee6ba0d265aa922039"
-  - name: store-c
-    newName: ghcr.io/GHCR_OWNER/store-c
-    newTag: "24ee76c44f610ad486efcde2c49c406722e8d29f"
   - name: collector-store-a
     newName: ghcr.io/GHCR_OWNER/cdc-collector
     newTag: "0.1.0"

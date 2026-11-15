@@ -17,7 +17,7 @@ flowchart LR
   end
 
   t0 --> col[collector-store-a/b/c<br/>one Deployment each<br/>KEDA on lag]
-  col -- HTTP --> shops[store-a/b/c<br/>nginx · web]
+  col -- HTTP --> shops[External dummy websites<br/>paegnium.github.io]
   col --> t1
   t1 --> norm[normaliser<br/>KEDA on lag]
   norm --> t2
@@ -31,7 +31,7 @@ flowchart LR
   gw -. search progress and results .-> pg
 ```
 
-Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d. All application code and Dockerfiles live under `services/`; common helpers live under `shared/`. The collectors, normaliser and matcher each have an HTTP entry point for Compose and an explicit Kafka worker entry point for Kubernetes. Each stage has its own image. `listing-store` persists raw listings, the gateway manages durable searches, and the frontend renders results through the gateway API. All deployment manifests remain under `infra/k8s/`.
+Everything runs in one Kubernetes cluster, in five namespaces: `kafka`, `data`, `pipeline`, `scoring` and `web`. Locally that cluster is k3d. All application code and Dockerfiles live under `services/`; common helpers live under `shared/`. The collectors, normaliser and matcher each have an HTTP entry point for Compose and an explicit Kafka worker entry point for Kubernetes. Each stage has its own image. `listing-store` persists raw listings, the gateway manages durable searches, and the frontend renders results through the gateway API. All deployment manifests remain under `infra/k8s/`. Product websites are external data sources; this application does not host them.
 
 ## Design decisions
 

@@ -34,8 +34,6 @@ spec:
               value: collector-store-a
             - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
               value: Cartlane
-            - name: FETCH_FROM                  # scrape the in-cluster copy of the store
-              value: https://paegnium.github.io/dummysite/=http://store-a.web.svc/
             - name: KAFKA_GROUP_ID
               value: cdc.collector.store_a
             - name: KAFKA_INPUT_TOPIC
@@ -91,8 +89,6 @@ spec:
               value: collector-store-b
             - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
               value: Tao Market
-            - name: FETCH_FROM                  # scrape the in-cluster copy of the store
-              value: https://paegnium.github.io/dummysite2/=http://store-b.web.svc/
             - name: KAFKA_GROUP_ID
               value: cdc.collector.store_b
             - name: KAFKA_INPUT_TOPIC
@@ -148,8 +144,6 @@ spec:
               value: collector-store-c
             - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
               value: Lazora
-            - name: FETCH_FROM                  # scrape the in-cluster copy of the store
-              value: https://paegnium.github.io/dummysite3/=http://store-c.web.svc/
             - name: KAFKA_GROUP_ID
               value: cdc.collector.store_c
             - name: KAFKA_INPUT_TOPIC

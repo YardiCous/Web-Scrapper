@@ -1,8 +1,8 @@
 """Collector adapter: scrape.requests -> listings.raw, using the team's scraper (services/collector/scraper.py) as is.
 
 Every collector reads the whole topic in its own consumer group and keeps only the requests for its
-own platform. FETCH_FROM ("<public prefix>=<in-cluster prefix>") makes it fetch the page from the
-in-cluster copy of the store; the listing keeps its public product_url.
+own platform. Collectors fetch the existing public websites directly; hosting those sites is
+outside this application.
 """
 import os
 from datetime import date, datetime, timezone
@@ -14,13 +14,7 @@ from .scraper import ScrapeError, scrape
 from shared.kafka_worker import Reject, run as run_worker
 
 PLATFORM = os.environ["COLLECTOR_PLATFORM"]   # "Cartlane", "Tao Market" or "Lazora", as the scraper reports it
-FETCH_FROM = os.environ.get("FETCH_FROM", "")
 completed = []
-
-
-def _fetch_url(url):
-    public, _, local = FETCH_FROM.partition("=")
-    return local + url[len(public):] if public and url.startswith(public) else url
 
 
 def _plain(value):
@@ -35,7 +29,7 @@ def handle(_key, request):
     if request.get("source_platform") != PLATFORM:
         return []
     try:
-        listings = scrape(_fetch_url(request["product_url"]))
+        listings = scrape(request["product_url"])
     except ScrapeError as e:
         if request.get("request_id"):
             completed.append((request["request_id"], [], str(e)[:500]))

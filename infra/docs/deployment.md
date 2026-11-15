@@ -46,9 +46,10 @@ In a browser:
 | URL | What you should see |
 |---|---|
 | http://kafka-ui.localhost:8080 | Kafka UI: cluster `cdc`, the five topics and their messages |
-| http://store-a.localhost:8080, http://store-b.localhost:8080, http://store-c.localhost:8080 | the three dummy shops |
 | http://app.localhost:8080 | product URL search and comparison UI |
 | http://api.localhost:8080/api/searches | search API; create searches with POST and poll their result URLs |
+
+Collectors access the existing public dummy websites directly; these sites are external to the deployment.
 
 Paste `https://paegnium.github.io/dummysite/?product=78` into the frontend. After collection and scoring, expect the Cartlane and Tao Market MacBook listings, SGD prices, risk scores and explanations. Repeat the search to check refreshes.
 

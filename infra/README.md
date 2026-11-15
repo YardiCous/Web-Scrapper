@@ -5,7 +5,6 @@ Infrastructure for the Online Retail Item Authenticity Checker (CSC3104 Group 1)
 - PostgreSQL
 - KEDA
 - Knative Serving and Eventing (KafkaSource → scorer)
-- the three dummy stores
 - the independently built services from `services/`
 
 It runs the integrated collectors, normaliser, matcher, scorer, API gateway and frontend, and provides deployment templates, message contracts and evaluation experiments.
@@ -29,7 +28,6 @@ Profiles: `PROFILE=lite` (default) runs 1 Kafka broker with RF 1 and uses about 
 | What | Where |
 |---|---|
 | Kafka UI | http://kafka-ui.localhost:8080 |
-| Dummy stores | http://store-a.localhost:8080, http://store-b.localhost:8080, http://store-c.localhost:8080 |
 | API gateway / product comparison frontend | http://api.localhost:8080, http://app.localhost:8080 |
 | Kafka from a pod / from this machine | `cdc-kafka-bootstrap.kafka.svc:9092` / `localhost:32100` |
 | Postgres shell | `kubectl -n data exec -it postgres-0 -- psql -U cdc -d cdc` |
@@ -53,7 +51,7 @@ Other targets (`make -C infra help` lists them all):
 | `bootstrap/k3d/` | everything k3d-specific: cluster creation, local-only manifest patches, Kourier NodePort |
 | `k8s/base/` | portable manifests, one folder per namespace (`kafka`, `data`, `pipeline`, `scoring`, `web`); `kustomization.yaml` lists every image |
 | `k8s/components/lite/`, `k8s/overlays/` | lite profile; `local-lite` / `local-default` = base + profile + k3d |
-| `../services/` | all application code and Dockerfiles, including storage, maintenance and storefront images |
+| `../services/` | all application code and Dockerfiles, including storage and maintenance images |
 | `templates/` | starting points for Kafka workers, KEDA ScaledObjects and Knative services |
 | `schemas/`, `../data/` | JSON Schema per topic, recorded raw and normalised listings |
 | `eval/` | experiment scripts and `plot.py` (run on this machine) |

@@ -22,6 +22,6 @@ kubectl -n pipeline wait scaledobject --all --for=condition=Ready --timeout=2m
 kubectl -n scoring wait ksvc/scorer --for=condition=Ready --timeout=5m
 kubectl -n scoring wait kafkasink/listings-dlq --for=condition=Ready --timeout=5m
 kubectl -n scoring wait kafkasource/scorer-feed --for=condition=Ready --timeout=5m
-for d in store-a store-b store-c gateway frontend; do
+for d in gateway frontend; do
   kubectl -n web rollout status "deploy/$d" --timeout=5m
 done

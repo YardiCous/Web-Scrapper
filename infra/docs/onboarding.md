@@ -12,7 +12,6 @@ Application code lives in [`services/`](../../services/README.md). Each service 
 | `services/frontend` | `frontend` | `k8s/base/web/apps.yaml` | — |
 | `services/storage` | `listing-store` | `k8s/base/pipeline/listing-store.yaml` | `cdc.listing-store` |
 | `services/maintenance` | `ttl-refresh`, `loadgen` CronJobs | `k8s/base/pipeline/` | — |
-| `services/storefront` | `store-a/b/c` | `k8s/base/web/apps.yaml` | — |
 
 ## Build and deploy
 

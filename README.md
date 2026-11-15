@@ -14,7 +14,6 @@ services/
   frontend/        browser pages, templates and styles
   storage/         Kafka listing persistence
   maintenance/     TTL refresh and load generation
-  storefront/      dummy shop image
 shared/            database, Kafka, URL and listing helpers
 data/              recorded listings and normalised sample rows
 infra/
@@ -51,7 +50,7 @@ Browser → Frontend → Gateway → Three collectors
                             → Saved results → Frontend
 ```
 
-The selected collector retrieves the submitted product; the other two retrieve their catalogues for comparison. Collectors save raw listings and reviews. The gateway sends those listings to the normaliser and matcher, asks the scorer to persist scores, then saves the completed search. A storefront URL returns that platform's catalogue and matching products.
+Product websites are hosted externally; this application only collects their listings. The selected collector retrieves the submitted product; the other two retrieve their catalogues for comparison. Collectors save raw listings and reviews. The gateway sends those listings to the normaliser and matcher, asks the scorer to persist scores, then saves the completed search. A storefront URL returns that platform's catalogue and matching products.
 
 ```bash
 docker compose logs -f frontend gateway normaliser matcher scorer

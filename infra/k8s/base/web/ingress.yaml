@@ -7,36 +7,6 @@ metadata:
   namespace: web
 spec:
   rules:
-    - host: store-a.localhost
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: store-a
-                port:
-                  name: http
-    - host: store-b.localhost
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: store-b
-                port:
-                  name: http
-    - host: store-c.localhost
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: store-c
-                port:
-                  name: http
     - host: api.localhost
       http:
         paths:

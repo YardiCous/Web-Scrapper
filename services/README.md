@@ -12,7 +12,6 @@ Every service owns its application code, dependencies and Dockerfile. Build comm
 | `frontend/` | Render browser pages and forward API calls to the gateway | Gunicorn `services.frontend.app:app` | Same server |
 | `storage/` | Persist `listings.raw` idempotently; deployed as `listing-store` | `python -m services.storage.worker` | Same worker |
 | `maintenance/` | TTL refresh and evaluation load generation | `python -m services.maintenance` | CronJobs pass `ttl-refresh` or `loadgen` arguments |
-| `storefront/` | Serve a pinned copy of a dummy shop with nginx | nginx | Three builds, one per shop |
 
 For example:
 
@@ -24,3 +23,5 @@ docker build -f services/matcher/Dockerfile -t cdc-matcher .
 Compose runs collector, normaliser and matcher HTTP endpoints. Kubernetes overrides those three images' commands to run their Kafka workers. Each image contains its own service and common helpers; normalisation, matching and scoring use separate images.
 
 All Kubernetes manifests live under `infra/k8s/`. The image names and tags are mapped in `infra/k8s/base/kustomization.yaml`; `infra/scripts/images.sh` builds each image from its service folder.
+
+Product websites are external data sources. The application does not host or deploy them.
