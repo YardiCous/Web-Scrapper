@@ -1,0 +1,75 @@
+# listings.raw -> Postgres `listings` (idempotent upsert). Example KEDA target: copy this pair for
+# collectors/normalisers (templates/kafka-worker*.yaml are the annotated versions).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: listing-store
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: listing-store
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: listing-store
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: listing-store
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: listing-store
+          image: listing-store
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: listing-store
+            - name: KAFKA_GROUP_ID
+              value: cdc.listing-store
+            - name: KAFKA_INPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+            - name: WORK_MS_PER_MESSAGE
+              value: "5"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: listing-store
+  namespace: pipeline
+spec:
+  scaleTargetRef:
+    name: listing-store
+  minReplicaCount: 1
+  maxReplicaCount: 6
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 30   # Kubernetes default is 300
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: cdc-kafka-bootstrap.kafka.svc:9092
+        consumerGroup: cdc.listing-store
+        topic: listings.raw
+        lagThreshold: "100"
+        offsetResetPolicy: earliest

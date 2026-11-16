@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cdc-env
+  namespace: web
+data:
+  KAFKA_BOOTSTRAP_SERVERS: cdc-kafka-bootstrap.kafka.svc:9092
+  PGHOST: postgres.data.svc
+  PGPORT: "5432"
+  PGDATABASE: cdc

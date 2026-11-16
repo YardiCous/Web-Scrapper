@@ -1,8 +1,13 @@
 **
-!requirements.txt
-!web/
-!web/**
+!services/
+!services/**
+!shared/
+!shared/**
+!data/
+!data/samples/
+!data/samples/**
 **/__pycache__/
 **/*.pyc
 **/.env
 **/.venv/
+**/tests/

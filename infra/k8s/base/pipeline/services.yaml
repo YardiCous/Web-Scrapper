@@ -1,0 +1,273 @@
+# Each pipeline stage has its own image and explicit Kafka worker entry point.
+# KEDA ScaledObjects in autoscaling.yaml scale these Deployments on consumer-group lag.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-store-a
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: collector-store-a
+    cdc/owner: jj
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collector-store-a
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collector-store-a
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: collector-store-a
+          image: collector-store-a
+          command: ["python", "-m", "services.collector.worker"]
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: collector-store-a
+            - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
+              value: Cartlane
+            - name: KAFKA_GROUP_ID
+              value: cdc.collector.store_a
+            - name: KAFKA_INPUT_TOPIC
+              value: scrape.requests
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-store-b
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: collector-store-b
+    cdc/owner: jj
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collector-store-b
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collector-store-b
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: collector-store-b
+          image: collector-store-b
+          command: ["python", "-m", "services.collector.worker"]
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: collector-store-b
+            - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
+              value: Tao Market
+            - name: KAFKA_GROUP_ID
+              value: cdc.collector.store_b
+            - name: KAFKA_INPUT_TOPIC
+              value: scrape.requests
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-store-c
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: collector-store-c
+    cdc/owner: jj
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collector-store-c
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collector-store-c
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: collector-store-c
+          image: collector-store-c
+          command: ["python", "-m", "services.collector.worker"]
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: collector-store-c
+            - name: COLLECTOR_PLATFORM          # source_platform as services/collector/scraper.py reports it
+              value: Lazora
+            - name: KAFKA_GROUP_ID
+              value: cdc.collector.store_c
+            - name: KAFKA_INPUT_TOPIC
+              value: scrape.requests
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: normaliser
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: normaliser
+    cdc/owner: gordon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: normaliser
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: normaliser
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: normaliser
+          image: normaliser
+          command: ["python", "-m", "services.normaliser.worker"]
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: normaliser
+            - name: KAFKA_GROUP_ID
+              value: cdc.normaliser
+            - name: KAFKA_INPUT_TOPIC
+              value: listings.raw
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.cleaned
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 160Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matcher
+  namespace: pipeline
+  labels:
+    app.kubernetes.io/name: matcher
+    cdc/owner: gordon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matcher
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matcher
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: matcher
+          image: matcher
+          command: ["python", "-m", "services.matcher.worker"]
+          envFrom:
+            - configMapRef:
+                name: cdc-env
+            - secretRef:
+                name: postgres-credentials
+          env:
+            - name: SERVICE_NAME
+              value: matcher
+            - name: KAFKA_GROUP_ID
+              value: cdc.matcher
+            - name: KAFKA_INPUT_TOPIC
+              value: listings.cleaned
+            - name: KAFKA_OUTPUT_TOPIC
+              value: listings.normalized
+            - name: KAFKA_DLQ_TOPIC
+              value: listings.dlq
+          resources:
+            requests:
+              cpu: 50m
+              memory: 160Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "test $(( $(date +%s) - $(stat -c %Y /tmp/healthy) )) -lt 60"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3

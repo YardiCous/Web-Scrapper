@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-ui
+  namespace: kafka
+  labels:
+    app.kubernetes.io/name: kafka-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kafka-ui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kafka-ui
+    spec:
+      containers:
+        - name: kafka-ui
+          image: ghcr.io/kafbat/kafka-ui:v1.5.0
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: KAFKA_CLUSTERS_0_NAME
+              value: cdc
+            - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+              value: cdc-kafka-bootstrap.kafka.svc:9092
+            - name: DYNAMIC_CONFIG_ENABLED
+              value: "false"
+            - name: JAVA_OPTS
+              value: -Xms128m -Xmx256m
+          resources:
+            requests:
+              cpu: 50m
+              memory: 384Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            periodSeconds: 20
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-ui
+  namespace: kafka
+spec:
+  selector:
+    app.kubernetes.io/name: kafka-ui
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kafka-ui
+  namespace: kafka
+spec:
+  rules:
+    - host: kafka-ui.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kafka-ui
+                port:
+                  name: http

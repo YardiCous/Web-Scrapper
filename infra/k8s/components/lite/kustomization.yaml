@@ -1,0 +1,50 @@
+# Lite profile: one Kafka node, replication factor 1. For 8 GB machines; no broker failover.
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - target:
+      group: kafka.strimzi.io
+      kind: KafkaNodePool
+      name: kafka
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+      - op: replace
+        path: /spec/resources
+        value:
+          requests:
+            cpu: 200m
+            memory: 768Mi
+          limits:
+            cpu: "1"
+            memory: 1Gi
+      - op: replace
+        path: /spec/jvmOptions
+        value:
+          -Xms: 512m
+          -Xmx: 512m
+  - patch: |-
+      apiVersion: kafka.strimzi.io/v1
+      kind: Kafka
+      metadata:
+        name: cdc
+        namespace: kafka
+      spec:
+        kafka:
+          config:
+            default.replication.factor: 1
+            min.insync.replicas: 1
+            offsets.topic.replication.factor: 1
+            transaction.state.log.replication.factor: 1
+            transaction.state.log.min.isr: 1
+  - target:
+      group: kafka.strimzi.io
+      kind: KafkaTopic
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+      - op: replace
+        path: /spec/config/min.insync.replicas
+        value: 1

@@ -1,0 +1,43 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespaces.yaml
+  - kafka
+  - data
+  - pipeline
+  - scoring
+  - web
+
+# Logical workload images map to a dedicated Dockerfile in services/.
+# GHCR_OWNER is filled in by scripts/lib.sh; scripts/images.sh builds each image once.
+images:
+  - name: collector-store-a
+    newName: ghcr.io/GHCR_OWNER/cdc-collector
+    newTag: "0.1.0"
+  - name: collector-store-b
+    newName: ghcr.io/GHCR_OWNER/cdc-collector
+    newTag: "0.1.0"
+  - name: collector-store-c
+    newName: ghcr.io/GHCR_OWNER/cdc-collector
+    newTag: "0.1.0"
+  - name: normaliser
+    newName: ghcr.io/GHCR_OWNER/cdc-normaliser
+    newTag: "0.1.0"
+  - name: matcher
+    newName: ghcr.io/GHCR_OWNER/cdc-matcher
+    newTag: "0.1.0"
+  - name: scorer
+    newName: ghcr.io/GHCR_OWNER/cdc-scorer
+    newTag: "0.1.0"
+  - name: gateway
+    newName: ghcr.io/GHCR_OWNER/cdc-gateway
+    newTag: "0.1.0"
+  - name: frontend
+    newName: ghcr.io/GHCR_OWNER/cdc-frontend
+    newTag: "0.1.0"
+  - name: listing-store
+    newName: ghcr.io/GHCR_OWNER/cdc-storage
+    newTag: "0.1.0"
+  - name: maintenance
+    newName: ghcr.io/GHCR_OWNER/cdc-maintenance
+    newTag: "0.1.0"

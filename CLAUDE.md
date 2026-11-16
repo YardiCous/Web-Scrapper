@@ -93,4 +93,8 @@ Final marks are adjusted by peer evaluation.
 - If a feature threatens the final deadline, propose a smaller version that still demonstrates the same distributed mechanism, and note the cut so it can go in the report's "missing functionality" discussion.
 - Keep this file updated as design decisions change (record the decision and the reason).
 
-@scorer/SCORER_CONTEXT.md
+@services/scorer/SCORER_CONTEXT.md
+
+## Current repository organisation
+
+All deployable application code is under `services/<name>/`, with a dedicated Dockerfile and requirements file per Python service. Shared Kafka, database and listing helpers live under `shared/`. Kubernetes manifests are centralised under `infra/k8s/`; image build selection lives in `infra/scripts/images.sh`. Compose runs separate frontend, gateway, collector, normaliser, matcher and scorer containers over HTTP. Kubernetes uses the same service images with explicit Kafka worker commands for collectors, normaliser and matcher. The raw-listing consumer is `listing-store` (`services/storage/`). Recorded data is under `data/`. Database deployment assumes a fresh volume and uses the single initial schema. Automated test files remain removed at the user's request.

@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cdc/listings.raw.schema.json",
+  "title": "listings.raw",
+  "description": "One listing as the team's scraper (services/collector/scraper.py) returns it, published by the collector adapter (services/collector/worker.py) with source_listing_id (= sku) and scraped_at added. Kafka key: \"<source_platform>:<source_listing_id>\". Extra fields are allowed.",
+  "type": "object",
+  "required": [
+    "sku",
+    "source_platform",
+    "source_listing_id",
+    "title",
+    "price",
+    "currency",
+    "seller_id",
+    "seller_name",
+    "selling_since",
+    "rating",
+    "review_count",
+    "reviews",
+    "product_url",
+    "scraped_at"
+  ],
+  "properties": {
+    "sku": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_platform": {
+      "$ref": "#/$defs/platform"
+    },
+    "source_listing_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "seller_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seller_name": {
+      "type": "string"
+    },
+    "selling_since": {
+      "$ref": "#/$defs/date"
+    },
+    "rating": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 5
+    },
+    "review_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/review"
+      }
+    },
+    "product_url": {
+      "type": "string",
+      "pattern": "^https?://"
+    },
+    "scraped_at": {
+      "$ref": "#/$defs/dateTime"
+    }
+  },
+  "$defs": {
+    "platform": {
+      "enum": [
+        "Cartlane",
+        "Tao Market",
+        "Lazora"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "text",
+        "rating",
+        "review_date"
+      ],
+      "properties": {
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "review_date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

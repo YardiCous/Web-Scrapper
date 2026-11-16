@@ -1,133 +1,113 @@
-# Postgres Setup Guide (WSL and Windows)
-```bash
-POSTGRES_USER=user
-POSTGRES_PASSWORD=password
-POSTGRES_DB=listings
-DATABASE_URL=postgresql://user:password@localhost:5432/listings
+# Online Retail Item Authenticity & Price Checker
+
+Paste a Cartlane, Tao Market or Lazora product URL to compare matching listings across platforms. The application converts prices to SGD, matches products and calculates explained counterfeit-risk scores.
+
+## Repository layout
+
+```text
+services/
+  collector/       scraper, HTTP endpoint and Kafka worker
+  normaliser/      normalisation logic, HTTP endpoint and Kafka worker
+  matcher/         matching logic, HTTP endpoint and Kafka worker
+  scorer/          risk scoring and persistence
+  gateway/         search API and orchestration
+  frontend/        browser pages, templates and styles
+  storage/         Kafka listing persistence
+  maintenance/     TTL refresh and load generation
+shared/            database, Kafka, URL and listing helpers
+data/              recorded listings and normalised sample rows
+infra/
+  k8s/             all Kubernetes manifests
+  scripts/         build and deployment scripts
+  schemas/         Kafka message contracts
+  docs/            architecture and deployment documentation
+  eval/            evaluation experiments
 ```
 
----
-## Option A: Docker
+Every service has its own Dockerfile. See the [service map](services/README.md) for entry points and responsibilities.
 
-Requires Docker Desktop with the WSL2 backend and WSL integration enabled for your Ubuntu distro (Settings > Resources > WSL Integration).
+## Run with Docker Compose
 
-```bash
-cd ~/project
-docker compose up -d db
-docker compose ps         
-docker compose exec db psql -U USER -d listings -c "\dt"
-```
-
-Notes:
-
-- The container reads `POSTGRES_USER`, `POSTGRES_PASSWORD` and `POSTGRES_DB` from `.env` and creates them **only the first time**, when the data volume is empty. `init.sql` also runs only then.
-- To change credentials or the schema, wipe the volume and start again (**deletes all data**):
-
-```bash
-docker compose down -v
-docker compose up -d db
-```
-
-- Data lives in the `pgdata` Docker volume, not in the project folder.
-
----
-
-## Option B: Native on Windows
-
-Use this only if you want Postgres to run on Windows itself rather than in WSL.
-
-### 1. Install
-
-Download the installer from postgresql.org (EDB) and run it, or from PowerShell:
-
-```powershell
-winget install PostgreSQL.PostgreSQL.16
-```
-
-During the installer, you set a password for the built-in `postgres` superuser. Keep the default port **5432** and let it install `psql` and pgAdmin.
-
-### 2. Create the user and database
-
-Open **SQL Shell (psql)** from the Start menu (accept the defaults and enter the `postgres` password), then:
-
-```sql
-CREATE USER USER WITH PASSWORD 'PASSWORD';
-CREATE DATABASE listings OWNER USER;
-\q
-```
-
-### 3. Create the tables
-
-From PowerShell in the project folder:
-
-```powershell
-psql "postgresql://user:password@localhost:5432/listings" -f db\init.sql
-```
-
-If `psql` is not recognized, add `C:\Program Files\PostgreSQL\16\bin` to your PATH.
-
-### 4. Using it from WSL
-
-If the Flask app runs in WSL but Postgres runs on Windows, `localhost` inside WSL may not reach the Windows server. By default Windows Postgres only listens on localhost, so you would need to change `listen_addresses` and `pg_hba.conf` and use the Windows host IP in `DATABASE_URL`. This is fiddly. **Simplest rule: run the app and the database in the same place** (both in WSL, or both on Windows).
-
----
-## Run project
- 
-Create `.env` using `env.example` in the repository root.
- 
-```bash
-cd ~/project
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python web/app.py
-```
-
-## Dummy Websites
-
-* https://paegnium.github.io/dummysite/
-* https://paegnium.github.io/dummysite2/
-* https://paegnium.github.io/dummysite3/
-
-## Search-triggered collectors
-
-Start the site, database, and three collector services from the repository root:
+Requires Docker Engine or Docker Desktop with WSL integration enabled.
 
 ```bash
+cp env.example .env       # first setup only; keep an existing .env
+# Set PostgreSQL credentials in .env.
 docker compose up --build -d
 ```
 
-Open http://localhost:5000 and paste a dummy product URL, for example:
+Open http://localhost:5000 and try:
 
-* Cartlane: `https://paegnium.github.io/dummysite/?product=78`
-* Tao Market: `https://paegnium.github.io/dummysite2/products/78.html`
-* Lazora: `https://paegnium.github.io/dummysite3/#product-7`
+- Cartlane: `https://paegnium.github.io/dummysite/?product=78`
+- Tao Market: `https://paegnium.github.io/dummysite2/products/78.html`
+- Lazora: `https://paegnium.github.io/dummysite3/#product-7`
 
-The collectors stay running and wait for requests; starting them does not scrape
-anything. Each search sends the URL to the matching collector's `POST /collect`
-endpoint. That collector uses the existing scraper, saves the listing and reviews
-to PostgreSQL, and returns the collected data for the results page. Repeating a
-search refreshes the existing listing and replaces its reviews. A storefront URL
-collects that site's catalogue instead of a single product. Searches currently
-collect from the submitted platform only; cross-platform matching is separate.
+Compose runs separate frontend, gateway, collector, normaliser, matcher and scorer containers, plus PostgreSQL. Each search follows this flow:
 
-To run Flask on your machine instead of in Docker, start only its dependencies:
-
-```bash
-docker compose up --build -d collector-cartlane collector-tao collector-lazora
-python web/app.py
+```text
+Browser → Frontend → Gateway → Three collectors
+                            → Normaliser → Matcher → Scorer
+                            → Saved results → Frontend
 ```
 
-The local Flask app uses collector ports 8101, 8102, and 8103. Containerized Flask
-uses the Compose service names instead. The URLs can be overridden with
-`COLLECTOR_CARTLANE_URL`, `COLLECTOR_TAO_URL`, and `COLLECTOR_LAZORA_URL`.
-Collectors connect to PostgreSQL at `db:5432` using the `POSTGRES_*` credentials
-from `.env`; the host-run app continues to use its local `DATABASE_URL`.
-
-Inspect collector logs with:
+Product websites are hosted externally; this application only collects their listings. The selected collector retrieves the submitted product; the other two retrieve their catalogues for comparison. Collectors save raw listings and reviews. The gateway sends those listings to the normaliser and matcher, asks the scorer to persist scores, then saves the completed search. A storefront URL returns that platform's catalogue and matching products.
 
 ```bash
-docker compose logs -f collector-cartlane collector-tao collector-lazora
+docker compose logs -f frontend gateway normaliser matcher scorer
+docker compose down      # retains the pgdata volume
 ```
 
+`init.sql` links to `infra/k8s/base/data/schema.sql`. PostgreSQL creates the complete schema on its first start with an empty volume. Deployment assumes a fresh database; there is no migration service.
 
+## Run with Kubernetes
+
+Requires Docker, k3d, kubectl, Helm, Make, Python and OpenSSL. Follow the [deployment instructions](infra/docs/deployment.md).
+
+```bash
+make -C infra up
+```
+
+Open http://app.localhost:8080. The same service folders supply the Kubernetes images, with collectors, normaliser and matcher running Kafka workers:
+
+```text
+Frontend → Gateway → scrape.requests → Collectors → listings.raw
+                                                     ├→ Listing storage → PostgreSQL
+                                                     └→ Normaliser → listings.cleaned
+                                                                       → Matcher → listings.normalized
+                                                                                     → KafkaSource → Scorer → PostgreSQL
+```
+
+The frontend polls the gateway for durable search progress. The gateway waits for all three collections and fresh scores, then saves and returns the comparison. KEDA scales workers on consumer lag; Knative scales the scorer to zero when idle; a TTL CronJob refreshes stale listings. Searches time out after 300 seconds by default.
+
+## Local development
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+docker compose up --build -d gateway
+python -m services.frontend.app
+```
+
+The local frontend listens on port 5000 and calls the gateway on port 8500. For individual service development, install `services/<name>/requirements.txt` and run that service's entry point from the repository root.
+
+| Service | Host port | URL override |
+|---|---|---|
+| Frontend | 5000 | — |
+| Gateway | 8500 | `GATEWAY_URL` on the frontend |
+| Collectors | 8101–8103 | `COLLECTOR_CARTLANE_URL`, `COLLECTOR_TAO_URL`, `COLLECTOR_LAZORA_URL` |
+| Normaliser | 8300 | `NORMALISER_URL` |
+| Matcher | 8400 | `MATCHER_URL` |
+| Scorer | 8200 | `SCORER_URL` |
+
+Containers listen on port 8080. The collector image defaults to HTTP; Kubernetes starts its Kafka worker explicitly. The gateway reads `DATABASE_URL` from `.env` locally; containers receive PostgreSQL settings through environment variables.
+
+## API
+
+`POST /api/searches` accepts `{"url":"https://paegnium.github.io/dummysite/?product=78"}` and returns `request_id`, `status`, `listings` and `error`. The `Location` header identifies `GET /api/searches/<request_id>`. Kafka searches return 202 while pending; HTTP searches return completed results synchronously. The frontend renders saved results at `/searches/<request_id>`.
+
+The normaliser accepts `POST /normalise` and the matcher accepts `POST /match`, each with a `{"listings": [...]}` body and response. The scorer accepts one matched listing at `POST /`. HTTP services expose process health at `/healthz`; the frontend and gateway also expose dependency health at `/health`.
+
+[Architecture](infra/docs/architecture.md) · [Message contracts](infra/docs/contracts.md) · [Infrastructure commands](infra/README.md)
+
+Risk scores describe available indicators and do not guarantee authenticity. SGD conversion uses fixed demonstration exchange rates.
