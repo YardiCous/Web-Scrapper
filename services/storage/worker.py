@@ -12,7 +12,8 @@ from pathlib import Path
 
 from confluent_kafka import Consumer, Producer
 
-from shared.kafka import Shutdown, connect_db, consumer_config, heartbeat, log, producer_config
+from shared.kafka import (Shutdown, commit_offsets, connect_db, consumer_config, heartbeat, log,
+                          producer_config)
 
 INPUT_TOPIC = os.environ.get("KAFKA_INPUT_TOPIC", "listings.raw")
 DLQ_TOPIC = os.environ.get("KAFKA_DLQ_TOPIC", "listings.dlq")
@@ -114,9 +115,9 @@ def run():
         if CRASH_FILE.exists():
             log("crash_injected", messages=len(msgs))
             os._exit(1)
-        consumer.commit(asynchronous=False)
+        committed = commit_offsets(consumer, len(msgs))
         log("batch", messages=len(msgs), inserted=inserted, updated=updated,
-            stale=len(rows) - inserted - updated, dlq=dlq)
+            stale=len(rows) - inserted - updated, dlq=dlq, committed=committed)
 
     consumer.close()  # commits nothing new; leaves the group so the rebalance starts immediately
     db.close()

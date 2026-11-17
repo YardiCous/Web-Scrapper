@@ -7,7 +7,7 @@ import os
 
 from confluent_kafka import Consumer, Producer
 
-from shared.kafka import Shutdown, consumer_config, heartbeat, log, producer_config
+from shared.kafka import Shutdown, commit_offsets, consumer_config, heartbeat, log, producer_config
 
 INPUT_TOPIC = os.environ["KAFKA_INPUT_TOPIC"]
 OUTPUT_TOPIC = os.environ["KAFKA_OUTPUT_TOPIC"]
@@ -74,8 +74,8 @@ def run(handle, end_batch=None, after_publish=None):
             raise RuntimeError("could not deliver every output message")
         if after_publish:
             after_publish()
-        consumer.commit(asynchronous=False)
-        log("batch", messages=len(msgs), published=len(out), dlq=dlq)
+        committed = commit_offsets(consumer, len(msgs))
+        log("batch", messages=len(msgs), published=len(out), dlq=dlq, committed=committed)
 
     consumer.close()
     log("stopped")
