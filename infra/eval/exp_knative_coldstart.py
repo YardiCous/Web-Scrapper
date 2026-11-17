@@ -18,6 +18,10 @@ from common import append_csv, kubectl_json, now_iso, profile, wait_until  # noq
 
 URL = "http://localhost:8081/"
 HOST = "scorer.scoring.knative.localhost"
+# Smallest listing the scorer accepts (services/scorer/models.py), so each request is scored and
+# upserted instead of rejected with 400. Its own cluster id keeps it out of every search result.
+PROBE = {"listing_id": "eval:coldstart-probe", "cluster_id": "eval:coldstart-probe", "cluster_size": 1,
+         "source_platform": "eval", "title": "Cold-start probe", "price_sgd": 1.0}
 
 
 def scorer_pods():
@@ -26,7 +30,7 @@ def scorer_pods():
 
 
 def post_event():
-    body = json.dumps({"listing_id": "coldstart-probe"}).encode()
+    body = json.dumps(PROBE).encode()
     req = urllib.request.Request(URL, data=body, method="POST", headers={
         "Host": HOST, "Content-Type": "application/json", "ce-specversion": "1.0",
         "ce-id": str(uuid.uuid4()), "ce-type": "cdc.eval.probe", "ce-source": "eval/exp_knative_coldstart"})

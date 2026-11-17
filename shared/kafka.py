@@ -25,6 +25,24 @@ class Shutdown:
         self.requested = True
 
 
+def commit_offsets(consumer, messages):
+    """Synchronous offset commit after a successful batch. Returns False if a consumer-group rebalance
+    rejected it: the partitions may now belong to another replica, which re-reads from the last committed
+    offset, so the batch is redelivered and the idempotent writes absorb it. Not worth a crash and restart.
+    Any other commit error still raises (the pod restarts from the last commit)."""
+    from confluent_kafka import KafkaError, KafkaException
+    try:
+        consumer.commit(asynchronous=False)
+        return True
+    except KafkaException as e:
+        err = e.args[0]
+        if err.code() not in (KafkaError.ILLEGAL_GENERATION, KafkaError.UNKNOWN_MEMBER_ID,
+                              KafkaError.REBALANCE_IN_PROGRESS, KafkaError._NO_OFFSET):
+            raise
+        log("commit_rejected_rebalance", messages=messages, error=err.name())
+        return False
+
+
 def heartbeat():
     """Touched every poll-loop iteration; the liveness probe restarts the pod if it goes stale."""
     HEALTH_FILE.touch()
