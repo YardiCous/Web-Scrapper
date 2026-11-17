@@ -1,1 +1,0 @@
-infra/k8s/base/data/schema.sql
