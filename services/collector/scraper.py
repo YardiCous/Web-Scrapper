@@ -10,8 +10,10 @@ python -m services.collector.scraper --save https://paegnium.github.io/dummysite
 """
 
 import json
+import os
 import re
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timezone
 from decimal import Decimal
 from urllib.parse import urljoin, urlsplit, urlunsplit, parse_qs
@@ -21,6 +23,16 @@ from bs4 import BeautifulSoup
 
 TIMEOUT = 30
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; listings-scraper/1.0)"}
+# Tao Market has one page per product (186 at last count); fetching them one by one took ~80 s.
+FETCH_WORKERS = max(1, int(os.environ.get("SCRAPE_FETCH_WORKERS", "16")))
+
+# One session for the process: keep-alive reuses TLS connections instead of a handshake per page.
+# The pool is as large as the thread pool so parallel fetches don't wait for or discard connections.
+_session = requests.Session()
+_session.headers.update(HEADERS)
+_adapter = requests.adapters.HTTPAdapter(pool_connections=4, pool_maxsize=FETCH_WORKERS)
+_session.mount("https://", _adapter)
+_session.mount("http://", _adapter)
 
 
 class ScrapeError(Exception):
@@ -61,7 +73,7 @@ def make_sku(product):
 # --------------------------------------------------------------------------- #
 def _fetch(url):
     try:
-        resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+        resp = _session.get(url, timeout=TIMEOUT)
         resp.raise_for_status()
     except requests.RequestException as e:
         raise ScrapeError(f"Could not fetch {url}: {e}") from e
@@ -184,11 +196,13 @@ def scrape(url):
             links = []
         if not links:
             raise ScrapeError(f"No product data found at {url}")
+        # Fetch the product pages in parallel. map() keeps the index order, and the first page that
+        # fails raises its ScrapeError here, as the sequential loop did.
         products = []
-        for link in links:
-            found = _embedded_products(_fetch(link))
-            if found:
-                products.extend(found)
+        with ThreadPoolExecutor(max_workers=min(FETCH_WORKERS, len(links))) as pool:
+            for found in pool.map(lambda link: _embedded_products(_fetch(link)), links):
+                if found:
+                    products.extend(found)
 
     if wanted is not None:
         products = [p for p in products if str(p.get("id")) == wanted]
