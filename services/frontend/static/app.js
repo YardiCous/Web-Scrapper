@@ -1,6 +1,8 @@
 const form = document.getElementById("lookup-form");
 const input = document.getElementById("url");
 const error = document.getElementById("error");
+const progress = document.getElementById("search-progress");
+const status = document.getElementById("search-status");
 
 form.addEventListener("submit", (e) => {
   error.textContent = "";
@@ -15,16 +17,27 @@ form.addEventListener("submit", (e) => {
   const button = form.querySelector("button");
   button.disabled = true;
   button.textContent = "Searching…";
+  // The browser stays on this page until the comparison finishes (or the pending page loads),
+  // so show that the search is running. A new search replaces any earlier pending status.
+  progress.hidden = false;
+  if (status) status.hidden = true;
 });
 
+// Coming back with the Back button can restore this page from the cache mid-search: reset it.
 window.addEventListener("pageshow", () => {
   const button = form.querySelector("button");
   button.disabled = false;
   button.textContent = "Look up";
+  progress.hidden = true;
+  if (status) status.hidden = false;
 });
 
-const status = document.getElementById("search-status");
 if (status) {
+  const text = document.getElementById("search-status-text");
+  const show = (message, busy) => {
+    text.textContent = message;
+    status.classList.toggle("stopped", !busy);
+  };
   const poll = async () => {
     try {
       const response = await fetch(status.dataset.statusUrl);
@@ -35,12 +48,12 @@ if (status) {
         return;
       }
       if (job.status === "failed") {
-        status.textContent = job.error;
+        show(job.error, false);
         return;
       }
       setTimeout(poll, 2000);
     } catch {
-      status.textContent = "Waiting for the comparison service to reconnect…";
+      show("Waiting for the comparison service to reconnect…", true);
       setTimeout(poll, 5000);
     }
   };
