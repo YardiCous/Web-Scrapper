@@ -43,11 +43,13 @@ def run_trial(a, lag, trial):
     wait_until(lambda: replicas() == (min_replicas, min_replicas), 900, interval_s=2, what="scaled back in")
 
     run_id = new_run_id()
-    t0 = time.time()
+    # Wall clock only to line up with the loadgen's log timestamp; sample times use the monotonic
+    # clock, because WSL steps the wall clock by ~0.2 s now and then, which made t_s go backwards.
+    t0, m0 = time.time(), time.monotonic()
     job = start_job("loadgen", ["loadgen", "--count", str(a.count), "--rate", str(a.rate), "--run-id", run_id])
     samples, done_at = [], None
     while True:
-        t = time.time() - t0
+        t = time.monotonic() - m0
         desired, ready = replicas()
         try:
             current = lag.total()
@@ -60,7 +62,7 @@ def run_trial(a, lag, trial):
             break
         if t > a.count / a.rate + 900:
             raise TimeoutError("lag did not drain")
-        time.sleep(max(0.0, 1 - (time.time() - t0 - t)))
+        time.sleep(max(0.0, 1 - (time.monotonic() - m0 - t)))
     wait_job(job, 60)
 
     start = next(r["ts"] for r in json_logs(f"job/{job}") if r.get("event") == "loadgen_start") - t0
