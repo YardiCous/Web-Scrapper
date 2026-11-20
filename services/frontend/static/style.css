@@ -6,6 +6,13 @@ button { padding: .7rem 1.2rem; border: 0; border-radius: 6px; background: #2b6c
 #error { color: #c53030; min-height: 1.2em; }
 input { min-width: 0; }
 button:disabled { opacity: .7; cursor: wait; }
+[hidden] { display: none !important; }
+.progress { display: flex; align-items: center; gap: .6rem; color: #444; }
+.spinner { flex: none; width: 1.1rem; height: 1.1rem; border: 3px solid #cbd5e0; border-top-color: #2b6cb0;
+           border-radius: 50%; animation: spin .8s linear infinite; }
+.progress.stopped .spinner { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 2.4s; } }
 .listing { margin: 1rem 0; padding: 1.25rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
 .listing h2 { margin-top: 0; }
 .listing details { margin-top: 1rem; }
