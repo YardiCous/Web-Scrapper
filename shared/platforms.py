@@ -45,8 +45,17 @@ def resolve_url(value):
     raise ValueError("Use a product or storefront URL from one of the three supported dummy sites.")
 
 
+def resolve_product_url(value):
+    """Like resolve_url, but reject storefront pages so users can only search for one product."""
+    platform, canonical = resolve_url(value)
+    parts = urlsplit(canonical)
+    if not (parts.query or parts.fragment or "/products/" in parts.path):
+        raise ValueError("Paste a product page URL, not a storefront or catalogue page.")
+    return platform, canonical
+
+
 def collection_targets(url):
     """Fetch the submitted product and the other catalogues to find price comparisons."""
-    selected, canonical = resolve_url(url)
+    selected, canonical = resolve_product_url(url)
     return [(key, canonical if key == selected else "https://paegnium.github.io" + config["path"])
             for key, config in PLATFORMS.items()]

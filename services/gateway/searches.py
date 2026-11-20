@@ -4,13 +4,11 @@ import os
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
-from urllib.parse import urlsplit
-
 import requests
 from psycopg2.extras import Json, RealDictCursor
 
 from shared import database as db
-from shared.platforms import PLATFORMS, collection_targets, resolve_url
+from shared.platforms import PLATFORMS, collection_targets, resolve_product_url
 from shared.listings import rows_for_url
 
 
@@ -20,15 +18,9 @@ class SearchError(Exception):
 
 def select_results(rows, url):
     result = rows_for_url(rows, url)
-    if result:
-        return result
-    platform, canonical = resolve_url(url)
-    parts = urlsplit(canonical)
-    if parts.query or parts.fragment or "/products/" in parts.path:
+    if not result:
         raise SearchError("No listing was found for this product URL.")
-    clusters = {r["cluster_id"] for r in rows if r["source_platform"] == PLATFORMS[platform]["name"]}
-    return sorted((r for r in rows if r["cluster_id"] in clusters),
-                  key=lambda r: (r["cluster_id"], r["price_sgd"]))
+    return result
 
 
 def _update(request_id, status, *, result=None, error=None):
@@ -102,7 +94,7 @@ def publish_requests(request_id, url, requested_at):
 
 
 def start(url):
-    _, url = resolve_url(url)
+    _, url = resolve_product_url(url)
     request_id = str(uuid.uuid4())
     with db.connection() as conn, conn.cursor() as cur:
         cur.execute("""INSERT INTO search_requests (request_id, product_url) VALUES (%s, %s)

@@ -4,7 +4,7 @@ import os
 import requests
 from flask import Flask, jsonify, render_template, request, url_for
 
-from shared.platforms import resolve_url
+from shared.platforms import resolve_product_url
 
 app = Flask(__name__)
 
@@ -31,7 +31,7 @@ def index():
 def lookup():
     pasted_url = request.args.get('url', '')
     try:
-        _, url = resolve_url(pasted_url)
+        _, url = resolve_product_url(pasted_url)
     except ValueError as error:
         return render_template('index.html', pasted_url=pasted_url, error=str(error)), 400
     try:
