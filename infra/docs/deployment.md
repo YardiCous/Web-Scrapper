@@ -3,8 +3,8 @@
 These steps start the whole system on one machine, run the application, and reproduce the evaluation graphs. Every command runs from the folder you cloned the repository into (the one that contains `infra/`). On Windows, run them in an **Ubuntu (WSL2) terminal**, not PowerShell, and clone the repository inside Ubuntu.
 
 ```bash
-git clone <repository URL>
-cd <repository folder>
+git clone https://github.com/YardiCous/Web-Scrapper.git
+cd Web-Scrapper
 ```
 
 ## 1. Prerequisites (once)
@@ -17,12 +17,6 @@ cd <repository folder>
 | helm ≥ 3 | `helm version` | https://helm.sh/docs/intro/install/ |
 | make, bash, python3 with venv, openssl | `make --version`, `python3 -m venv --help` | Ubuntu: `sudo apt-get install -y make python3-venv openssl` (macOS: already installed) |
 
-**Windows (WSL2) from scratch:**
-1. In an admin PowerShell, run `wsl --install -d Ubuntu-24.04`, reboot, and create the Linux user.
-2. In Ubuntu, run `curl -fsSL https://get.docker.com | sudo sh` and `sudo usermod -aG docker $USER`.
-3. In PowerShell, run `wsl --shutdown`, then reopen Ubuntu.
-4. Install kubectl, k3d and helm from the links above, using the Linux instructions.
-
 Ports used on this machine: 8080 (web), 8081 (Knative), 32100–32103 (Kafka). Close other programs using them.
 
 ## 2. Start everything
@@ -32,7 +26,7 @@ make -C infra up
 ```
 This takes about 10–15 minutes the first time (it downloads images) and about 1–2 minutes after that. It is safe to run again. It ends by printing the URLs. The command waits for each component to be healthy and stops with an error if one isn't.
 
-With 16 GB or more of memory available to Docker, `make -C infra up PROFILE=default` runs 3 Kafka brokers (replication factor 3) instead of 1. The broker-failure experiment is only meaningful in that profile.
+With 16 GB or more of memory available to Docker, `make -C infra up PROFILE=default` runs 3 Kafka brokers (replication factor 3) instead of 1.
 
 ## 3. Open the application
 
