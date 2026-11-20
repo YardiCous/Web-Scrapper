@@ -4,8 +4,7 @@ listings.cleaned is keyed by brand, so one matcher replica owns every listing of
 saves its listings to matcher_listings, re-runs find_matches/build_clusters for every brand it touched,
 saves each cluster with an optimistic-concurrency version check, and publishes one scoring row per
 listing (keyed by cluster_id) for every cluster that changed or holds a listing from the batch. Matching
-within a brand gives the same clusters as Gordon's batch run over all listings (checked on
-data/listings).
+within a brand gives the same clusters as Gordon's batch run over all listings.
 
 The database transaction commits only after the rows are published, so a crash in between rolls the
 clusters back and the redelivered batch publishes them again.

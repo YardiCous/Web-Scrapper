@@ -59,7 +59,7 @@ One listing exactly as `services/collector/scraper.py` returns it, with numbers 
  "rating":4.7,"review_count":3,"reviews":[{"text":"Very happy with my purchase!","rating":5,"review_date":"2025-04-30"}],
  "product_url":"https://paegnium.github.io/dummysite/?product=78","scraped_at":"2026-11-11T00:00:00Z"}
 ```
-The collectors fetch the public `paegnium.github.io` websites directly. The websites are external data sources and are not deployed by this application. [`data/samples/raw_listings.json`](../../data/samples/raw_listings.json) is the 32 listings in `data/listings` in this form.
+The collectors fetch the public `paegnium.github.io` websites directly. The websites are external data sources and are not deployed by this application.
 
 ### `listings.cleaned`
 The raw fields plus what `normalise_record()` adds: `price_sgd`, `seller_age_days`, `clean_title`, `brand`, and the adapter's `listing_id`. Keyed by `brand` (or `unbranded`) so one matcher replica sees every listing of a brand. Matching per brand gives the same clusters as the normaliser's batch run over all listings.
