@@ -67,7 +67,7 @@ Frontend → Gateway → scrape.requests → Collectors → listings.raw
 
 The frontend polls the gateway for durable search progress. The gateway waits for all three collections and fresh scores, then saves and returns the comparison. KEDA scales workers on consumer lag; Knative scales the scorer to zero when idle; a TTL CronJob refreshes stale listings. Searches time out after 300 seconds by default.
 
-Product websites are hosted externally; this application only collects their listings. The selected collector retrieves the submitted product; the other two retrieve their catalogues for comparison. A storefront URL returns that platform's catalogue and matching products.
+Product websites are hosted externally; this application only collects their listings. The selected collector retrieves the submitted product; the other two retrieve their catalogues for comparison.
 
 ### Host ports
 

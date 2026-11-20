@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, request, url_for
 
 from shared import database
-from shared.platforms import resolve_url
+from shared.platforms import resolve_product_url
 from . import searches
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ app = Flask(__name__)
 def create_search():
     payload = request.get_json(silent=True)
     try:
-        _, url = resolve_url(payload.get('url') if isinstance(payload, dict) else None)
+        _, url = resolve_product_url(payload.get('url') if isinstance(payload, dict) else None)
     except ValueError as error:
         return jsonify(error=str(error)), 400
     try:

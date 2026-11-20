@@ -124,7 +124,7 @@ WHERE cluster_id = $1 AND version = $6;          -- $6 = n
 
 ## Search API and freshness
 
-`POST /api/searches` takes `{"url": "<supported product or storefront URL>"}` and returns `{request_id, url, status, listings, error}`. Pending searches return 202 with a `Location` header for `GET /api/searches/<request_id>`. The frontend uses this API through the gateway.
+`POST /api/searches` takes `{"url": "<supported product URL>"}` and returns `{request_id, url, status, listings, error}`. Pending searches return 202 with a `Location` header for `GET /api/searches/<request_id>`. The frontend uses this API through the gateway.
 
 `search_requests` stores durable progress and completed result snapshots. `collection_runs` is keyed by `(request_id, source_platform)` and records collected listing IDs or an error after Kafka delivery succeeds. The gateway expects one completed collection per supported platform, then waits for fresh scores and current cluster metadata.
 
